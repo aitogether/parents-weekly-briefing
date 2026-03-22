@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/report/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "父母周报",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+  }
+}
