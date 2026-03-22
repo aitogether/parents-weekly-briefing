@@ -1,62 +1,65 @@
 /* pages/child/weekly-report/index.wxss */
+/* UI 规范 v1 */
 
-.week-title {
-  font-size: 36rpx;
-  font-weight: 700;
-  color: #222;
-  letter-spacing: 2rpx;
+page {
+  background: #F5F5F7;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
 }
 
-.fact-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 24rpx;
-  padding-bottom: 24rpx;
-  border-bottom: 1rpx solid #f0f0f0;
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 16px 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.card-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
 }
 
-.fact-item:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
+/* 状态总览 */
+.status-card { text-align: center; padding: 28px 20px; }
+.status-dot {
+  width: 48px; height: 48px; border-radius: 50%;
+  margin: 0 auto 12px;
 }
+.status-dot.green { background: #22A060; }
+.status-dot.yellow { background: #F6A623; }
+.status-dot.red { background: #D6453D; }
+.status-title { font-size: 20px; font-weight: 700; color: #0F5960; margin-bottom: 6px; }
+.status-liner { font-size: 15px; color: #666; line-height: 1.5; }
 
-.fact-index {
-  width: 44rpx;
-  height: 44rpx;
-  border-radius: 50%;
-  background: #4CAF50;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24rpx;
-  font-weight: 600;
-  flex-shrink: 0;
-  margin-right: 20rpx;
+/* 事实列表 */
+.fact {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid #f0f0f0;
 }
-
-.fact-text {
-  font-size: 28rpx;
-  line-height: 1.6;
+.fact:last-child { border-bottom: none; }
+.fact-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: #E5F6F7; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
 }
+.fact-label { font-size: 13px; color: #666; }
+.fact-value { font-size: 20px; font-weight: 700; color: #0F5960; }
+.fact-note { font-size: 13px; color: #999; margin-top: 2px; }
 
-.fact-anchor {
-  font-size: 24rpx;
-  margin-top: 8rpx;
+/* 行动建议 */
+.action-card { background: #E5F6F7; }
+.action-text { font-size: 16px; color: #0F5960; line-height: 1.6; }
+
+/* 回声选项 */
+.echo-options { display: flex; flex-direction: column; gap: 10px; }
+.echo-option {
+  padding: 14px 16px; border: 1.5px solid #e0e0e0; border-radius: 10px;
+  font-size: 15px; color: #1A1A1A; text-align: center;
 }
-
-.action-item,
-.curious-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 16rpx;
-  font-size: 28rpx;
-  line-height: 1.6;
+.echo-option.selected {
+  border-color: #1C9CA7; background: #E5F6F7; color: #0F5960;
 }
-
-.action-icon,
-.curious-icon {
-  margin-right: 12rpx;
-  font-size: 30rpx;
+.echo-submit {
+  margin-top: 12px; background: #1C9CA7; color: #fff; border: none;
+  border-radius: 10px; font-size: 16px; padding: 12px;
 }

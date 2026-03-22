@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const { initDB } = require('./db/init');
+const { initDB } = require('./db/store');
 const werunRoutes = require('./routes/werun');
 const medicationRoutes = require('./routes/medication');
 const reportRoutes = require('./routes/report');
+const feedbackRoutes = require('./routes/feedback');
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get('/health', (req, res) => {
 app.use('/api/werun', werunRoutes);
 app.use('/api/med', medicationRoutes);
 app.use('/api/report', reportRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 // Mock 周报生成接口（符合 PRD §6 结构，保留用于前端对接）
 app.post('/v1/weekly-briefing/generate', (req, res) => {

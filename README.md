@@ -56,6 +56,20 @@
 
 ---
 
+## 当前进度（Sprint 进行中）
+
+| 模块 | 状态 | 说明 |
+|------|------|------|
+| **Backend** | ✅ 可运行 | Express + JSON 存储，已实现：微信运动 API、用药计划/确认/统计、周报生成（绿/黄/红灯规则） |
+| **Mini Program** | ✅ 骨架完成 | 6 个页面（子女端4 + 老人端2），API 封装就绪，可导入微信开发者工具联调 |
+| **UI 线框图** | ✅ 完成 | `docs/ui/wireframe-weekly-report.html`，含黄灯周和绿灯周两个 Demo |
+| **内测说明** | ✅ 完成 | `docs/pilot-manual.md`，可直接发给内测用户 |
+| **接口自检** | ✅ 全部通过 | 8 个 API 端点本地 curl 测试通过（详见 `backend/README.md`） |
+
+**里程碑**：M1 数据通路已就绪，下一步进入 M2（周报 pipeline 跑通）+ 首批内测。
+
+---
+
 ## Roadmap
 
 - **P0（当前）**：完成微信小程序 MVP + 后端 API + 内测 5–10 名付费子女用户。
@@ -71,13 +85,24 @@ parents-weekly-briefing/
 ├── docs/
 │   ├── prd/
 │   │   ├── parents-weekly-briefing-prd-p0.md        — P0 产品需求文档
-│   │   ├── reverse-prd-grandcare-stackcare.md        — GrandCare / StackCare 反向 PRD（负面教科书）
+│   │   ├── reverse-prd-grandcare-stackcare.md        — 反向 PRD（负面教科书）
 │   │   ├── paper-demo-monday-morning.md              — 黄灯周纸上 Demo
 │   │   └── paper-demo-green-light-week.md            — 绿灯周纸上 Demo
-│   ├── privacy-and-security.md                       — P0 隐私与数据安全说明
+│   ├── ui/
+│   │   └── wireframe-weekly-report.html              — UI 线框图（黄灯+绿灯 Demo）
+│   ├── privacy-and-security.md                       — 隐私与数据安全说明
+│   ├── pilot-manual.md                               — 内测使用说明
 │   └── sprint-backlog-p0-weekly-briefing.md          — Sprint Backlog
 ├── backend/
-│   └── (预留：后端服务代码)
+│   ├── src/
+│   │   ├── app.js                                    — Express 主入口
+│   │   ├── db/store.js                               — JSON 文件存储（P0）
+│   │   ├── routes/werun.js                           — 微信运动 API
+│   │   ├── routes/medication.js                      — 用药 CRUD + 确认
+│   │   └── routes/report.js                          — 周报生成（绿/黄/红灯）
+│   └── README.md                                     — 快速验证指南
 └── wechat-miniprogram/
-    └── (预留：微信小程序代码)
+    ├── pages/child/                                   — 子女端4个页面
+    ├── pages/parent/                                  — 老人端2个页面（大字体大按钮）
+    └── utils/api.js                                   — API 封装
 ```

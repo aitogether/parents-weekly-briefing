@@ -1,95 +1,67 @@
-const api = require('../../../utils/api.js');
-
-const STATUS_COLORS = {
-  green: '#4CAF50',
-  yellow: '#FFC107',
-  red: '#F44336'
-};
+const api = require('../../../utils/api');
 
 Page({
   data: {
-    report: null,
-    loading: true,
-    feedbackDone: false,
-    statusColor: STATUS_COLORS.green
+    weekRange: '',
+    summary: {},
+    parentA: {},
+    parentB: {},
+    action: {},
+    youMayWonder: [],
+    echoOptions: [],
+    selectedEcho: null,
+    echoSubmitted: false
   },
 
   onLoad() {
     this.loadReport();
+    this.loadEchoOptions();
   },
 
-  onPullDownRefresh() {
-    this.loadReport().then(() => wx.stopPullDownRefresh());
-  },
-
-  /** 加载周报数据 */
   async loadReport() {
-    this.setData({ loading: true });
     try {
-      // 计算本周一的日期作为 weekStart
-      const now = new Date();
-      const day = now.getDay() || 7;
-      const monday = new Date(now);
-      monday.setDate(now.getDate() - day + 1);
-      const weekStart = monday.toISOString().slice(0, 10);
-
-      const res = await api.getWeeklyReport(weekStart);
-      const report = res.data || res;
+      const res = await api.generateReport('mom_001', 'dad_001');
       this.setData({
-        report,
-        loading: false,
-        statusColor: STATUS_COLORS[report.overallStatus] || STATUS_COLORS.green,
-        feedbackDone: !!report.feedbackStatus
+        weekRange: res.weekRange,
+        summary: res.summary,
+        parentA: res.parentA,
+        parentB: res.parentB,
+        action: res.action,
+        youMayWonder: res.youMayWonder || []
       });
-    } catch (err) {
-      console.error('加载周报失败', err);
-      this.setData({ loading: false });
-      // 使用 mock 数据方便调试
+    } catch (e) {
+      wx.showToast({ title: '加载周报失败', icon: 'none' });
+    }
+  },
+
+  async loadEchoOptions() {
+    try {
+      const res = await api.getFeedbackOptions();
+      this.setData({ echoOptions: res });
+    } catch (e) {
+      // fallback
       this.setData({
-        report: {
-          weekRange: '2026.03.16 - 2026.03.22',
-          overallStatus: 'green',
-          overallText: '爸妈这周整体不错，血压稳定，睡眠也比上周好',
-          keyFacts: [
-            { text: '爸爸本周血压平均 128/82，比上周下降 5mmHg', anchor: '数据来源：智能血压计' },
-            { text: '妈妈睡眠时长平均 7.2 小时，连续 5 天达标', anchor: '数据来源：手环' },
-            { text: '两位老人本周散步 4 次，每次 30 分钟以上', anchor: '数据来源：步数统计' }
-          ],
-          weekendActions: [
-            '问问爸爸最近睡眠怎么样',
-            '周末天气好，建议爸妈出去走走',
-            '提醒妈妈下周体检预约'
-          ],
-          curiousItems: [
-            '爸爸的降压药是否需要调整剂量？',
-            '妈妈最近是否还在坚持做手指操？'
-          ],
-          feedbackStatus: null
-        },
-        loading: false,
-        statusColor: STATUS_COLORS.green
+        echoOptions: [
+          { type: 'reassured', text: '今天我看过你的情况，一切放心。' },
+          { type: 'concerned', text: '最近有点担心，改天好好跟你聊聊。' },
+          { type: 'busy_caring', text: '我这几天有点忙，但一直惦记着你。' }
+        ]
       });
     }
   },
 
-  /** 反馈：已经聊了 */
-  onFeedbackTalked() {
-    this._submitFeedback('talked');
+  onEchoSelect(e) {
+    this.setData({ selectedEcho: e.currentTarget.dataset.type });
   },
 
-  /** 反馈：还没聊 */
-  onFeedbackNotTalked() {
-    this._submitFeedback('not_talked');
-  },
-
-  async _submitFeedback(status) {
-    if (this.data.feedbackDone) return;
+  async onEchoSubmit() {
+    if (!this.data.selectedEcho || this.data.echoSubmitted) return;
     try {
-      await api.submitFeedback(this.data.report?.id, status);
-      this.setData({ feedbackDone: true });
-      wx.showToast({ title: '已提交', icon: 'success' });
-    } catch (err) {
-      wx.showToast({ title: '提交失败，请重试', icon: 'none' });
+      await api.submitEchoFeedback('child_001', 'mom_001', this.data.selectedEcho);
+      this.setData({ echoSubmitted: true });
+      wx.showToast({ title: '已发送', icon: 'success' });
+    } catch (e) {
+      wx.showToast({ title: '发送失败', icon: 'none' });
     }
   }
 });

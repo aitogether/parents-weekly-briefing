@@ -3,297 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>父母周报 - 线框图</title>
+<title>父母周报 · UI 线框图 v2</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: #f0f2f5;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    color: #333;
+  /* ===== UI 规范 v1 ===== */
+  :root {
+    --primary: #1C9CA7;
+    --primary-dark: #0F5960;
+    --primary-light: #E5F6F7;
+    --bg: #F5F5F7;
+    --white: #FFFFFF;
+    --text-dark: #1A1A1A;
+    --text-mid: #666666;
+    --text-light: #999999;
+    --green: #22A060;
+    --yellow: #F6A623;
+    --red: #D6453D;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --radius: 12px;
   }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text-dark); }
 
-  .demo-label {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 8px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  /* 模拟手机 */
+  .phone { width: 375px; margin: 20px auto; background: var(--bg); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+  .phone-header { background: var(--primary-dark); color: var(--white); padding: 40px 20px 16px; font-size: 14px; }
+  .phone-header .title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .phone-header .subtitle { font-size: 13px; opacity: 0.8; }
+  .phone-body { padding: 16px; }
 
-  .phone {
-    width: 375px;
-    background: #fff;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  }
+  /* 卡片 */
+  .card { background: var(--white); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--card-shadow); }
+  .card-title { font-size: 14px; color: var(--text-mid); margin-bottom: 12px; }
 
-  .screen {
-    padding: 20px 18px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+  /* 状态总览卡 */
+  .status-card { text-align: center; padding: 28px 20px; }
+  .status-dot { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 12px; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+  .status-title { font-size: 20px; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+  .status-liner { font-size: 15px; color: var(--text-mid); line-height: 1.5; }
 
-  /* 顶部日期 */
-  .meta {
-    font-size: 12px;
-    color: #aaa;
-    text-align: center;
-  }
+  /* 事实列表卡 */
+  .fact { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+  .fact:last-child { border-bottom: none; }
+  .fact-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .fact-content { flex: 1; }
+  .fact-label { font-size: 13px; color: var(--text-mid); }
+  .fact-value { font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+  .fact-note { font-size: 13px; color: var(--text-light); margin-top: 2px; }
 
-  /* 灯 + 一句话 */
-  .traffic-light-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
-    background: #fafafa;
-    border-radius: 14px;
-  }
+  /* 行动建议卡 */
+  .action-card { background: var(--primary-light); border: none; }
+  .action-text { font-size: 16px; color: var(--primary-dark); line-height: 1.6; }
 
-  .dots {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
+  /* 回声卡片（子女端） */
+  .echo-options { display: flex; flex-direction: column; gap: 10px; }
+  .echo-option { padding: 14px 16px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px; color: var(--text-dark); cursor: pointer; transition: all 0.2s; text-align: center; }
+  .echo-option:hover, .echo-option.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary-dark); }
 
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    opacity: 0.25;
-  }
+  /* 回声卡片（老人端） */
+  .elder-echo { background: var(--primary-light); border-radius: var(--radius); padding: 16px 20px; }
+  .elder-echo-title { font-size: 14px; color: var(--text-mid); margin-bottom: 8px; }
+  .elder-echo-text { font-size: 18px; color: var(--primary-dark); line-height: 1.6; font-weight: 500; }
 
-  .dot.green   { background: #4CAF50; }
-  .dot.yellow  { background: #FFC107; }
-  .dot.red     { background: #F44336; }
+  /* 老人端大按钮 */
+  .med-btn-row { display: flex; gap: 12px; margin-top: 16px; }
+  .med-btn { flex: 1; padding: 20px 0; border: none; border-radius: 12px; font-size: 20px; font-weight: 700; cursor: pointer; }
+  .med-btn.taken { background: var(--green); color: var(--white); }
+  .med-btn.not-taken { background: var(--white); color: var(--red); border: 2px solid var(--red); }
+  .med-btn.large-text { font-size: 18px; }
 
-  .dot.active  { opacity: 1; box-shadow: 0 0 6px currentColor; }
-  .dot.green.active  { box-shadow: 0 0 6px #4CAF50; }
-  .dot.yellow.active { box-shadow: 0 0 6px #FFC107; }
-  .dot.red.active    { box-shadow: 0 0 6px #F44336; }
+  /* 分隔标签 */
+  .section-label { font-size: 13px; color: var(--text-light); text-align: center; margin: 24px 0 16px; letter-spacing: 2px; }
 
-  .headline {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.4;
-  }
+  /* 底部反馈按钮 */
+  .feedback-btn { display: block; width: 100%; padding: 14px; background: var(--white); border: 1.5px solid var(--primary); border-radius: 10px; font-size: 15px; color: var(--primary); cursor: pointer; margin-top: 12px; }
 
-  /* 卡片通用 */
-  .card {
-    background: #fafafa;
-    border-radius: 14px;
-    padding: 16px;
-  }
-
-  .card-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: #888;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-  }
-
-  /* 关键事实 */
-  .fact-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .fact-list li {
-    font-size: 14px;
-    line-height: 1.55;
-    padding-left: 18px;
-    position: relative;
-  }
-
-  .fact-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 7px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ccc;
-  }
-
-  .fact-list li.mom::before  { background: #E91E63; }
-  .fact-list li.dad::before  { background: #2196F3; }
-
-  /* 行动建议 */
-  .action-card {
-    border-left: 3px solid transparent;
-  }
-
-  .action-card.do    { border-left-color: #FFC107; }
-  .action-card.care  { border-left-color: #8BC34A; }
-
-  .action-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #aaa;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .action-text {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #444;
-  }
-
-  .action-text .highlight {
-    color: #E65100;
-    font-weight: 500;
-  }
-
-  /* 底部按钮 */
-  .btn-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .btn {
-    flex: 1;
-    padding: 12px 0;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .btn-done {
-    background: #4CAF50;
-    color: #fff;
-  }
-
-  .btn-pending {
-    background: #f0f0f0;
-    color: #666;
-  }
-
-  /* 分隔标注 */
-  .divider {
-    text-align: center;
-    font-size: 13px;
-    color: #bbb;
-    padding: 6px 0;
-  }
+  .demo-title { text-align: center; padding: 20px; font-size: 16px; color: var(--primary-dark); font-weight: 600; background: var(--white); }
 </style>
 </head>
 <body>
 
-<!-- ========== 黄灯周 Demo ========== -->
-<div>
-  <div class="demo-label">黄灯周 Demo</div>
-  <div class="phone">
-    <div class="screen">
+<!-- ==================== Demo A: 黄灯周 · 子女端周报 ==================== -->
+<div class="demo-title">Demo A · 黄灯周 · 子女端周报</div>
+<div class="phone">
+  <div class="phone-header">
+    <div class="title">父母周报</div>
+    <div class="subtitle">3月15日 — 3月22日</div>
+  </div>
+  <div class="phone-body">
 
-      <div class="meta">本期覆盖 3/14 – 3/20 · 下期 3/28 发送</div>
-
-      <!-- 交通灯 -->
-      <div class="traffic-light-bar">
-        <div class="dots">
-          <div class="dot green"></div>
-          <div class="dot yellow active"></div>
-          <div class="dot red"></div>
-        </div>
-        <div class="headline">妈整体稳定，爸活动量略降。</div>
-      </div>
-
-      <!-- 关键事实 -->
-      <div class="card">
-        <div class="card-title">关键事实</div>
-        <ul class="fact-list">
-          <li class="mom">妈本周用药完成率 94%，周三周四血压略高</li>
-          <li class="dad">爸日均步数比上月少 28%（2,103 → 1,514）</li>
-          <li class="dad">爸周六出门只有 412 步</li>
-        </ul>
-      </div>
-
-      <!-- 行动建议 -->
-      <div class="card action-card do">
-        <div class="action-label">本周末可以做什么</div>
-        <div class="action-text">打个电话问问妈最近睡得好不好</div>
-      </div>
-
-      <div class="card action-card care">
-        <div class="action-label">你可能好奇的</div>
-        <div class="action-text">爸周六出门只有 412 步——<span class="highlight">那天他在忙什么？</span></div>
-      </div>
-
-      <!-- 按钮 -->
-      <div class="btn-row">
-        <button class="btn btn-done">已经聊了</button>
-        <button class="btn btn-pending">还没聊</button>
-      </div>
-
+    <!-- 1. 状态总览卡 -->
+    <div class="card status-card">
+      <div class="status-dot yellow"></div>
+      <div class="status-title">稍微留意一下</div>
+      <div class="status-liner">妈的用药连续两天没确认，爸这周活动量偏低。</div>
     </div>
+
+    <!-- 2. 妈的事实列表 -->
+    <div class="card">
+      <div class="card-title">妈</div>
+      <div class="fact">
+        <div class="fact-icon">💊</div>
+        <div class="fact-content">
+          <div class="fact-label">用药完成率</div>
+          <div class="fact-value">83%</div>
+          <div class="fact-note">周三、周四各漏了一次降压药</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🚶</div>
+        <div class="fact-content">
+          <div class="fact-label">日均步数</div>
+          <div class="fact-value">3,210</div>
+          <div class="fact-note">比上月低 18%，周三只有 890 步</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 爸的事实列表 -->
+    <div class="card">
+      <div class="card-title">爸</div>
+      <div class="fact">
+        <div class="fact-icon">🚶</div>
+        <div class="fact-content">
+          <div class="fact-label">日均步数</div>
+          <div class="fact-value">1,640</div>
+          <div class="fact-note">比上月低 35%，连续 5 天没出门</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 行动建议卡 -->
+    <div class="card action-card">
+      <div class="card-title">建议</div>
+      <div class="action-text">这周打个电话给妈，问问是不是降压药吃完了忘了买。顺便问爸最近在忙什么，怎么都没出门。</div>
+    </div>
+
+    <!-- 5. 你可能好奇 -->
+    <div class="card">
+      <div class="card-title">你可能好奇</div>
+      <div class="fact">
+        <div class="fact-icon">❓</div>
+        <div class="fact-content">
+          <div class="fact-label">妈周三只走了 890 步</div>
+          <div class="fact-note">那天她在忙什么？身体不舒服？</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">❓</div>
+        <div class="fact-content">
+          <div class="fact-label">爸连续 5 天没出门</div>
+          <div class="fact-note">他在家做什么？情绪还好吗？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 子女回声选择 -->
+    <div class="card">
+      <div class="card-title">告诉爸妈你看过了（可选）</div>
+      <div class="echo-options">
+        <div class="echo-option">今天我看过你的情况，一切放心。</div>
+        <div class="echo-option selected">最近有点担心，改天好好跟你聊聊。</div>
+        <div class="echo-option">我这几天有点忙，但一直惦记着你。</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- ========== 绿灯周 Demo ========== -->
-<div>
-  <div class="demo-label">绿灯周 Demo</div>
-  <div class="phone">
-    <div class="screen">
+<!-- ==================== Demo B: 绿灯周 · 子女端周报 ==================== -->
+<div class="demo-title">Demo B · 绿灯周 · 子女端周报</div>
+<div class="phone">
+  <div class="phone-header">
+    <div class="title">父母周报</div>
+    <div class="subtitle">3月8日 — 3月15日</div>
+  </div>
+  <div class="phone-body">
 
-      <div class="meta">本期覆盖 3/21 – 3/27 · 下期 4/4 发送</div>
-
-      <!-- 交通灯 -->
-      <div class="traffic-light-bar">
-        <div class="dots">
-          <div class="dot green active"></div>
-          <div class="dot yellow"></div>
-          <div class="dot red"></div>
-        </div>
-        <div class="headline">爸妈这周都挺好。放心忙你的。</div>
-      </div>
-
-      <!-- 关键事实 -->
-      <div class="card">
-        <div class="card-title">关键事实</div>
-        <ul class="fact-list">
-          <li class="mom">妈的血压和用药是这几周最好的一次</li>
-          <li class="dad">爸的步数回到上月水平（日均 2,847 步）</li>
-          <li class="mom">没有异常用药记录</li>
-        </ul>
-      </div>
-
-      <!-- 行动建议 -->
-      <div class="card action-card care">
-        <div class="action-label">周末如果有空</div>
-        <div class="action-text">打个电话不聊身体，聊点家常。</div>
-      </div>
-
-      <div class="card action-card care">
-        <div class="action-label">你可能好奇的</div>
-        <div class="action-text">爸周六 2,300 步——这天他明显出门了。<span class="highlight">去哪了？跟谁？</span></div>
-      </div>
-
-      <!-- 按钮 -->
-      <div class="btn-row">
-        <button class="btn btn-done">已经聊了</button>
-        <button class="btn btn-pending">还没聊</button>
-      </div>
-
+    <div class="card status-card">
+      <div class="status-dot green"></div>
+      <div class="status-title">本周不用操心</div>
+      <div class="status-liner">爸妈这周都挺好，你可以放心忙自己的事。</div>
     </div>
+
+    <div class="card">
+      <div class="card-title">妈</div>
+      <div class="fact">
+        <div class="fact-icon">💊</div>
+        <div class="fact-content">
+          <div class="fact-label">用药完成率</div>
+          <div class="fact-value">100%</div>
+          <div class="fact-note">连续第 3 周全勤 🎉</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🚶</div>
+        <div class="fact-content">
+          <div class="fact-label">日均步数</div>
+          <div class="fact-value">4,120</div>
+          <div class="fact-note">与上月持平</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">爸</div>
+      <div class="fact">
+        <div class="fact-icon">🚶</div>
+        <div class="fact-content">
+          <div class="fact-label">日均步数</div>
+          <div class="fact-value">2,650</div>
+          <div class="fact-note">恢复到上月水平，周六 3,280 步</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card action-card">
+      <div class="card-title">建议</div>
+      <div class="action-text">本周无需特意打电话谈正事。周末有空聊点家常就好。</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">你可能好奇</div>
+      <div class="fact">
+        <div class="fact-icon">💬</div>
+        <div class="fact-content">
+          <div class="fact-label">爸周六 3,280 步——明显出门了</div>
+          <div class="fact-note">去哪了？跟谁？可以聊聊。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">告诉爸妈你看过了（可选）</div>
+      <div class="echo-options">
+        <div class="echo-option selected">今天我看过你的情况，一切放心。</div>
+        <div class="echo-option">最近有点担心，改天好好跟你聊聊。</div>
+        <div class="echo-option">我这几天有点忙，但一直惦记着你。</div>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<!-- ==================== Demo C: 老人端用药确认 + 回声卡片 ==================== -->
+<div class="demo-title">Demo C · 老人端 · 用药确认 + 回声</div>
+<div class="phone">
+  <div class="phone-header">
+    <div class="title" style="font-size:22px">今日用药</div>
+    <div class="subtitle">3月22日 周六</div>
+  </div>
+  <div class="phone-body">
+
+    <div class="card">
+      <div class="card-title" style="font-size:16px;font-weight:600;color:var(--text-dark)">降压药 · 1片</div>
+      <div class="fact-note" style="margin-bottom:16px">上午 8:00</div>
+      <div class="med-btn-row">
+        <button class="med-btn taken">✅ 已吃</button>
+        <button class="med-btn not-taken">没吃</button>
+      </div>
+    </div>
+
+    <div class="card" style="opacity:0.6">
+      <div class="card-title" style="font-size:16px;font-weight:600;color:var(--text-dark)">降压药 · 1片</div>
+      <div class="fact-note" style="margin-bottom:4px">下午 8:00（未到时间）</div>
+    </div>
+
+    <!-- 老人端回声卡片 -->
+    <div class="elder-echo">
+      <div class="elder-echo-title">💬 来自家里人的一句话</div>
+      <div class="elder-echo-text">最近有点担心，改天好好跟你聊聊。</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== Demo D: 老人端 · 无回声时 ==================== -->
+<div class="demo-title">Demo D · 老人端 · 无回声（不显示卡片）</div>
+<div class="phone">
+  <div class="phone-header">
+    <div class="title" style="font-size:22px">今日用药</div>
+    <div class="subtitle">3月20日 周四</div>
+  </div>
+  <div class="phone-body">
+
+    <div class="card">
+      <div class="card-title" style="font-size:16px;font-weight:600;color:var(--text-dark)">降压药 · 1片</div>
+      <div class="fact-note" style="margin-bottom:16px">上午 8:00</div>
+      <div class="med-btn-row">
+        <button class="med-btn taken">✅ 已吃</button>
+        <button class="med-btn not-taken">没吃</button>
+      </div>
+    </div>
+
+    <!-- 无回声 → 不显示卡片 -->
+    <div style="text-align:center;color:var(--text-light);font-size:13px;padding:20px">
+      （7天内无子女反馈 → 回声卡片不显示）
+    </div>
+
+  </div>
+</div>
+
+<div style="height:40px"></div>
 
 </body>
 </html>

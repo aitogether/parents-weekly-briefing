@@ -2,7 +2,7 @@
 App({
   globalData: {
     // ── API 配置 ──
-    API_BASE_URL: 'https://api.example.com',  // TODO: 替换为实际后端地址
+    API_BASE_URL: 'http://127.0.0.1:3000',  // 本地开发，真机时改为 Mac 内网 IP
     TOKEN_KEY: 'pwb_auth_token',
     USER_ROLE_KEY: 'pwb_user_role', // 'child' | 'parent'
 

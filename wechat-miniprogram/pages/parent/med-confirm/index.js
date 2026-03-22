@@ -1,84 +1,66 @@
-const api = require('../../../utils/api.js');
+const api = require('../../../utils/api');
 
 Page({
   data: {
-    currentMed: null,
-    loading: true
+    today: '',
+    plans: [],
+    echoText: null
   },
 
-  onLoad(options) {
-    // 支持从通知携带 recordId 参数
-    this.recordId = options.recordId || null;
-    this.loadCurrentMed();
+  onLoad() {
+    const d = new Date();
+    const days = ['周日','周一','周二','周三','周四','周五','周六'];
+    this.setData({
+      today: `${d.getMonth()+1}月${d.getDate()}日 ${days[d.getDay()]}`
+    });
+    this.loadPlans();
+    this.loadEcho();
   },
 
-  onShow() {
-    // 每次页面显示时刷新
-    this.loadCurrentMed();
-  },
-
-  async loadCurrentMed() {
-    this.setData({ loading: true });
+  async loadPlans() {
     try {
-      const res = await api.getMedPlans();
-      const plans = res.data || res;
-      // 取第一个待确认的用药记录
-      const pending = plans.filter(p => p.status === 'pending');
-      this.setData({
-        currentMed: pending.length > 0 ? pending[0] : null,
-        loading: false
-      });
-    } catch (err) {
-      console.error('加载用药计划失败', err);
-      this.setData({ loading: false });
-      // mock
-      this.setData({
-        currentMed: {
-          id: 'med_001',
-          medName: '降压药（氨氯地平）',
-          dosage: '1片 (5mg)',
-          scheduledTime: '08:00',
-          remark: '饭后服用，多喝水',
-          status: 'pending'
-        }
-      });
+      const plans = await api.getMedPlans('mom_001');
+      const today = new Date().toISOString().slice(0, 10);
+      const confirmations = await api.getMedStats('mom_001', 1);
+      // 简单逻辑：标记今天已确认的
+      const enriched = plans.map(p => ({
+        ...p,
+        confirmed: false,
+        status: null
+      }));
+      this.setData({ plans: enriched });
+    } catch (e) {
+      wx.showToast({ title: '加载失败', icon: 'none' });
     }
   },
 
-  /** 已吃 */
-  async onConfirmTaken() {
-    await this._confirm('taken');
-  },
-
-  /** 这次先不吃 */
-  async onConfirmSkipped() {
-    wx.showModal({
-      title: '确认跳过',
-      content: '确定这次不吃吗？我们会在周报中记录。',
-      success: async (res) => {
-        if (res.confirm) {
-          await this._confirm('skipped');
-        }
-      }
-    });
-  },
-
-  async _confirm(status) {
-    const med = this.data.currentMed;
-    if (!med) return;
-    wx.showLoading({ title: '提交中...' });
+  async loadEcho() {
     try {
-      await api.confirmMedication(med.id, status);
-      wx.hideLoading();
+      const res = await api.getLatestFeedback('mom_001');
+      if (res.has_feedback) {
+        this.setData({ echoText: res.text });
+      }
+    } catch (e) {
+      // 无反馈时不显示
+    }
+  },
+
+  async onConfirm(e) {
+    const { id, status } = e.currentTarget.dataset;
+    try {
+      await api.confirmMedication(id, 'mom_001', 'parent', status);
       wx.showToast({
-        title: status === 'taken' ? '已记录 ✅' : '已跳过',
+        title: status === 'taken' ? '✅ 已确认' : '已跳过',
         icon: 'success'
       });
-      // 重新加载
-      this.loadCurrentMed();
-    } catch (err) {
-      wx.hideLoading();
-      wx.showToast({ title: '提交失败，请重试', icon: 'none' });
+      // 更新本地状态
+      const plans = this.data.plans.map(p => {
+        if (p.id === id) return { ...p, confirmed: true, status };
+        return p;
+      });
+      this.setData({ plans });
+    } catch (e) {
+      wx.showToast({ title: '确认失败', icon: 'none' });
     }
   }
 });

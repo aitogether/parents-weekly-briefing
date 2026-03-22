@@ -1,6 +1,5 @@
 /**
- * utils/api.js
- * 封装 wx.request，统一处理 base url、token、错误
+ * utils/api.js — 后端接口封装（已对齐 backend 路由）
  */
 
 const app = getApp();
@@ -15,14 +14,6 @@ function getToken() {
   return app.globalData.token || '';
 }
 
-/**
- * 通用请求方法
- * @param {Object} options
- * @param {string} options.url    - 接口路径（不含 base）
- * @param {string} options.method - GET / POST / PUT / DELETE
- * @param {Object} options.data   - 请求参数
- * @param {Object} options.header - 额外 header
- */
 function request({ url, method = 'GET', data = {}, header = {} }) {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -37,13 +28,8 @@ function request({ url, method = 'GET', data = {}, header = {} }) {
       success(res) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data);
-        } else if (res.statusCode === 401) {
-          // token 过期，清除并跳转登录
-          app.clearAuth();
-          wx.showToast({ title: '请重新登录', icon: 'none' });
-          reject(new Error('Unauthorized'));
         } else {
-          const msg = res.data?.message || res.data?.msg || '请求失败';
+          const msg = res.data?.error || '请求失败';
           wx.showToast({ title: msg, icon: 'none' });
           reject(new Error(msg));
         }
@@ -56,87 +42,66 @@ function request({ url, method = 'GET', data = {}, header = {} }) {
   });
 }
 
-// ── 业务接口 ──
-
-/** 获取周报数据 */
-function getWeeklyReport(weekStart) {
-  return request({
-    url: '/api/weekly-report',
-    data: { weekStart }
-  });
+// ── 微信运动 ──
+function injectWerunMock(parentId) {
+  return request({ url: '/api/werun/decrypt', method: 'POST', data: { parent_id: parentId } });
+}
+function getWerunSteps(parentId, days = 7) {
+  return request({ url: '/api/werun/steps', data: { parent_id: parentId, days } });
 }
 
-/** 获取每日小结 */
-function getDailySummary(date) {
-  return request({
-    url: '/api/daily-summary',
-    data: { date }
-  });
-}
-
-/** 获取用药统计 */
-function getMedStats(range) {
-  return request({
-    url: '/api/medication-stats',
-    data: { range }
-  });
-}
-
-/** 确认用药（老人端） */
-function confirmMedication(recordId, status) {
-  return request({
-    url: '/api/medication/confirm',
-    method: 'POST',
-    data: { recordId, status } // status: 'taken' | 'skipped'
-  });
-}
-
-/** 创建用药计划 */
+// ── 用药 ──
 function createMedPlan(plan) {
+  return request({ url: '/api/med/plan', method: 'POST', data: plan });
+}
+function getMedPlans(parentId) {
+  return request({ url: '/api/med/plans', data: { parent_id: parentId } });
+}
+function confirmMedication(planId, parentId, role, status) {
   return request({
-    url: '/api/medication/plans',
+    url: '/api/med/confirm',
     method: 'POST',
-    data: plan
+    data: { plan_id: planId, parent_id: parentId, role, status }
   });
 }
-
-/** 获取用药计划列表 */
-function getMedPlans() {
-  return request({ url: '/api/medication/plans' });
+function getMedStats(parentId, days = 7) {
+  return request({ url: '/api/med/stats', data: { parent_id: parentId, days } });
 }
 
-/** 提交子女反馈 */
-function submitFeedback(reportId, status) {
+// ── 周报 ──
+function generateReport(parentAId, parentBId) {
   return request({
-    url: '/api/weekly-report/feedback',
+    url: '/api/report/generate',
     method: 'POST',
-    data: { reportId, status } // status: 'talked' | 'not_talked'
+    data: { parent_a_id: parentAId, parent_b_id: parentBId }
   });
 }
 
-/** 更新通知设置 */
-function updateNotificationSettings(settings) {
+// ── 子女回声 ──
+function getFeedbackOptions() {
+  return request({ url: '/api/feedback/options' });
+}
+function submitEchoFeedback(childId, parentId, feedbackType, reportId) {
   return request({
-    url: '/api/settings/notifications',
-    method: 'PUT',
-    data: settings
+    url: '/api/feedback',
+    method: 'POST',
+    data: { child_id: childId, parent_id: parentId, feedback_type: feedbackType, report_id: reportId }
   });
 }
-
-/** 获取通知设置 */
-function getNotificationSettings() {
-  return request({ url: '/api/settings/notifications' });
+function getLatestFeedback(parentId) {
+  return request({ url: '/api/feedback/latest', data: { parent_id: parentId } });
 }
 
 module.exports = {
   request,
-  getWeeklyReport,
-  getDailySummary,
-  getMedStats,
-  confirmMedication,
+  injectWerunMock,
+  getWerunSteps,
   createMedPlan,
   getMedPlans,
-  submitFeedback,
-  updateNotificationSettings,
-  getNotificationSettings
+  confirmMedication,
+  getMedStats,
+  generateReport,
+  getFeedbackOptions,
+  submitEchoFeedback,
+  getLatestFeedback
 };

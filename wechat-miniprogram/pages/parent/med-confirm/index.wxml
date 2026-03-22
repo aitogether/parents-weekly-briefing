@@ -1,35 +1,26 @@
 <!-- pages/parent/med-confirm/index.wxml -->
-<view class="container">
-  <!-- 当前待确认用药 -->
-  <view class="card" wx:if="{{currentMed}}">
-    <view class="med-header text-center">
-      <view class="med-time-badge">{{currentMed.scheduledTime}}</view>
-      <view class="med-name">{{currentMed.medName}}</view>
-      <view class="med-dosage text-gray">{{currentMed.dosage}}</view>
-      <view class="med-remark text-gray mt-20" wx:if="{{currentMed.remark}}">
-        {{currentMed.remark}}
-      </view>
-    </view>
+<view class="page">
+  <view class="page-header">
+    <text class="page-date">{{today}}</text>
+  </view>
 
-    <!-- 大按钮 -->
-    <view class="btn-group mt-20">
-      <button class="btn-primary btn-large" bindtap="onConfirmTaken">
-        ✅ 已吃
-      </button>
-      <button class="btn-secondary btn-large mt-20" bindtap="onConfirmSkipped">
-        ⏭️ 这次先不吃
-      </button>
+  <!-- 用药卡片 -->
+  <view class="card" wx:for="{{plans}}" wx:key="id">
+    <view class="med-name">{{item.nickname}} · {{item.dosage}}</view>
+    <view class="med-schedule">{{item.schedule}}</view>
+    <view class="med-btn-row" wx:if="{{!item.confirmed}}">
+      <button class="med-btn taken" bindtap="onConfirm" data-id="{{item.id}}" data-status="taken">✅ 已吃</button>
+      <button class="med-btn not-taken" bindtap="onConfirm" data-id="{{item.id}}" data-status="skipped">没吃</button>
+    </view>
+    <view class="med-confirmed" wx:else>
+      <text class="med-confirmed-text {{item.status}}">{{item.status === 'taken' ? '✅ 已确认吃过' : '❌ 已跳过'}}</text>
     </view>
   </view>
 
-  <!-- 无待确认用药 -->
-  <view class="card text-center" wx:elif="{{!loading}}">
-    <view class="text-gray" style="font-size:32rpx; padding:60rpx 0;">
-      🎉 当前没有待确认的用药
-    </view>
+  <!-- 老人端回声卡片（7天内有反馈才显示） -->
+  <view class="elder-echo" wx:if="{{echoText}}">
+    <view class="elder-echo-title">💬 来自家里人的一句话</view>
+    <view class="elder-echo-text">{{echoText}}</view>
   </view>
 
-  <view class="card text-center" wx:if="{{loading}}">
-    <view class="text-gray">加载中...</view>
-  </view>
 </view>

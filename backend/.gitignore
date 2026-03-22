@@ -2,3 +2,4 @@ node_modules/
 *.db
 *.sqlite
 .env
+data.json

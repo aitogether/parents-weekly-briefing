@@ -1,70 +1,73 @@
 <!-- pages/child/weekly-report/index.wxml -->
-<view class="container">
-  <!-- 顶部：周报标题 -->
-  <view class="card text-center" wx:if="{{report}}">
-    <view class="week-title">{{report.weekRange}}</view>
+<view class="page">
+  <!-- 状态总览卡 -->
+  <view class="card status-card">
+    <view class="status-dot {{summary.level}}"></view>
+    <view class="status-title">{{summary.title}}</view>
+    <view class="status-liner">{{summary.oneLiner}}</view>
   </view>
 
-  <!-- 总评区 -->
-  <view class="card" wx:if="{{report}}">
-    <view class="card-title">本周总评</view>
-    <view class="flex-center" style="flex-direction:column; padding: 20rpx 0;">
-      <view class="status-light {{report.overallStatus}}"></view>
-      <view class="mt-20" style="font-size:34rpx; font-weight:600; color:{{statusColor}}">
-        {{report.overallText}}
-      </view>
-    </view>
-  </view>
-
-  <!-- 关键事实区 -->
-  <view class="card" wx:if="{{report && report.keyFacts.length > 0}}">
-    <view class="card-title">关键事实</view>
-    <view class="fact-item" wx:for="{{report.keyFacts}}" wx:key="index">
-      <view class="fact-index">{{index + 1}}</view>
+  <!-- 妈 -->
+  <view class="card">
+    <view class="card-title">妈</view>
+    <view class="fact" wx:if="{{parentA.medAdherence}}">
+      <view class="fact-icon">💊</view>
       <view class="fact-content">
-        <view class="fact-text">{{item.text}}</view>
-        <view class="fact-anchor text-gray" wx:if="{{item.anchor}}">{{item.anchor}}</view>
+        <view class="fact-label">用药完成率</view>
+        <view class="fact-value">{{parentA.medAdherence.rate}}%</view>
+        <view class="fact-note">{{parentA.medAdherence.note}}</view>
+      </view>
+    </view>
+    <view class="fact">
+      <view class="fact-icon">🚶</view>
+      <view class="fact-content">
+        <view class="fact-label">日均步数</view>
+        <view class="fact-value">{{parentA.steps.dailyAvg}}</view>
+        <view class="fact-note">{{parentA.steps.note}}</view>
       </view>
     </view>
   </view>
 
-  <!-- 行动区 -->
-  <view class="card" wx:if="{{report}}">
-    <view class="card-title">本周末可以做什么</view>
-    <view class="action-item" wx:for="{{report.weekendActions}}" wx:key="index">
-      <text class="action-icon">💡</text>
-      <text>{{item}}</text>
+  <!-- 爸 -->
+  <view class="card">
+    <view class="card-title">爸</view>
+    <view class="fact">
+      <view class="fact-icon">🚶</view>
+      <view class="fact-content">
+        <view class="fact-label">日均步数</view>
+        <view class="fact-value">{{parentB.steps.dailyAvg}}</view>
+        <view class="fact-note">{{parentB.steps.note}}</view>
+      </view>
     </view>
   </view>
 
-  <view class="card" wx:if="{{report && report.curiousItems.length > 0}}">
-    <view class="card-title">你可能好奇的</view>
-    <view class="curious-item" wx:for="{{report.curiousItems}}" wx:key="index">
-      <text class="curious-icon">❓</text>
-      <text>{{item}}</text>
+  <!-- 行动建议 -->
+  <view class="card action-card">
+    <view class="card-title">建议</view>
+    <view class="action-text">{{action.text}}</view>
+  </view>
+
+  <!-- 你可能好奇 -->
+  <view class="card" wx:if="{{youMayWonder.length > 0}}">
+    <view class="card-title">你可能好奇</view>
+    <view class="fact" wx:for="{{youMayWonder}}" wx:key="index">
+      <view class="fact-icon">💬</view>
+      <view class="fact-content">
+        <view class="fact-note">{{item}}</view>
+      </view>
     </view>
   </view>
 
-  <!-- 底部反馈按钮 -->
-  <view class="card" wx:if="{{report}}">
-    <view class="card-title text-center">这个周末和爸妈聊了吗？</view>
-    <view class="flex-row" style="gap:20rpx;">
-      <button class="btn-primary" style="flex:1;" bindtap="onFeedbackTalked"
-        disabled="{{feedbackDone}}">
-        💬 已经聊了
-      </button>
-      <button class="btn-secondary" style="flex:1;" bindtap="onFeedbackNotTalked"
-        disabled="{{feedbackDone}}">
-        ⏰ 还没聊
-      </button>
+  <!-- 子女回声选择 -->
+  <view class="card">
+    <view class="card-title">告诉爸妈你看过了（可选）</view>
+    <view class="echo-options">
+      <view class="echo-option {{selectedEcho === item.type ? 'selected' : ''}}"
+            wx:for="{{echoOptions}}" wx:key="type"
+            bindtap="onEchoSelect" data-type="{{item.type}}">
+        {{item.text}}
+      </view>
     </view>
-    <view class="text-center text-gray mt-20" wx:if="{{feedbackDone}}">
-      已提交反馈，谢谢 ❤️
-    </view>
-  </view>
-
-  <!-- 加载状态 -->
-  <view class="card text-center" wx:if="{{loading}}">
-    <view class="text-gray">加载中...</view>
+    <button class="echo-submit" wx:if="{{selectedEcho}}" bindtap="onEchoSubmit">发送</button>
   </view>
 </view>
