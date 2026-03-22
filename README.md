@@ -1,6 +1,57 @@
 # 父母周报 · Parents Weekly Briefing
 
-给「每周至少焦虑一次父母身体/安全」的子女，在周一早上用 5 分钟完成「看完 → 决定本周要不要采取行动」的一周一次父母状态简报。
+「父母周报」是给异地子女的一份每周一次的父母状态简报，让你在周五傍晚用 5 分钟知道：爸妈这周大概怎样、这个周末要不要做点什么。
+
+### 这份周报写给谁？
+
+- **高频焦虑型**：爸妈在老家，每次刷到老人健康/诈骗新闻就紧张，周报帮你把模糊不安变成清晰判断。
+- **疲惫管理型**：爸妈已经被骗/生病多次，你身心俱疲，周报帮你减少无效电话、把精力用在真正需要的行动上。
+
+---
+
+## 示例：两封真实的周报
+
+### 🟡 黄灯周
+
+> **锁屏**：「妈整体稳定，爸活动量略降。」
+>
+> **周报摘抄**：「妈本周用药完成率 94%，周三周四血压略高；爸日均步数比上月少 28%。建议这周末回去看看，或者打个电话问问妈最近睡得好不好。」
+>
+> **你可能好奇的**：「爸周六出门只有 412 步——那天他在忙什么？」
+
+### 🟢 绿灯周
+
+> **锁屏**：「爸妈这周都挺好。放心忙你的。」
+>
+> **周报摘抄**：「妈的血压和用药是这几周最好的一次；爸的步数回到上月水平。周末如果有空，打个电话不聊身体，聊点家常。」
+>
+> **你可能好奇的**：「爸周六 2,300 步——这天他明显出门了。去哪了？跟谁？」
+
+### 周报解决什么问题？
+
+- 从「每周一堆重复确认电话」→「有数据底气的一次有效对话」
+- 从「看完老人新闻就心慌」→「知道爸妈最近有没有偏离自己的 baseline」
+- 从「不知道跟爸妈聊什么」→「数据长出的自然话题」
+
+---
+
+## 实现概览
+
+- **子女端**：微信小程序，负责展示周报、每日中午小结、子女反馈。
+- **老人端**：同一小程序/服务号入口，负责用药计划的提醒与确认。
+- **后端**：REST API + OpenClaw，用 PRD 中的规则生成结构化周报。
+- **数据**：只用微信运动步数 + 用药确认，全部境内存储，详见 [docs/privacy-and-security.md](docs/privacy-and-security.md)。
+
+更多技术细节请参阅 `backend/README.md` 和 `docs/prd/parents-weekly-briefing-prd-p0.md`。
+
+---
+
+## Roadmap
+
+- **P0（当前）**：完成微信小程序 MVP + 后端 API + 内测 5–10 名付费子女用户。
+- **P1（规划中）**：引入更多数据源和独立 App。
+
+---
 
 ## 仓库结构
 
@@ -9,44 +60,14 @@ parents-weekly-briefing/
 ├── README.md
 ├── docs/
 │   ├── prd/
-│   │   ├── parents-weekly-briefing-prd-p0.md
-│   │   ├── reverse-prd-grandcare-stackcare.md
-│   │   ├── paper-demo-monday-morning.md
-│   │   └── paper-demo-green-light-week.md
-│   ├── privacy-and-security.md
-│   └── sprint-backlog-p0-weekly-briefing.md
+│   │   ├── parents-weekly-briefing-prd-p0.md        — P0 产品需求文档
+│   │   ├── reverse-prd-grandcare-stackcare.md        — GrandCare / StackCare 反向 PRD（负面教科书）
+│   │   ├── paper-demo-monday-morning.md              — 黄灯周纸上 Demo
+│   │   └── paper-demo-green-light-week.md            — 绿灯周纸上 Demo
+│   ├── privacy-and-security.md                       — P0 隐私与数据安全说明
+│   └── sprint-backlog-p0-weekly-briefing.md          — Sprint Backlog
 ├── backend/
 │   └── (预留：后端服务代码)
 └── wechat-miniprogram/
     └── (预留：微信小程序代码)
 ```
-
-- **`docs/prd/parents-weekly-briefing-prd-p0.md`** — P0 产品需求文档（目标用户、关键场景、数据源、周报结构、成功指标等）。
-- **`docs/prd/reverse-prd-grandcare-stackcare.md`** — GrandCare / StackCare 反向 PRD（负面教科书，列出 8 条「我们不这么做」）。
-- **`docs/prd/paper-demo-monday-morning.md`** — 黄灯周纸上 Demo：周一早上完整交互剧本（锁屏 → 周报 → 反馈 → 下周闭环）。
-- **`docs/prd/paper-demo-green-light-week.md`** — 绿灯周纸上 Demo：在「一切正常」时，如何从数据里长出自然的话题，而不是废话。
-- **`docs/privacy-and-security.md`** — P0 隐私与数据安全说明：只接入微信运动步数 + 父母手动用药确认，明确不读取聊天、不碰钱、不看定位。
-- **`docs/sprint-backlog-p0-weekly-briefing.md`** — 2 周内测冲刺的 Sprint Backlog：10 个任务 + 4 个里程碑（数据通路 → 周报生成 → UI+通知 → 首批内测）。
-- **`backend/`** — 预留：后端服务代码（REST API + OpenClaw 集成），后续按照 PRD 中的接口约定实现。
-- **`wechat-miniprogram/`** — 预留：微信小程序代码（页面、配置、隐私弹窗等）。
-
-## 实现规划（P0）
-
-- **前端形态**：微信小程序
-  - 子女在小程序中接收周报、查看细节、反馈「聊了/还没聊」。
-  - 只使用微信运动步数 + 父母手动确认用药，不接入额外硬件（小米手环等）作为 P0 前提。
-
-- **后端服务**：
-  - 业务 API 服务：聚合微信运动和用药数据，根据 PRD §6 的规则生成结构化周报 JSON。
-  - OpenClaw：作为规则/生成层，接收「周汇总特征」并输出周报文案结构。
-
-- **数据与隐私**：
-  - 所有数据加密存储在境内云服务器，仅用于周报生成和匿名统计。
-  - 不读取聊天、通话内容，不接入银行/支付/医保数据，详见 `docs/privacy-and-security.md`。
-
-## Roadmap（简要）
-
-- **P0（当前）**：
-  - 完成微信小程序 MVP + 后端 API + 内测 5–10 名付费子女用户。
-- **P1（规划中）**：
-  - 在验证 P0 成功指标后，考虑引入更多数据源（可穿戴设备、诈骗风险等）和独立 App。
