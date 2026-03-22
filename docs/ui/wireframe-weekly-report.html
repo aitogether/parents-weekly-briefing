@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>父母周报 - 线框图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f0f2f5;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    color: #333;
+  }
+
+  .demo-label {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .phone {
+    width: 375px;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  .screen {
+    padding: 20px 18px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* 顶部日期 */
+  .meta {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+  }
+
+  /* 灯 + 一句话 */
+  .traffic-light-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: #fafafa;
+    border-radius: 14px;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+
+  .dot.green   { background: #4CAF50; }
+  .dot.yellow  { background: #FFC107; }
+  .dot.red     { background: #F44336; }
+
+  .dot.active  { opacity: 1; box-shadow: 0 0 6px currentColor; }
+  .dot.green.active  { box-shadow: 0 0 6px #4CAF50; }
+  .dot.yellow.active { box-shadow: 0 0 6px #FFC107; }
+  .dot.red.active    { box-shadow: 0 0 6px #F44336; }
+
+  .headline {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* 卡片通用 */
+  .card {
+    background: #fafafa;
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* 关键事实 */
+  .fact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fact-list li {
+    font-size: 14px;
+    line-height: 1.55;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .fact-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+
+  .fact-list li.mom::before  { background: #E91E63; }
+  .fact-list li.dad::before  { background: #2196F3; }
+
+  /* 行动建议 */
+  .action-card {
+    border-left: 3px solid transparent;
+  }
+
+  .action-card.do    { border-left-color: #FFC107; }
+  .action-card.care  { border-left-color: #8BC34A; }
+
+  .action-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #aaa;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .action-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .action-text .highlight {
+    color: #E65100;
+    font-weight: 500;
+  }
+
+  /* 底部按钮 */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-done {
+    background: #4CAF50;
+    color: #fff;
+  }
+
+  .btn-pending {
+    background: #f0f0f0;
+    color: #666;
+  }
+
+  /* 分隔标注 */
+  .divider {
+    text-align: center;
+    font-size: 13px;
+    color: #bbb;
+    padding: 6px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 黄灯周 Demo ========== -->
+<div>
+  <div class="demo-label">黄灯周 Demo</div>
+  <div class="phone">
+    <div class="screen">
+
+      <div class="meta">本期覆盖 3/14 – 3/20 · 下期 3/28 发送</div>
+
+      <!-- 交通灯 -->
+      <div class="traffic-light-bar">
+        <div class="dots">
+          <div class="dot green"></div>
+          <div class="dot yellow active"></div>
+          <div class="dot red"></div>
+        </div>
+        <div class="headline">妈整体稳定，爸活动量略降。</div>
+      </div>
+
+      <!-- 关键事实 -->
+      <div class="card">
+        <div class="card-title">关键事实</div>
+        <ul class="fact-list">
+          <li class="mom">妈本周用药完成率 94%，周三周四血压略高</li>
+          <li class="dad">爸日均步数比上月少 28%（2,103 → 1,514）</li>
+          <li class="dad">爸周六出门只有 412 步</li>
+        </ul>
+      </div>
+
+      <!-- 行动建议 -->
+      <div class="card action-card do">
+        <div class="action-label">本周末可以做什么</div>
+        <div class="action-text">打个电话问问妈最近睡得好不好</div>
+      </div>
+
+      <div class="card action-card care">
+        <div class="action-label">你可能好奇的</div>
+        <div class="action-text">爸周六出门只有 412 步——<span class="highlight">那天他在忙什么？</span></div>
+      </div>
+
+      <!-- 按钮 -->
+      <div class="btn-row">
+        <button class="btn btn-done">已经聊了</button>
+        <button class="btn btn-pending">还没聊</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== 绿灯周 Demo ========== -->
+<div>
+  <div class="demo-label">绿灯周 Demo</div>
+  <div class="phone">
+    <div class="screen">
+
+      <div class="meta">本期覆盖 3/21 – 3/27 · 下期 4/4 发送</div>
+
+      <!-- 交通灯 -->
+      <div class="traffic-light-bar">
+        <div class="dots">
+          <div class="dot green active"></div>
+          <div class="dot yellow"></div>
+          <div class="dot red"></div>
+        </div>
+        <div class="headline">爸妈这周都挺好。放心忙你的。</div>
+      </div>
+
+      <!-- 关键事实 -->
+      <div class="card">
+        <div class="card-title">关键事实</div>
+        <ul class="fact-list">
+          <li class="mom">妈的血压和用药是这几周最好的一次</li>
+          <li class="dad">爸的步数回到上月水平（日均 2,847 步）</li>
+          <li class="mom">没有异常用药记录</li>
+        </ul>
+      </div>
+
+      <!-- 行动建议 -->
+      <div class="card action-card care">
+        <div class="action-label">周末如果有空</div>
+        <div class="action-text">打个电话不聊身体，聊点家常。</div>
+      </div>
+
+      <div class="card action-card care">
+        <div class="action-label">你可能好奇的</div>
+        <div class="action-text">爸周六 2,300 步——这天他明显出门了。<span class="highlight">去哪了？跟谁？</span></div>
+      </div>
+
+      <!-- 按钮 -->
+      <div class="btn-row">
+        <button class="btn btn-done">已经聊了</button>
+        <button class="btn btn-pending">还没聊</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

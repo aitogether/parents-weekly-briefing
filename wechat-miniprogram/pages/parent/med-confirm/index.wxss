@@ -1,0 +1,41 @@
+/* pages/parent/med-confirm/index.wxss */
+
+.med-header {
+  padding: 40rpx 0;
+}
+
+.med-time-badge {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #4CAF50;
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  margin-bottom: 24rpx;
+}
+
+.med-name {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 12rpx;
+}
+
+.med-dosage {
+  font-size: 32rpx;
+}
+
+.med-remark {
+  font-size: 26rpx;
+}
+
+.btn-group {
+  padding: 0 20rpx;
+}
+
+.btn-large {
+  padding: 36rpx 0;
+  font-size: 36rpx;
+  font-weight: 600;
+  border-radius: 20rpx;
+}

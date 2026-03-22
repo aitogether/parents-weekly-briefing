@@ -1,0 +1,40 @@
+<!-- pages/child/medication-stats/index.wxml -->
+<view class="container">
+  <!-- 今日完成率 -->
+  <view class="card">
+    <view class="card-title">今日用药</view>
+    <view class="progress-section">
+      <view class="progress-bar-bg">
+        <view class="progress-bar-fill" style="width:{{todayRate}}%; background:{{todayRate >= 100 ? '#4CAF50' : todayRate >= 50 ? '#FFC107' : '#F44336'}}"></view>
+      </view>
+      <view class="progress-text">{{todayDone}}/{{todayTotal}} 已服用 ({{todayRate}}%)</view>
+    </view>
+  </view>
+
+  <!-- 本周完成率 -->
+  <view class="card">
+    <view class="card-title">本周用药</view>
+    <view class="progress-section">
+      <view class="progress-bar-bg">
+        <view class="progress-bar-fill" style="width:{{weekRate}}%; background:{{weekRate >= 90 ? '#4CAF50' : weekRate >= 70 ? '#FFC107' : '#F44336'}}"></view>
+      </view>
+      <view class="progress-text">{{weekDone}}/{{weekTotal}} 已服用 ({{weekRate}}%)</view>
+    </view>
+  </view>
+
+  <!-- 漏服记录 -->
+  <view class="card" wx:if="{{missedRecords.length > 0}}">
+    <view class="card-title">未服用记录</view>
+    <view class="missed-item" wx:for="{{missedRecords}}" wx:key="index">
+      <view class="missed-dot"></view>
+      <view class="missed-info">
+        <view class="missed-med">{{item.medName}} {{item.dosage}}</view>
+        <view class="missed-time text-gray">{{item.scheduledTime}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card text-center" wx:if="{{loading}}">
+    <view class="text-gray">加载中...</view>
+  </view>
+</view>

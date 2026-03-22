@@ -1,4 +1,82 @@
+/* app.wxss - 全局样式 */
+
 page {
   background-color: #f5f5f5;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
 }
+
+/* ── 通用容器 ── */
+.container {
+  padding: 30rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  color: #222;
+}
+
+/* ── 状态灯 ── */
+.status-light {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-light.green  { background: #4CAF50; }
+.status-light.yellow { background: #FFC107; }
+.status-light.red    { background: #F44336; }
+
+/* ── 按钮 ── */
+.btn-primary {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #4CAF50;
+  border: 2rpx solid #4CAF50;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-large {
+  padding: 36rpx 0;
+  font-size: 36rpx;
+  font-weight: 600;
+  border-radius: 20rpx;
+}
+
+/* ── 工具类 ── */
+.text-center { text-align: center; }
+.text-gray    { color: #999; }
+.text-green   { color: #4CAF50; }
+.text-yellow  { color: #FFC107; }
+.text-red     { color: #F44336; }
+.mt-20        { margin-top: 20rpx; }
+.mb-20        { margin-bottom: 20rpx; }
+.flex-row     { display: flex; flex-direction: row; align-items: center; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-center  { display: flex; justify-content: center; align-items: center; }

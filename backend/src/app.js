@@ -1,14 +1,25 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
+const { initDB } = require('./db/init');
+const werunRoutes = require('./routes/werun');
+const medicationRoutes = require('./routes/medication');
+const reportRoutes = require('./routes/report');
 
+const app = express();
 app.use(express.json());
+app.use(cors());
 
 // 健康检查
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Mock 周报生成接口（符合 PRD §6 结构）
+// API 路由
+app.use('/api/werun', werunRoutes);
+app.use('/api/med', medicationRoutes);
+app.use('/api/report', reportRoutes);
+
+// Mock 周报生成接口（符合 PRD §6 结构，保留用于前端对接）
 app.post('/v1/weekly-briefing/generate', (req, res) => {
   // P0: 从请求体接收用户ID，返回 mock 周报
   // P1: 从数据库拉取真实数据，经规则引擎生成
@@ -58,6 +69,9 @@ app.post('/v1/weekly-briefing/generate', (req, res) => {
     ]
   });
 });
+
+// 初始化数据库
+initDB();
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

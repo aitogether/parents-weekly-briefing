@@ -1,0 +1,62 @@
+/* pages/child/weekly-report/index.wxss */
+
+.week-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 2rpx;
+}
+
+.fact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.fact-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.fact-index {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.fact-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.fact-anchor {
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.action-item,
+.curious-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.action-icon,
+.curious-icon {
+  margin-right: 12rpx;
+  font-size: 30rpx;
+}

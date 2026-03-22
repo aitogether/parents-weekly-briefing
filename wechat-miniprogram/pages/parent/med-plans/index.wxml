@@ -1,0 +1,39 @@
+<!-- pages/parent/med-plans/index.wxml -->
+<view class="container">
+  <view class="card" wx:for="{{plans}}" wx:key="id">
+    <view class="plan-item">
+      <view class="plan-header flex-between">
+        <view class="plan-name">{{item.medName}}</view>
+        <view class="plan-status {{item.status === 'confirmed' ? 'status-done' : 'status-pending'}}">
+          {{item.status === 'confirmed' ? '已确认' : '待确认'}}
+        </view>
+      </view>
+      <view class="plan-detail">
+        <view class="plan-row">
+          <text class="text-gray">剂量：</text>
+          <text>{{item.dosage}}</text>
+        </view>
+        <view class="plan-row">
+          <text class="text-gray">时间：</text>
+          <text>{{item.scheduledTime}}</text>
+        </view>
+        <view class="plan-row" wx:if="{{item.frequency}}">
+          <text class="text-gray">频率：</text>
+          <text>{{item.frequency}}</text>
+        </view>
+        <view class="plan-row" wx:if="{{item.remark}}">
+          <text class="text-gray">备注：</text>
+          <text>{{item.remark}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card text-center" wx:if="{{loading}}">
+    <view class="text-gray">加载中...</view>
+  </view>
+
+  <view class="card text-center" wx:if="{{!loading && plans.length === 0}}">
+    <view class="text-gray">暂无用药计划</view>
+  </view>
+</view>

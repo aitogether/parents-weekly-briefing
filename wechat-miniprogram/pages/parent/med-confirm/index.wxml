@@ -1,0 +1,35 @@
+<!-- pages/parent/med-confirm/index.wxml -->
+<view class="container">
+  <!-- 当前待确认用药 -->
+  <view class="card" wx:if="{{currentMed}}">
+    <view class="med-header text-center">
+      <view class="med-time-badge">{{currentMed.scheduledTime}}</view>
+      <view class="med-name">{{currentMed.medName}}</view>
+      <view class="med-dosage text-gray">{{currentMed.dosage}}</view>
+      <view class="med-remark text-gray mt-20" wx:if="{{currentMed.remark}}">
+        {{currentMed.remark}}
+      </view>
+    </view>
+
+    <!-- 大按钮 -->
+    <view class="btn-group mt-20">
+      <button class="btn-primary btn-large" bindtap="onConfirmTaken">
+        ✅ 已吃
+      </button>
+      <button class="btn-secondary btn-large mt-20" bindtap="onConfirmSkipped">
+        ⏭️ 这次先不吃
+      </button>
+    </view>
+  </view>
+
+  <!-- 无待确认用药 -->
+  <view class="card text-center" wx:elif="{{!loading}}">
+    <view class="text-gray" style="font-size:32rpx; padding:60rpx 0;">
+      🎉 当前没有待确认的用药
+    </view>
+  </view>
+
+  <view class="card text-center" wx:if="{{loading}}">
+    <view class="text-gray">加载中...</view>
+  </view>
+</view>
