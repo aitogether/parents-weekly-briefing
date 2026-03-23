@@ -106,3 +106,10 @@ parents-weekly-briefing/
     ├── pages/parent/                                  — 老人端2个页面（大字体大按钮）
     └── utils/api.js                                   — API 封装
 ```
+
+## Android 演示版 APK / Android Demo App
+
+如果你想快速向非技术朋友/家人演示「父母周报」，可以安装独立 Android 演示应用（纯本地假数据，不联网）：
+
+- **GitHub 仓库 / Demo Repo**: [aitogether/parents-weekly-briefing-demo-app](https://github.com/aitogether/parents-weekly-briefing-demo-app)
+- **最新 APK / Latest Release**: [Releases Page](https://github.com/aitogether/parents-weekly-briefing-demo-app/releases)
