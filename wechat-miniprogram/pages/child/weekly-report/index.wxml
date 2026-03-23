@@ -1,73 +1,54 @@
-<!-- pages/child/weekly-report/index.wxml -->
+<!-- pages/child/weekly-report/index.wxml — 紧凑单屏 -->
 <view class="page">
-  <!-- 状态总览卡 -->
-  <view class="card status-card">
+
+  <!-- 状态条：一行搞定 -->
+  <view class="status-bar">
     <view class="status-dot {{summary.level}}"></view>
-    <view class="status-title">{{summary.title}}</view>
-    <view class="status-liner">{{summary.oneLiner}}</view>
+    <text class="status-title">{{summary.title}}</text>
+    <text class="status-liner">{{summary.oneLiner}}</text>
   </view>
 
-  <!-- 妈 -->
-  <view class="card">
-    <view class="card-title">妈</view>
-    <view class="fact" wx:if="{{parentA.medAdherence}}">
-      <view class="fact-icon">💊</view>
-      <view class="fact-content">
-        <view class="fact-label">用药完成率</view>
-        <view class="fact-value">{{parentA.medAdherence.rate}}%</view>
-        <view class="fact-note">{{parentA.medAdherence.note}}</view>
+  <!-- 爸妈数据横排 -->
+  <view class="card data-card">
+    <view class="parent-row">
+      <view class="parent-col">
+        <text class="parent-label">妈</text>
+        <text class="data-val">{{parentA.steps.dailyAvg}}</text>
+        <text class="data-unit">步/天</text>
+        <text class="data-sub" wx:if="{{parentA.medAdherence}}">💊 {{parentA.medAdherence.rate}}%</text>
       </view>
-    </view>
-    <view class="fact">
-      <view class="fact-icon">🚶</view>
-      <view class="fact-content">
-        <view class="fact-label">日均步数</view>
-        <view class="fact-value">{{parentA.steps.dailyAvg}}</view>
-        <view class="fact-note">{{parentA.steps.note}}</view>
-      </view>
-    </view>
-  </view>
-
-  <!-- 爸 -->
-  <view class="card">
-    <view class="card-title">爸</view>
-    <view class="fact">
-      <view class="fact-icon">🚶</view>
-      <view class="fact-content">
-        <view class="fact-label">日均步数</view>
-        <view class="fact-value">{{parentB.steps.dailyAvg}}</view>
-        <view class="fact-note">{{parentB.steps.note}}</view>
+      <view class="v-line"></view>
+      <view class="parent-col">
+        <text class="parent-label">爸</text>
+        <text class="data-val">{{parentB.steps.dailyAvg}}</text>
+        <text class="data-unit">步/天</text>
+        <text class="data-sub">{{parentB.steps.note}}</text>
       </view>
     </view>
   </view>
 
-  <!-- 行动建议 -->
+  <!-- 建议 -->
   <view class="card action-card">
-    <view class="card-title">建议</view>
-    <view class="action-text">{{action.text}}</view>
+    <text class="action-text">💡 {{action.text}}</text>
   </view>
 
-  <!-- 你可能好奇 -->
+  <!-- 好奇（紧凑列表） -->
   <view class="card" wx:if="{{youMayWonder.length > 0}}">
-    <view class="card-title">你可能好奇</view>
-    <view class="fact" wx:for="{{youMayWonder}}" wx:key="index">
-      <view class="fact-icon">💬</view>
-      <view class="fact-content">
-        <view class="fact-note">{{item}}</view>
-      </view>
+    <view class="wonder-item" wx:for="{{youMayWonder}}" wx:key="index">
+      <text>• {{item}}</text>
     </view>
   </view>
 
-  <!-- 子女回声选择 -->
-  <view class="card">
-    <view class="card-title">告诉爸妈你看过了（可选）</view>
-    <view class="echo-options">
-      <view class="echo-option {{selectedEcho === item.type ? 'selected' : ''}}"
+  <!-- 回声 -->
+  <view class="card echo-card">
+    <text class="echo-label">告诉爸妈你看过了</text>
+    <view class="echo-row">
+      <view class="echo-chip {{selectedEcho === item.type ? 'selected' : ''}}"
             wx:for="{{echoOptions}}" wx:key="type"
             bindtap="onEchoSelect" data-type="{{item.type}}">
         {{item.text}}
       </view>
     </view>
-    <button class="echo-submit" wx:if="{{selectedEcho}}" bindtap="onEchoSubmit">发送</button>
+    <button class="echo-btn" size="mini" wx:if="{{selectedEcho}}" bindtap="onEchoSubmit">发送</button>
   </view>
 </view>

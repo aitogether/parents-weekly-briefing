@@ -1,65 +1,58 @@
-/* pages/child/weekly-report/index.wxss */
-/* UI 规范 v1 */
+/* pages/child/weekly-report/index.wxss — 紧凑单屏布局 */
 
-page {
-  background: #F5F5F7;
-  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
-}
+page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; }
 
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 0 16px 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+/* 状态条 */
+.status-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff; border-radius: 12px; padding: 12px 16px;
+  margin: 8px 12px 8px;
 }
-.card-title {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 12px;
-}
-
-/* 状态总览 */
-.status-card { text-align: center; padding: 28px 20px; }
-.status-dot {
-  width: 48px; height: 48px; border-radius: 50%;
-  margin: 0 auto 12px;
-}
+.status-dot { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
 .status-dot.green { background: #22A060; }
 .status-dot.yellow { background: #F6A623; }
 .status-dot.red { background: #D6453D; }
-.status-title { font-size: 20px; font-weight: 700; color: #0F5960; margin-bottom: 6px; }
-.status-liner { font-size: 15px; color: #666; line-height: 1.5; }
+.status-info { display: flex; flex-direction: column; }
+.status-title { font-size: 16px; font-weight: 700; color: #0F5960; }
+.status-liner { font-size: 12px; color: #888; margin-top: 2px; }
 
-/* 事实列表 */
-.fact {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+/* 通用卡片 */
+.card {
+  background: #fff; border-radius: 10px; padding: 12px;
+  margin: 0 12px 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.05);
 }
-.fact:last-child { border-bottom: none; }
-.fact-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  background: #E5F6F7; display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.fact-label { font-size: 13px; color: #666; }
-.fact-value { font-size: 20px; font-weight: 700; color: #0F5960; }
-.fact-note { font-size: 13px; color: #999; margin-top: 2px; }
 
-/* 行动建议 */
-.action-card { background: #E5F6F7; }
-.action-text { font-size: 16px; color: #0F5960; line-height: 1.6; }
+/* 爸妈数据 */
+.data-card { padding: 10px 8px; }
+.parent-row { display: flex; align-items: center; text-align: center; }
+.parent-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.parent-label { font-size: 12px; color: #999; margin-bottom: 2px; }
+.data-val { font-size: 22px; font-weight: 700; color: #0F5960; }
+.data-unit { font-size: 10px; color: #aaa; }
+.data-small { font-size: 11px; color: #888; margin-top: 2px; }
+.divider { width: 1px; height: 40px; background: #eee; margin: 0 4px; }
 
-/* 回声选项 */
-.echo-options { display: flex; flex-direction: column; gap: 10px; }
-.echo-option {
-  padding: 14px 16px; border: 1.5px solid #e0e0e0; border-radius: 10px;
-  font-size: 15px; color: #1A1A1A; text-align: center;
+/* 建议 */
+.action-card { background: #E5F6F7; padding: 10px 14px; }
+.action-label { font-size: 12px; color: #1C9CA7; font-weight: 600; }
+.action-text { font-size: 13px; color: #0F5960; line-height: 1.5; margin-top: 4px; display: block; }
+
+/* 好奇 */
+.wonder-card { padding: 10px 14px; }
+.wonder-title { font-size: 12px; color: #999; font-weight: 600; }
+.wonder-item { font-size: 12px; color: #666; line-height: 1.8; display: block; }
+
+/* 回声 */
+.echo-card { padding: 10px 12px; }
+.echo-title { font-size: 12px; color: #999; margin-bottom: 6px; display: block; }
+.echo-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.echo-chip {
+  flex: 1; min-width: 0; padding: 8px 6px;
+  border: 1px solid #e0e0e0; border-radius: 8px;
+  font-size: 12px; color: #333; text-align: center;
 }
-.echo-option.selected {
-  border-color: #1C9CA7; background: #E5F6F7; color: #0F5960;
-}
+.echo-chip.selected { border-color: #1C9CA7; background: #E5F6F7; color: #0F5960; }
 .echo-submit {
-  margin-top: 12px; background: #1C9CA7; color: #fff; border: none;
-  border-radius: 10px; font-size: 16px; padding: 12px;
+  margin-top: 8px; background: #1C9CA7; color: #fff; border: none;
+  border-radius: 8px; font-size: 14px;
 }
