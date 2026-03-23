@@ -2,6 +2,12 @@
 
 「父母周报」是给异地子女的一份每周一次的父母状态简报，让你在周五傍晚用 5 分钟知道：爸妈这周大概怎样、这个周末要不要做点什么。
 
+## 📸 Screenshots
+
+| 黄灯周报（子女端） | 用药确认（有回声） | 每日小结 | 设置页 |
+|:---:|:---:|:---:|:---:|
+| ![周报](docs/media/screenshots/phone-01-report.jpg) | ![用药有回声](docs/media/screenshots/phone-03-medication.jpg) | ![每日小结](docs/media/screenshots/phone-02-daily.jpg) | ![设置](docs/media/screenshots/phone-04-settings.jpg) |
+
 ### 这份周报写给谁？
 
 - **高频焦虑型**：爸妈在老家，每次刷到老人健康/诈骗新闻就紧张，周报帮你把模糊不安变成清晰判断。
