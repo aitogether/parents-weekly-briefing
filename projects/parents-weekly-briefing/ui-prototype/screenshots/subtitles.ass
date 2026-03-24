@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Subtitle,Noto Sans SC,36,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,2,1,2,40,40,100,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:05.00,Subtitle,,0,0,0,,{\pos(540,1820)}父母周报 — Parents Weekly Briefing
+Dialogue: 0,0:00:05.00,0:00:10.00,Subtitle,,0,0,0,,{\pos(540,1820)}每日小结 — 最近7天的活动与用药
+Dialogue: 0,0:00:10.00,0:00:15.00,Subtitle,,0,0,0,,{\pos(540,1820)}用药管理 — 爸妈的健康守护
+Dialogue: 0,0:00:15.00,0:00:20.00,Subtitle,,0,0,0,,{\pos(540,1820)}设置 — 通知与家庭成员管理
+Dialogue: 0,0:00:20.00,0:00:25.00,Subtitle,,0,0,0,,{\pos(540,1820)}父母周报 v1.0 — 让关心不再距离遥远

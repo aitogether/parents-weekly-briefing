@@ -1,0 +1,9 @@
+file 'phone-01-report.jpg'
+duration 5
+file 'phone-02-daily.jpg'
+duration 5
+file 'phone-03-medication.jpg'
+duration 5
+file 'phone-04-settings.jpg'
+duration 5
+file 'phone-04-settings.jpg'
