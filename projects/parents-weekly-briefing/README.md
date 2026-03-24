@@ -19,7 +19,7 @@
 | --- | --- | --- | --- |
 | ![](ui-prototype/screenshots/phone-02-report.jpg) | ![](ui-prototype/screenshots/phone-03-med-confirm.jpg) | ![](ui-prototype/screenshots/phone-04-med-plan.jpg) | ![](ui-prototype/screenshots/phone-05-echo.jpg) |
 
-> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况。
+> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况，也不构成任何医疗建议。
 
 ## 产品是什么？
 
