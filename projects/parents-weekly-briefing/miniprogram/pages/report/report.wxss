@@ -1,0 +1,250 @@
+/* ============================================
+   子女端黄灯周报首屏
+   设计关键词：安心、温和、记得住
+   色板：主色 #20A080（青绿）/ 辅助色 #70E090（薄荷绿）
+         背景 #F0FAF6 / 卡片 #FFFFFF / 警示 #E84040
+   ============================================ */
+
+/* --- 全局 & 页面容器 --- */
+
+.page-container {
+  min-height: 100vh;
+  background-color: #F0FAF6;
+  padding: 24rpx 32rpx 48rpx;
+  box-sizing: border-box;
+}
+
+/* --- 通用卡片 --- */
+
+.card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx;
+  margin-bottom: 28rpx;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #D1E8DE;
+}
+
+/* --- 顶部状态卡 --- */
+
+.status-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 40rpx 36rpx;
+  margin-bottom: 28rpx;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #D1E8DE;
+}
+
+.status-header {
+  margin-bottom: 28rpx;
+}
+
+.status-title {
+  font-size: 40rpx;          /* 20px */
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.status-date {
+  font-size: 28rpx;           /* 14px */
+  color: #6B7280;
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+
+.status-light-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.status-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+
+/* 绿灯 / 正常状态 */
+.status-dot--green {
+  background-color: #20A080;
+  box-shadow: 0 0 8rpx rgba(32, 160, 128, 0.4);
+}
+
+/* 黄灯状态 */
+.status-dot--yellow {
+  background-color: #F09933;
+  box-shadow: 0 0 8rpx rgba(240, 153, 51, 0.4);
+}
+
+/* 红灯 / 警告 */
+.status-dot--red {
+  background-color: #E84040;
+  box-shadow: 0 0 8rpx rgba(232, 64, 64, 0.4);
+}
+
+.status-label {
+  font-size: 32rpx;           /* 16px */
+  font-weight: 500;
+  color: #20A080;
+  letter-spacing: 1rpx;
+}
+
+/* --- 一句话总结卡 --- */
+
+.summary-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 28rpx;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #D1E8DE;
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.summary-icon {
+  flex-shrink: 0;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 16rpx;
+  background-color: #E0F5EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-text {
+  font-size: 28rpx;
+}
+
+.summary-text {
+  font-size: 30rpx;           /* 15px */
+  color: #374151;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* --- 关键事实卡 --- */
+
+.fact-card {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 28rpx;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #D1E8DE;
+}
+
+.fact-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.fact-label {
+  font-size: 28rpx;           /* 14px */
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+.fact-value {
+  font-size: 40rpx;           /* 20px */
+  font-weight: 700;
+  color: #374151;
+}
+
+.fact-value--warn {
+  color: #F09933;             /* 警示色 */
+}
+
+.fact-bar-track {
+  height: 12rpx;
+  border-radius: 6rpx;
+  background-color: #E0F5EE;
+  overflow: hidden;
+  margin-bottom: 14rpx;
+}
+
+.fact-bar-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  background-color: #20A080;  /* 青绿进度条 */
+  transition: width 0.6s ease;
+}
+
+.fact-sub {
+  font-size: 26rpx;           /* 13px */
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* --- 回声区 --- */
+
+.echo-section {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx;
+  margin-top: 8rpx;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #D1E8DE;
+}
+
+.echo-title {
+  font-size: 34rpx;           /* 17px */
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10rpx;
+}
+
+.echo-subtitle {
+  font-size: 26rpx;           /* 13px */
+  color: #6B7280;
+  margin-bottom: 28rpx;
+  line-height: 1.5;
+}
+
+.echo-btn-row {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 28rpx;
+}
+
+.echo-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: 16rpx;
+  font-size: 30rpx;           /* 15px */
+  font-weight: 500;
+  color: #374151;
+  background-color: #FFFFFF;
+  border: 1.5px solid #D1E8DE;
+  transition: all 0.2s ease;
+}
+
+.echo-btn--active {
+  background-color: #20A080;
+  border-color: #20A080;
+  color: #FFFFFF;
+}
+
+.echo-submit {
+  width: 100%;
+  text-align: center;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  font-size: 32rpx;           /* 16px */
+  font-weight: 600;
+  color: #FFFFFF;
+  background-color: #20A080;
+  transition: all 0.2s ease;
+}
+
+.echo-submit--disabled {
+  background-color: #BDBDBD;
+  opacity: 0.5;
+}
