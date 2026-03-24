@@ -1,15 +1,13 @@
 /* ============================================
-   子女端黄灯周报首屏
-   设计关键词：安心、温和、记得住
-   色板：主色 #20A080（青绿）/ 辅助色 #70E090（薄荷绿）
-         背景 #F0FAF6 / 卡片 #FFFFFF / 警示 #E84040
+   子女端周报首屏
+   色板来源：../../styles/colors.wxss
    ============================================ */
 
 /* --- 全局 & 页面容器 --- */
 
 .page-container {
   min-height: 100vh;
-  background-color: #F0FAF6;
+  background-color: var(--echo-bg);
   padding: 24rpx 32rpx 48rpx;
   box-sizing: border-box;
 }
@@ -22,7 +20,7 @@
   padding: 36rpx 32rpx;
   margin-bottom: 28rpx;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid #D1E8DE;
+  border: 1px solid var(--card-border);
 }
 
 /* --- 顶部状态卡 --- */
@@ -33,7 +31,7 @@
   padding: 40rpx 36rpx;
   margin-bottom: 28rpx;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #D1E8DE;
+  border: 1px solid var(--card-border);
 }
 
 .status-header {
@@ -41,15 +39,15 @@
 }
 
 .status-title {
-  font-size: 40rpx;          /* 20px */
+  font-size: 40rpx;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-main);
   line-height: 1.4;
 }
 
 .status-date {
-  font-size: 28rpx;           /* 14px */
-  color: #6B7280;
+  font-size: 28rpx;
+  color: var(--text-sub);
   margin-top: 8rpx;
   line-height: 1.5;
 }
@@ -66,13 +64,13 @@
   border-radius: 50%;
 }
 
-/* 绿灯 / 正常状态 */
+/* 绿灯 / 正常 */
 .status-dot--green {
-  background-color: #20A080;
+  background-color: var(--brand-teal);
   box-shadow: 0 0 8rpx rgba(32, 160, 128, 0.4);
 }
 
-/* 黄灯状态 */
+/* 黄灯 */
 .status-dot--yellow {
   background-color: #F09933;
   box-shadow: 0 0 8rpx rgba(240, 153, 51, 0.4);
@@ -80,14 +78,14 @@
 
 /* 红灯 / 警告 */
 .status-dot--red {
-  background-color: #E84040;
+  background-color: var(--heart-red);
   box-shadow: 0 0 8rpx rgba(232, 64, 64, 0.4);
 }
 
 .status-label {
-  font-size: 32rpx;           /* 16px */
+  font-size: 32rpx;
   font-weight: 500;
-  color: #20A080;
+  color: var(--brand-teal);
   letter-spacing: 1rpx;
 }
 
@@ -99,7 +97,7 @@
   padding: 32rpx;
   margin-bottom: 28rpx;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid #D1E8DE;
+  border: 1px solid var(--card-border);
   display: flex;
   align-items: flex-start;
   gap: 20rpx;
@@ -110,7 +108,7 @@
   width: 56rpx;
   height: 56rpx;
   border-radius: 16rpx;
-  background-color: #E0F5EE;
+  background-color: var(--brand-teal-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,8 +119,8 @@
 }
 
 .summary-text {
-  font-size: 30rpx;           /* 15px */
-  color: #374151;
+  font-size: 30rpx;
+  color: var(--text-main);
   line-height: 1.7;
   flex: 1;
 }
@@ -135,7 +133,7 @@
   padding: 32rpx;
   margin-bottom: 28rpx;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid #D1E8DE;
+  border: 1px solid var(--card-border);
 }
 
 .fact-row {
@@ -146,25 +144,25 @@
 }
 
 .fact-label {
-  font-size: 28rpx;           /* 14px */
-  color: #6B7280;
+  font-size: 28rpx;
+  color: var(--text-sub);
   line-height: 1.5;
 }
 
 .fact-value {
-  font-size: 40rpx;           /* 20px */
+  font-size: 40rpx;
   font-weight: 700;
-  color: #374151;
+  color: var(--text-main);
 }
 
 .fact-value--warn {
-  color: #F09933;             /* 警示色 */
+  color: #F09933;
 }
 
 .fact-bar-track {
   height: 12rpx;
   border-radius: 6rpx;
-  background-color: #E0F5EE;
+  background-color: var(--brand-teal-light);
   overflow: hidden;
   margin-bottom: 14rpx;
 }
@@ -172,13 +170,13 @@
 .fact-bar-fill {
   height: 100%;
   border-radius: 6rpx;
-  background-color: #20A080;  /* 青绿进度条 */
+  background-color: var(--brand-teal);
   transition: width 0.6s ease;
 }
 
 .fact-sub {
-  font-size: 26rpx;           /* 13px */
-  color: #6B7280;
+  font-size: 26rpx;
+  color: var(--text-sub);
   line-height: 1.5;
 }
 
@@ -190,19 +188,19 @@
   padding: 36rpx 32rpx;
   margin-top: 8rpx;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid #D1E8DE;
+  border: 1px solid var(--card-border);
 }
 
 .echo-title {
-  font-size: 34rpx;           /* 17px */
+  font-size: 34rpx;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-main);
   margin-bottom: 10rpx;
 }
 
 .echo-subtitle {
-  font-size: 26rpx;           /* 13px */
-  color: #6B7280;
+  font-size: 26rpx;
+  color: var(--text-sub);
   margin-bottom: 28rpx;
   line-height: 1.5;
 }
@@ -218,17 +216,17 @@
   text-align: center;
   padding: 20rpx 0;
   border-radius: 16rpx;
-  font-size: 30rpx;           /* 15px */
+  font-size: 30rpx;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-main);
   background-color: #FFFFFF;
-  border: 1.5px solid #D1E8DE;
+  border: 1.5px solid var(--card-border);
   transition: all 0.2s ease;
 }
 
 .echo-btn--active {
-  background-color: #20A080;
-  border-color: #20A080;
+  background-color: var(--brand-teal);
+  border-color: var(--brand-teal);
   color: #FFFFFF;
 }
 
@@ -237,10 +235,10 @@
   text-align: center;
   padding: 24rpx 0;
   border-radius: 16rpx;
-  font-size: 32rpx;           /* 16px */
+  font-size: 32rpx;
   font-weight: 600;
   color: #FFFFFF;
-  background-color: #20A080;
+  background-color: var(--brand-teal);
   transition: all 0.2s ease;
 }
 

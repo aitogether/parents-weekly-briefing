@@ -12,45 +12,22 @@
       theme: {
         extend: {
           colors: {
-            teal: {
-              50:  '#f0faf6',
-              100: '#e0f5ee',
-              200: '#c1ebdd',
-              300: '#93dcc4',
-              400: '#5dc9a6',
-              500: '#20A080',
-              600: '#188068',
-              700: '#166653',
-              800: '#155143',
-              900: '#144338',
+            brand: {
+              DEFAULT: '#20A080',  // BrandTeal
+              dark: '#188068',     // BrandTealDark
+              light: '#E0F5EE',    // BrandTealLight
             },
             mint: {
-              50:  '#f0fbf4',
-              100: '#ddf7e7',
-              200: '#bdefd0',
-              300: '#8de2ab',
-              400: '#70E090',
-              500: '#40C060',
-              600: '#309E4E',
-              700: '#287E42',
-              800: '#256437',
-              900: '#20532F',
+              DEFAULT: '#70E090',  // BrandMint
+              light: '#F0FBF4',    // BrandMintLight
             },
-            blush: {
-              50:  '#fef2f2',
-              100: '#fde8e8',
-              200: '#fbd5d5',
-              300: '#f8a8a8',
-              400: '#f27070',
-              500: '#E84040',
-              600: '#d62828',
-              700: '#b31e1e',
-              800: '#941c1c',
-              900: '#7c1e1e',
+            echoBg: '#F0FAF6',     // EchoBackground
+            cardBorder: '#D1E8DE', // CardBorder
+            heart: {
+              DEFAULT: '#E84040',  // HeartRed
+              dark: '#d62828',
+              light: '#fde8e8',
             },
-            slate: {
-              750: '#293548',
-            }
           },
           fontFamily: {
             sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif'],
@@ -192,8 +169,8 @@
             <h1 class="text-xl font-bold text-gray-800">本周周报</h1>
             <p class="text-sm text-gray-400 mt-0.5">3月17日 - 3月23日</p>
           </div>
-          <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
-            <i data-lucide="bar-chart-3" class="w-5 h-5 text-teal-600"></i>
+          <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-dark"></i>
           </div>
         </div>
 
@@ -201,7 +178,7 @@
         <div class="card fade-in" style="animation-delay: 100ms">
           <div class="flex items-center justify-between mb-3">
             <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-full bg-blush-100 flex items-center justify-center text-lg">👵</div>
+              <div class="w-11 h-11 rounded-full bg-heart-light flex items-center justify-center text-lg">👵</div>
               <div>
                 <div class="font-semibold text-gray-800">妈妈</div>
                 <div class="text-xs text-gray-400">本周活动概况</div>
@@ -214,14 +191,14 @@
               <span class="text-3xl font-bold text-gray-800">3,980</span>
               <span class="text-sm text-gray-400 ml-1">步/天</span>
             </div>
-            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-mint-100 text-mint-700">🔥 活跃</span>
+            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-mint-light text-mint-dark">🔥 活跃</span>
           </div>
           <div class="progress-bar mb-3">
-            <div class="progress-fill bg-gradient-to-r from-mint-400 to-teal-500" style="width: 79%"></div>
+            <div class="progress-fill bg-gradient-to-r from-mint to-brand" style="width: 79%"></div>
           </div>
           <div class="flex items-center justify-between text-sm">
             <span class="text-gray-500">💊 服药率</span>
-            <span class="font-semibold text-teal-700">71% <span class="text-gray-400 font-normal">(5/7天)</span></span>
+            <span class="font-semibold text-brand-dark">71% <span class="text-gray-400 font-normal">(5/7天)</span></span>
           </div>
         </div>
 
@@ -229,7 +206,7 @@
         <div class="card fade-in" style="animation-delay: 200ms">
           <div class="flex items-center justify-between mb-3">
             <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-full bg-teal-100 flex items-center justify-center text-lg">👴</div>
+              <div class="w-11 h-11 rounded-full bg-brand-light flex items-center justify-center text-lg">👴</div>
               <div>
                 <div class="font-semibold text-gray-800">爸爸</div>
                 <div class="text-xs text-gray-400">本周活动概况</div>
@@ -242,10 +219,10 @@
               <span class="text-3xl font-bold text-gray-800">1,271</span>
               <span class="text-sm text-gray-400 ml-1">步/天</span>
             </div>
-            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-blush-100 text-blush-700">⚠️ 偏低</span>
+            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-heart-light text-heart-dark">⚠️ 偏低</span>
           </div>
           <div class="progress-bar mb-3">
-            <div class="progress-fill bg-gradient-to-r from-blush-400 to-blush-500" style="width: 25%"></div>
+            <div class="progress-fill bg-gradient-to-r from-heart to-heart" style="width: 25%"></div>
           </div>
           <div class="flex items-center justify-between text-sm">
             <span class="text-gray-500">💊 服药率</span>
@@ -254,10 +231,10 @@
         </div>
 
         <!-- AI Suggestion -->
-        <div class="card bg-gradient-to-br from-teal-50 to-white fade-in" style="animation-delay: 300ms">
+        <div class="card bg-gradient-to-br from-brand-light to-white fade-in" style="animation-delay: 300ms">
           <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <i data-lucide="lightbulb" class="w-5 h-5 text-teal-600"></i>
+            <div class="w-9 h-9 rounded-xl bg-brand-light flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="lightbulb" class="w-5 h-5 text-brand-dark"></i>
             </div>
             <div>
               <div class="font-semibold text-gray-800 text-sm mb-1">💡 本周建议</div>
@@ -269,7 +246,7 @@
         <!-- Echo Section -->
         <div class="card fade-in" style="animation-delay: 400ms">
           <div class="flex items-center gap-2 mb-4">
-            <i data-lucide="message-circle-heart" class="w-5 h-5 text-blush-500"></i>
+            <i data-lucide="message-circle-heart" class="w-5 h-5 text-heart"></i>
             <span class="font-semibold text-gray-800">给爸妈的回声</span>
           </div>
           <p class="text-xs text-gray-400 mb-3">选一句话，让爸妈知道你在关心他们 ❤️</p>
@@ -278,7 +255,7 @@
             <button class="echo-btn flex-1" onclick="selectEcho(this)">🤗 关心</button>
             <button class="echo-btn flex-1" onclick="selectEcho(this)">💭 惦记</button>
           </div>
-          <button id="echo-submit" class="w-full mt-3 py-3 rounded-xl bg-teal-500 text-white font-semibold text-sm opacity-50 cursor-not-allowed transition-all" disabled>
+          <button id="echo-submit" class="w-full mt-3 py-3 rounded-xl bg-brand text-white font-semibold text-sm opacity-50 cursor-not-allowed transition-all" disabled>
             发送回声 →
           </button>
         </div>
@@ -297,8 +274,8 @@
       <div id="tab-med" class="tab-content hidden">
         <div class="flex items-center justify-between py-4">
           <h1 class="text-xl font-bold text-gray-800">用药管理</h1>
-          <div class="w-10 h-10 rounded-full bg-mint-100 flex items-center justify-center">
-            <i data-lucide="plus" class="w-5 h-5 text-mint-600"></i>
+          <div class="w-10 h-10 rounded-full bg-mint-light flex items-center justify-center">
+            <i data-lucide="plus" class="w-5 h-5 text-mint-dark"></i>
           </div>
         </div>
 
@@ -307,13 +284,13 @@
           <div class="text-sm font-medium text-gray-500 mb-3">今日用药</div>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-lg">👵</div>
+              <div class="w-10 h-10 rounded-full bg-heart-light flex items-center justify-center text-lg">👵</div>
               <div>
                 <div class="font-semibold text-gray-800">降压药</div>
                 <div class="text-xs text-gray-400">1片 / 每天早上</div>
               </div>
             </div>
-            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-mint-100 text-mint-700 text-sm font-medium">
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-mint-light text-mint-dark text-sm font-medium">
               <i data-lucide="check-circle-2" class="w-4 h-4"></i>
               已确认
             </div>
@@ -325,14 +302,14 @@
         <div class="card">
           <div class="text-sm font-medium text-gray-500 mb-3">本周服药率</div>
           <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-lg">👵</div>
+            <div class="w-10 h-10 rounded-full bg-heart-light flex items-center justify-center text-lg">👵</div>
             <div class="flex-1">
               <div class="flex items-center justify-between mb-1.5">
                 <span class="font-semibold text-gray-800">妈妈</span>
-                <span class="text-sm font-semibold text-teal-700">71%</span>
+                <span class="text-sm font-semibold text-brand-dark">71%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill bg-gradient-to-r from-mint-400 to-teal-500" style="width: 71%"></div>
+                <div class="progress-fill bg-gradient-to-r from-mint to-brand" style="width: 71%"></div>
               </div>
             </div>
           </div>
@@ -349,7 +326,7 @@
 
         <div class="card">
           <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-lg">👴</div>
+            <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center text-lg">👴</div>
             <div class="flex-1">
               <div class="flex items-center justify-between mb-1.5">
                 <span class="font-semibold text-gray-800">爸爸</span>
@@ -393,7 +370,7 @@
                 <span class="text-xl">👴</span>
                 <div>
                   <div class="font-medium text-gray-700 text-sm">爸爸</div>
-                  <div class="text-xs text-blush-500">未绑定</div>
+                  <div class="text-xs text-heart">未绑定</div>
                 </div>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300"></i>
@@ -421,19 +398,19 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="text-sm text-gray-600">每周推送提醒</span>
-              <div class="w-11 h-6 rounded-full bg-teal-500 relative cursor-pointer">
+              <div class="w-11 h-6 rounded-full bg-brand relative cursor-pointer">
                 <div class="absolute right-0.5 top-0.5 w-5 h-5 rounded-full bg-white shadow"></div>
               </div>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-sm text-gray-600">用药提醒</span>
-              <div class="w-11 h-6 rounded-full bg-teal-500 relative cursor-pointer">
+              <div class="w-11 h-6 rounded-full bg-brand relative cursor-pointer">
                 <div class="absolute right-0.5 top-0.5 w-5 h-5 rounded-full bg-white shadow"></div>
               </div>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-sm text-gray-600">步数异常告警</span>
-              <div class="w-11 h-6 rounded-full bg-teal-500 relative cursor-pointer">
+              <div class="w-11 h-6 rounded-full bg-brand relative cursor-pointer">
                 <div class="absolute right-0.5 top-0.5 w-5 h-5 rounded-full bg-white shadow"></div>
               </div>
             </div>
@@ -496,7 +473,7 @@
             <div class="flex items-center gap-2">
               <span class="font-semibold text-gray-800">${d.date}</span>
               <span class="text-xs text-gray-400">${d.day}</span>
-              ${d.today ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-teal-100 text-teal-700">今天</span>' : ''}
+              ${d.today ? '<span class="px-2 py-0.5 rounded-full text-xs font-medium bg-brand-light text-brand-dark">今天</span>' : ''}
             </div>
           </div>
           <div class="space-y-2">
@@ -506,7 +483,7 @@
                 <span class="text-sm text-gray-600">${d.mom.toLocaleString()} 步</span>
               </div>
               ${d.momMed
-                ? '<span class="px-2 py-0.5 rounded-full text-xs bg-mint-100 text-mint-700">💊已确认</span>'
+                ? '<span class="px-2 py-0.5 rounded-full text-xs bg-mint-light text-mint-dark">💊已确认</span>'
                 : '<span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-400">--</span>'
               }
             </div>
@@ -516,8 +493,8 @@
                 <span class="text-sm text-gray-600">${d.dad.toLocaleString()} 步</span>
               </div>
               ${d.dad < 2000
-                ? '<span class="px-2 py-0.5 rounded-full text-xs bg-blush-50 text-blush-500">偏低</span>'
-                : '<span class="px-2 py-0.5 rounded-full text-xs bg-mint-100 text-mint-700">正常</span>'
+                ? '<span class="px-2 py-0.5 rounded-full text-xs bg-heart-light text-heart">偏低</span>'
+                : '<span class="px-2 py-0.5 rounded-full text-xs bg-mint-light text-mint-dark">正常</span>'
               }
             </div>
           </div>
@@ -543,7 +520,7 @@
       const submit = document.getElementById('echo-submit');
       submit.disabled = false;
       submit.classList.remove('opacity-50', 'cursor-not-allowed');
-      submit.classList.add('bg-teal-500', 'hover:bg-teal-600', 'cursor-pointer');
+      submit.classList.add('bg-brand', 'hover:bg-brand-dark', 'cursor-pointer');
     }
   </script>
 </body>

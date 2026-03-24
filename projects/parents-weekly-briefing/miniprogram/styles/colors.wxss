@@ -1,0 +1,25 @@
+/* ============================================
+   全局色板定义（CSS 变量）
+   与 docs/ui/color-palette.md 保持一致
+   各页面 wxss 通过 var(--xxx) 引用
+   ============================================ */
+
+page {
+  /* 品牌主色 */
+  --brand-teal:       #20A080;   /* BrandTeal — 主按钮、主标题、标签 */
+  --brand-teal-dark:  #188068;   /* BrandTealDark — 按下/pressed */
+  --brand-teal-light: #E0F5EE;   /* BrandTealLight — 图标背景、选中态 */
+
+  /* 辅助色 */
+  --brand-mint:       #70E090;   /* BrandMint — 次要按钮、进度条、成功标记 */
+  --brand-mint-light: #F0FBF4;   /* BrandMintLight — 轻量背景 */
+
+  /* 背景 & 边框 */
+  --echo-bg:          #F0FAF6;   /* EchoBackground — 页面底色 */
+  --card-border:      #D1E8DE;   /* CardBorder — 卡片边框、分割线 */
+
+  /* 功能色 */
+  --heart-red:        #E84040;   /* HeartRed — 心形、警示 */
+  --text-main:        #374151;   /* DarkGray — 正文文字 */
+  --text-sub:         #6B7280;   /* MediumGray — 副标题、说明 */
+}
