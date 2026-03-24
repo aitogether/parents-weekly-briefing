@@ -1,7 +1,9 @@
 # 父母周报 · Parents Weekly Briefing
 
+> **状态：2026-03 正在寻找 5–10 个愿意尝试的家庭内测。**
+
 <p align="center">
-  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
+  <img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing-demo-app/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
 </p>
 
 <p align="center">
@@ -10,6 +12,14 @@
 </p>
 
 ---
+
+## 📸 Screenshots
+
+| 黄灯周报（子女端） | 用药确认（有回声） | 每日小结 | 设置页 |
+| --- | --- | --- | --- |
+| ![](ui-prototype/screenshots/01-report.png) | ![](ui-prototype/screenshots/03-medication.png) | ![](ui-prototype/screenshots/02-daily.png) | ![](ui-prototype/screenshots/04-settings.png) |
+
+> 所有截图均为演示数据，不代表真实用户情况。
 
 ## 产品是什么？
 
