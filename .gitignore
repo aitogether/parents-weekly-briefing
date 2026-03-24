@@ -1,25 +1,7 @@
-# Dependencies
-node_modules/
-__pycache__/
-*.pyc
-.env
-.env.local
-
-# IDE
-.vscode/
-.idea/
-
-# OS
 .DS_Store
-Thumbs.db
-
-# Build
-dist/
-build/
-
-# Logs
 *.log
-
-# Miniprogram build
-wechat-miniprogram/miniprogram_npm/
-wechat-miniprogram/cloudfunctions/*/node_modules/
+node_modules/
+.gradle/
+build/
+*.iml
+.idea/

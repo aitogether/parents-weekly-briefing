@@ -1,121 +1,111 @@
 # 父母周报 · Parents Weekly Briefing
 
-「父母周报」是给异地子女的一份每周一次的父母状态简报，让你在周五傍晚用 5 分钟知道：爸妈这周大概怎样、这个周末要不要做点什么。
+> **状态：2026-03 正在寻找 5–10 个愿意尝试的家庭内测。**
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing-demo-app/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
+</p>
+
+<p align="center">
+  <strong>让关心不再距离遥远</strong><br/>
+  Weekly health briefing for families — gentle, respectful, no surveillance.
+</p>
+
+---
 
 ## 📸 Screenshots
 
-| 黄灯周报（子女端） | 用药确认（有回声） | 每日小结 | 设置页 |
-|:---:|:---:|:---:|:---:|
-| ![周报](docs/media/screenshots/phone-01-report.jpg) | ![用药有回声](docs/media/screenshots/phone-03-medication.jpg) | ![每日小结](docs/media/screenshots/phone-02-daily.jpg) | ![设置](docs/media/screenshots/phone-04-settings.jpg) |
+| 周报详情 | 用药确认 | 用药计划 | 回声结果 |
+| --- | --- | --- | --- |
+| ![](ui-prototype/screenshots/phone-02-report.jpg) | ![](ui-prototype/screenshots/phone-03-med-confirm.jpg) | ![](ui-prototype/screenshots/phone-04-med-plan.jpg) | ![](ui-prototype/screenshots/phone-05-echo.jpg) |
 
-### 这份周报写给谁？
+> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况，也不构成任何医疗建议。
 
-- **高频焦虑型**：爸妈在老家，每次刷到老人健康/诈骗新闻就紧张，周报帮你把模糊不安变成清晰判断。
-- **疲惫管理型**：爸妈已经被骗/生病多次，你身心俱疲，周报帮你减少无效电话、把精力用在真正需要的行动上。
+## 产品是什么？
 
----
+父母周报是一个**轻量级家庭健康关怀工具**，面向异地子女和年迈父母：
 
-## 示例：两封真实的周报
+| 角色 | 体验 |
+|------|------|
+| 👶 子女端 | 每周收到一份**黄灯周报**：父母步数趋势 + 用药情况 + AI 建议，一键发送「回声」 |
+| 👴👵 父母端 | 大按钮确认用药，不需要打字，不需要学习新操作 |
 
-### 🟡 黄灯周
-
-> **锁屏**：「妈整体稳定，爸活动量略降。」
->
-> **周报摘抄**：「妈本周用药完成率 94%，周三周四血压略高；爸日均步数比上月少 28%。建议这周末回去看看，或者打个电话问问妈最近睡得好不好。」
->
-> **你可能好奇的**：「爸周六出门只有 412 步——那天他在忙什么？」
-
-### 🟢 绿灯周
-
-> **锁屏**：「爸妈这周都挺好。放心忙你的。」
->
-> **周报摘抄**：「妈的血压和用药是这几周最好的一次；爸的步数回到上月水平。周末如果有空，打个电话不聊身体，聊点家常。」
->
-> **你可能好奇的**：「爸周六 2,300 步——这天他明显出门了。去哪了？跟谁？」
-
-### 周报解决什么问题？
-
-- 从「每周一堆重复确认电话」→「有数据底气的一次有效对话」
-- 从「看完老人新闻就心慌」→「知道爸妈最近有没有偏离自己的 baseline」
-- 从「不知道跟爸妈聊什么」→「数据长出的自然话题」
-
----
-
-## 如何参与内测
-
-如果你是异地子女（父母 60 岁以上、至少有一个健康问题），想试用父母周报：
-
-1. 在 [Issues](https://github.com/aitogether/parents-weekly-briefing/issues/new) 里开一个「内测申请」
-2. 简单说明你的情况：你在哪个城市、父母年龄、父母是否用微信、父母有什么健康问题
-3. 我们会优先邀请 5–10 位用户参与 2 周免费内测
-
----
-
-## 实现概览
-
-- **子女端**：微信小程序，负责展示周报、每日中午小结、子女反馈。
-- **老人端**：同一小程序/服务号入口，负责用药计划的提醒与确认。
-- **后端**：REST API + OpenClaw，用 PRD 中的规则生成结构化周报。
-- **数据**：只用微信运动步数 + 用药确认，全部境内存储，详见 [docs/privacy-and-security.md](docs/privacy-and-security.md)。
-
-更多技术细节请参阅 `backend/README.md` 和 `docs/prd/parents-weekly-briefing-prd-p0.md`。
-
----
-
-## 当前进度（Sprint 进行中）
-
-| 模块 | 状态 | 说明 |
-|------|------|------|
-| **Backend** | ✅ 可运行 | Express + JSON 存储，已实现：微信运动 API、用药计划/确认/统计、周报生成（绿/黄/红灯规则） |
-| **Mini Program** | ✅ 骨架完成 | 6 个页面（子女端4 + 老人端2），API 封装就绪，可导入微信开发者工具联调 |
-| **UI 线框图** | ✅ 完成 | `docs/ui/wireframe-weekly-report.html`，含黄灯周和绿灯周两个 Demo |
-| **内测说明** | ✅ 完成 | `docs/pilot-manual.md`，可直接发给内测用户 |
-| **接口自检** | ✅ 全部通过 | 8 个 API 端点本地 curl 测试通过（详见 `backend/README.md`） |
-
-**里程碑**：M1 数据通路已就绪，下一步进入 M2（周报 pipeline 跑通）+ 首批内测。
-
----
-
-## Roadmap
-
-- **P0（当前）**：完成微信小程序 MVP + 后端 API + 内测 5–10 名付费子女用户。
-- **P1（规划中）**：引入更多数据源和独立 App。
-
----
+**核心理念**：不是监控，是关心。用**周报**代替实时监控，用**一句话回声**代替长消息轰炸。
 
 ## 仓库结构
 
 ```
 parents-weekly-briefing/
-├── README.md
-├── docs/
-│   ├── prd/
-│   │   ├── parents-weekly-briefing-prd-p0.md        — P0 产品需求文档
-│   │   ├── reverse-prd-grandcare-stackcare.md        — 反向 PRD（负面教科书）
-│   │   ├── paper-demo-monday-morning.md              — 黄灯周纸上 Demo
-│   │   └── paper-demo-green-light-week.md            — 绿灯周纸上 Demo
-│   ├── ui/
-│   │   └── wireframe-weekly-report.html              — UI 线框图（黄灯+绿灯 Demo）
-│   ├── privacy-and-security.md                       — 隐私与数据安全说明
-│   ├── pilot-manual.md                               — 内测使用说明
-│   └── sprint-backlog-p0-weekly-briefing.md          — Sprint Backlog
-├── backend/
-│   ├── src/
-│   │   ├── app.js                                    — Express 主入口
-│   │   ├── db/store.js                               — JSON 文件存储（P0）
-│   │   ├── routes/werun.js                           — 微信运动 API
-│   │   ├── routes/medication.js                      — 用药 CRUD + 确认
-│   │   └── routes/report.js                          — 周报生成（绿/黄/红灯）
-│   └── README.md                                     — 快速验证指南
-└── wechat-miniprogram/
-    ├── pages/child/                                   — 子女端4个页面
-    ├── pages/parent/                                  — 老人端2个页面（大字体大按钮）
-    └── utils/api.js                                   — API 封装
+├── backend/                 # Node.js 后端服务（API + SQLite）
+├── docs/                    # 产品文档 & 设计规范
+│   ├── prd/                 # PRD 文档
+│   ├── ui/color-palette.md  # 全端色板规范
+│   ├── design-brief.md      # 设计简报
+│   └── icon-guidelines.md   # 图标指南
+├── miniprogram/             # 微信小程序源码（最新版）
+│   ├── pages/report/        # 周报页面
+│   └── styles/              # 全局样式（色板变量）
+├── ui-prototype/            # HTML 高保真原型
+│   ├── index.html           # 可直接打开的手机模拟器
+│   └── screenshots/         # 真机截图
+└── LICENSE                  # CC BY-NC 4.0 + 商业授权
 ```
 
-## Android 演示版 APK / Android Demo App
+## 快速体验
 
-如果你想快速向非技术朋友/家人演示「父母周报」，可以安装独立 Android 演示应用（纯本地假数据，不联网）：
+### HTML 原型
+直接在浏览器打开 `ui-prototype/index.html`，即可看到完整的 4 个页面（周报/日结/用药/设置）。
 
-- **GitHub 仓库 / Demo Repo**: [aitogether/parents-weekly-briefing-demo-app](https://github.com/aitogether/parents-weekly-briefing-demo-app)
-- **最新 APK / Latest Release**: [Releases Page](https://github.com/aitogether/parents-weekly-briefing-demo-app/releases)
+### Demo App
+独立的 Android 演示应用，纯本地假数据，不联网：
+→ [parents-weekly-briefing-demo-app](https://github.com/aitogether/parents-weekly-briefing-demo-app)
+
+## 配色方案
+
+<p align="center">
+  <img src="https://via.placeholder.com/80x80/20A080/ffffff?text=T" width="40"/> BrandTeal #20A080
+  &nbsp;&nbsp;
+  <img src="https://via.placeholder.com/80x80/70E090/ffffff?text=M" width="40"/> BrandMint #70E090
+  &nbsp;&nbsp;
+  <img src="https://via.placeholder.com/80x80/E84040/ffffff?text=R" width="40"/> HeartRed #E84040
+</p>
+
+完整色板定义 → [docs/ui/color-palette.md](docs/ui/color-palette.md)
+
+---
+
+## Commercial use & branding
+
+### Personal / non-commercial use
+
+This project is open source and welcomes personal and non-commercial use.
+
+If you are an individual using this project for yourself, your family, or non-profit / research purposes, you can use, modify, and deploy it freely under the [CC BY-NC 4.0](LICENSE) license.
+
+We appreciate attribution (linking back to this repo), but it is not required for private use.
+
+### Commercial use
+
+If you plan to integrate this project into a paid product or service, or deploy it as part of a commercial offering (e.g. SaaS for caregivers, hospital / clinic deployments, insurance / eldercare bundles), **please contact the author to discuss a commercial license or revenue-sharing agreement**.
+
+This helps sustain continued development and ensures the product is used in a way that respects the values behind "Parents Weekly Briefing".
+
+### Branding & naming
+
+The names 「父母周报」 and "Parents Weekly Briefing", as well as related logos / icons used in this repository, are reserved as project branding.
+
+You may not use these names or logos in a way that suggests your product is the "official" Parents Weekly Briefing without prior written permission.
+
+If you build on this project commercially, please use your own product name and branding, unless we explicitly agree otherwise.
+
+### 联系 / Contact
+
+For questions about acceptable use, commercial licensing, or partnership inquiries, feel free to open an issue or reach out directly.
+
+---
+
+## License
+
+[CC BY-NC 4.0](LICENSE) — 个人非商业使用免费，商业使用请联系作者。
+
+*个人随便用，赚钱要谈。*
