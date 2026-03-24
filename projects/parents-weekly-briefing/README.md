@@ -15,11 +15,11 @@
 
 ## 📸 Screenshots
 
-| 黄灯周报（子女端） | 用药确认（有回声） | 每日小结 | 设置页 |
+| 周报详情 | 用药确认 | 用药计划 | 回声结果 |
 | --- | --- | --- | --- |
-| ![](ui-prototype/screenshots/01-report.png) | ![](ui-prototype/screenshots/03-medication.png) | ![](ui-prototype/screenshots/02-daily.png) | ![](ui-prototype/screenshots/04-settings.png) |
+| ![](ui-prototype/screenshots/phone-02-report.jpg) | ![](ui-prototype/screenshots/phone-03-med-confirm.jpg) | ![](ui-prototype/screenshots/phone-04-med-plan.jpg) | ![](ui-prototype/screenshots/phone-05-echo.jpg) |
 
-> 所有截图均为演示数据，不代表真实用户情况。
+> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况。
 
 ## 产品是什么？
 
