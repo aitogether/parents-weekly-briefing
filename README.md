@@ -32,24 +32,75 @@
 
 **核心理念**：不是监控，是关心。用**周报**代替实时监控，用**一句话回声**代替长消息轰炸。
 
-## 仓库结构
+## 项目结构
 
 ```
 parents-weekly-briefing/
-├── backend/                 # Node.js 后端服务（API + SQLite）
+├── backend/                 # Node.js 后端服务（REST API + SQLite 数据库）
+│   ├── src/                 #   源码：路由、业务逻辑、数据模型
+│   ├── .env.example         #   环境变量模板
+│   └── package.json
+├── wechat-miniprogram/      # 微信小程序源码（生产版，使用云开发）
+│   ├── pages/               #   页面：report / med-confirm / echo 等
+│   ├── utils/               #   工具函数：API 请求封装、数据格式化
+│   └── images/              #   静态图片资源
+├── miniprogram/             # 小程序早期版本（本地开发用）
+│   ├── pages/               #   页面组件
+│   └── styles/              #   全局样式（色板变量）
+├── ui-prototype/            # HTML 高保真原型（浏览器直接打开）
+│   ├── index.html           #   可直接打开的手机模拟器
+│   └── screenshots/         #   真机截图
 ├── docs/                    # 产品文档 & 设计规范
-│   ├── prd/                 # PRD 文档
-│   ├── ui/color-palette.md  # 全端色板规范
-│   ├── design-brief.md      # 设计简报
-│   └── icon-guidelines.md   # 图标指南
-├── miniprogram/             # 微信小程序源码（最新版）
-│   ├── pages/report/        # 周报页面
-│   └── styles/              # 全局样式（色板变量）
-├── ui-prototype/            # HTML 高保真原型
-│   ├── index.html           # 可直接打开的手机模拟器
-│   └── screenshots/         # 真机截图
-└── LICENSE                  # CC BY-NC 4.0 + 商业授权
+│   ├── prd/                 #   PRD 需求文档
+│   ├── ui/color-palette.md  #   全端色板规范
+│   ├── design-brief.md      #   设计简报
+│   ├── icon-guidelines.md   #   图标指南
+│   ├── pilot-manual.md      #   内测用户手册
+│   ├── known-issues.md      #   已知问题
+│   ├── privacy-and-security.md # 隐私与安全说明
+│   └── roadmap.md           #   产品路线图
+├── CHANGELOG.md             # 变更日志
+├── LICENSE                  # CC BY-NC 4.0 + 商业授权
+└── project.config.json      # 微信小程序项目配置
 ```
+
+## 快速开始
+
+### 后端服务
+
+```bash
+cd backend
+
+# 1. 安装依赖
+npm install
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env，填入数据库路径、API 密钥等配置
+
+# 3. 启动开发服务器
+npm run dev
+# 默认监听 http://localhost:3000
+```
+
+### 微信小程序
+
+1. 用微信开发者工具打开 `wechat-miniprogram/` 目录
+2. 在 `utils/` 或项目配置中找到 API 地址，指向你刚启动的后端服务
+3. 点击「编译预览」即可在模拟器中调试
+
+> 💡 小程序默认连接本地后端。如需联调真机，确保手机和电脑在同一局域网，将 API 地址改为电脑 IP。
+
+## 当前小程序状态
+
+| 维度 | 状态 |
+|------|------|
+| 已实现页面 | 周报详情、用药确认、用药计划、回声结果（4 页） |
+| 上架状态 | ❌ 未上架，处于小规模内测阶段 |
+| 内测计划 | 2026 Q1 寻找 5–10 个真实家庭内测，收集反馈后迭代 |
+| 下一步 | 云开发 PoC → 优化体验 → 提交审核上架 |
+
+详细路线图 → [docs/roadmap.md](docs/roadmap.md)
 
 ## 快速体验
 
