@@ -1,0 +1,5 @@
+.privacy-text {
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: #666;
+}

@@ -1,0 +1,93 @@
+/* pages/child/bind/index.wxss */
+.bind-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 40rpx;
+}
+
+.bind-header {
+  margin-bottom: 48rpx;
+}
+
+.bind-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #222;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.bind-desc {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.bind-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+  margin-bottom: 40rpx;
+}
+
+.input-row {
+  margin-bottom: 32rpx;
+}
+
+.code-input {
+  background: #F5F5F5;
+  border-radius: 16rpx;
+  padding: 28rpx 24rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+  letter-spacing: 16rpx;
+  text-align: center;
+  color: #2E7D32;
+}
+
+.error-msg {
+  background: #FFF3E0;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.error-msg text {
+  color: #E65100;
+  font-size: 26rpx;
+}
+
+.bind-help {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+
+.help-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #222;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.help-item {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  line-height: 2;
+}
+
+.test-btn {
+  margin-top: 48rpx;
+  background: transparent;
+  border: 2rpx dashed #ccc;
+  color: #999;
+  font-size: 24rpx;
+  border-radius: 12rpx;
+}
+
+.test-btn::after {
+  border: none;
+}

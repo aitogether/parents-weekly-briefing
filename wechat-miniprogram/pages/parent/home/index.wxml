@@ -1,0 +1,68 @@
+<!-- pages/parent/home/index.wxml — 父母端首页 -->
+<view class="parent-home">
+
+  <!-- 日期 & 问候 -->
+  <view class="header">
+    <text class="date">{{today}}</text>
+    <text class="greeting">{{nickname}}，你好！</text>
+  </view>
+
+  <!-- 邀请码卡片（让子女用来绑定） -->
+  <view class="invite-card" bindtap="onCopyCode">
+    <view class="invite-label">
+      <text>📱 让子女输入这个码来绑定你</text>
+    </view>
+    <view class="invite-code">
+      <text class="code-char" wx:for="{{inviteCode.split('')}}" wx:key="index">{{item}}</text>
+    </view>
+    <text class="invite-hint">点击复制邀请码</text>
+  </view>
+
+  <!-- 今日确认 -->
+  <view class="confirm-section">
+    <text class="section-title" wx:if="{{!allDone}}">今天的确认</text>
+    <text class="section-title done-title" wx:else>✅ 今天都确认了，辛苦了！</text>
+
+    <view class="confirm-card" wx:for="{{items}}" wx:key="id">
+      <view class="confirm-q">
+        <text class="confirm-icon">{{item.icon}}</text>
+        <text class="confirm-label">{{item.label}}</text>
+      </view>
+
+      <!-- 未确认：显示两个大按钮 -->
+      <view class="btn-row" wx:if="{{item.status === null}}">
+        <button class="big-btn done" data-id="{{item.id}}" data-status="done" bindtap="onConfirm">
+          <text class="btn-emoji">👍</text>
+          <text class="btn-text">好了</text>
+        </button>
+        <button class="big-btn skip" data-id="{{item.id}}" data-status="skip" bindtap="onConfirm">
+          <text class="btn-emoji">🤷</text>
+          <text class="btn-text">没有</text>
+        </button>
+      </view>
+
+      <!-- 已确认 -->
+      <view class="confirmed" wx:else>
+        <text class="confirmed-text {{item.status}}">
+          {{item.status === 'done' ? '👍 已确认' : '🤷 今天没有'}}
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 子女回声 -->
+  <view class="echo-card" wx:if="{{echoText}}">
+    <text class="echo-label">💬 来自子女的一句话</text>
+    <text class="echo-text">{{echoText}}</text>
+  </view>
+
+  <!-- 全部完成后的鼓励 -->
+  <view class="done-card" wx:if="{{allDone}}">
+    <text class="done-emoji">🌟</text>
+    <text class="done-text">今天的确认全部完成了</text>
+    <text class="done-sub">子女可以看到你的记录了</text>
+  </view>
+
+  <!-- 开发用重置按钮 -->
+  <button class="reset-btn" bindtap="onReset">🔄 重置今日（测试用）</button>
+</view>

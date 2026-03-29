@@ -1,0 +1,98 @@
+/* pages/index/index.wxss */
+.landing {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #E8F5E9 0%, #F5F5F5 40%);
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-area {
+  margin-top: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-circle {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(76,175,80,0.15);
+  margin-bottom: 32rpx;
+}
+
+.logo-emoji {
+  font-size: 72rpx;
+}
+
+.app-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #2E7D32;
+  margin-bottom: 12rpx;
+}
+
+.app-desc {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.role-section {
+  margin-top: 100rpx;
+  width: 100%;
+}
+
+.role-prompt {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+  display: block;
+  margin-bottom: 32rpx;
+}
+
+.role-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 36rpx 32rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+
+.role-icon {
+  font-size: 56rpx;
+  margin-right: 24rpx;
+  width: 80rpx;
+  text-align: center;
+}
+
+.role-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.role-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8rpx;
+}
+
+.role-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.role-arrow {
+  font-size: 48rpx;
+  color: #ccc;
+  font-weight: 300;
+}

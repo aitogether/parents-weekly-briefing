@@ -8,11 +8,20 @@ const { v4: uuidv4 } = require('uuid');
 
 const DB_FILE = path.join(__dirname, '..', '..', 'data.json');
 
+// 生成6位邀请码
+function generateInviteCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // 去掉容易混淆的 I/O/0/1
+  let code = '';
+  for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+  return code;
+}
+
 function load() {
   if (fs.existsSync(DB_FILE)) {
     return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
   }
   return {
+    users: [],          // { id, open_id, role, nickname, invite_code, bound_to, created_at }
     medication_plans: [],
     med_confirmations: [],
     werun_data: [],
@@ -85,6 +94,65 @@ function getDB() {
         .filter(w => w.parent_id === parent_id && w.data_date >= since)
         .sort((a, b) => a.data_date.localeCompare(b.data_date));
     },
+    // --- 用户系统 ---
+    createUser({ open_id, role, nickname }) {
+      const db = load();
+      // 检查是否已存在
+      const existing = db.users.find(u => u.open_id === open_id);
+      if (existing) return existing;
+      const user = {
+        id: uuidv4(),
+        open_id,
+        role,           // 'child' | 'parent'
+        nickname: nickname || (role === 'parent' ? '爸爸/妈妈' : '子女'),
+        invite_code: role === 'parent' ? generateInviteCode() : null,
+        bound_to: null, // child: parent_id; parent: [child_id, ...]
+        created_at: new Date().toISOString()
+      };
+      db.users.push(user);
+      save(db);
+      return user;
+    },
+    getUserByOpenId(open_id) {
+      const db = load();
+      return db.users.find(u => u.open_id === open_id) || null;
+    },
+    getUserById(id) {
+      const db = load();
+      return db.users.find(u => u.id === id) || null;
+    },
+    getParentByInviteCode(code) {
+      const db = load();
+      return db.users.find(u => u.role === 'parent' && u.invite_code === code) || null;
+    },
+    bindChildToParent(child_id, parent_id) {
+      const db = load();
+      const child = db.users.find(u => u.id === child_id);
+      const parent = db.users.find(u => u.id === parent_id);
+      if (!child || !parent) return null;
+      child.bound_to = parent_id;
+      if (!parent.bound_to) parent.bound_to = [];
+      if (Array.isArray(parent.bound_to) && !parent.bound_to.includes(child_id)) {
+        parent.bound_to.push(child_id);
+      }
+      save(db);
+      return { child, parent };
+    },
+    // 获取子女绑定的父母信息
+    getBoundParent(child_id) {
+      const db = load();
+      const child = db.users.find(u => u.id === child_id);
+      if (!child || !child.bound_to) return null;
+      return db.users.find(u => u.id === child.bound_to) || null;
+    },
+    // 获取父母绑定的子女列表
+    getBoundChildren(parent_id) {
+      const db = load();
+      const parent = db.users.find(u => u.id === parent_id);
+      if (!parent || !Array.isArray(parent.bound_to)) return [];
+      return parent.bound_to.map(cid => db.users.find(u => u.id === cid)).filter(Boolean);
+    },
+
     // --- 子女回声 ---
     addFeedback({ child_id, parent_id, feedback_type, report_id }) {
       const db = load();

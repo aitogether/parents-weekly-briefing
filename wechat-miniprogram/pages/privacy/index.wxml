@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="card">
+    <view class="card-title">隐私政策</view>
+    <view class="privacy-text">
+      <text>父母周报小程序隐私政策</text>
+      <text>\n\n1. 信息收集\n我们收集您的微信头像、昵称用于展示。父母端需要获取微信运动数据以生成周报。</text>
+      <text>\n\n2. 信息使用\n您的健康数据仅用于家庭成员之间共享周报，不会向第三方披露。</text>
+      <text>\n\n3. 信息存储\n数据存储在我们的服务器上，采用加密传输（HTTPS）。</text>
+      <text>\n\n4. 联系我们\n如有疑问，请联系开发者。</text>
+    </view>
+  </view>
+</view>

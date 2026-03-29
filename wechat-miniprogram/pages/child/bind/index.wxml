@@ -1,0 +1,39 @@
+<!-- pages/child/bind/index.wxml — 子女绑定父母 -->
+<view class="bind-page">
+  <view class="bind-header">
+    <text class="bind-title">绑定父母</text>
+    <text class="bind-desc">请向父母要一个 6 位邀请码</text>
+  </view>
+
+  <view class="bind-card">
+    <view class="input-row">
+      <input
+        class="code-input"
+        placeholder="请输入 6 位邀请码"
+        maxlength="6"
+        value="{{inviteCode}}"
+        bindinput="onInput"
+        type="text"
+        confirm-type="done"
+      />
+    </view>
+
+    <view class="error-msg" wx:if="{{errorMsg}}">
+      <text>{{errorMsg}}</text>
+    </view>
+
+    <button class="btn-primary btn-large" bindtap="onBind" disabled="{{loading || inviteCode.length !== 6}}">
+      {{loading ? '绑定中...' : '确认绑定'}}
+    </button>
+  </view>
+
+  <view class="bind-help">
+    <text class="help-title">邀请码在哪里？</text>
+    <text class="help-item">1. 让父母打开「父母周报」小程序</text>
+    <text class="help-item">2. 选择「我是父母」</text>
+    <text class="help-item">3. 首页会显示 6 位邀请码</text>
+  </view>
+
+  <!-- 开发测试按钮 -->
+  <button class="test-btn" bindtap="onQuickTest">🧪 测试：创建父母并绑定</button>
+</view>
