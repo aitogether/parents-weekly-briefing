@@ -1,5 +1,5 @@
 // pages/child/weekly-report/index.js
-const api = require('../../../utils/api');
+const app = getApp();
 
 Page({
   data: {
@@ -36,8 +36,7 @@ Page({
         wx.redirectTo({ url: '/pages/child/bind/index' });
         return;
       }
-      // MVP: 用同一 parent_id（后续支持双亲）
-      const res = await api.generateReport(parentId, parentId);
+      const res = await app.api.generateReport(parentId, parentId);
       this.setData({
         weekRange: res.weekRange,
         summary: res.summary,
@@ -53,8 +52,10 @@ Page({
 
   async loadEchoOptions() {
     try {
-      const res = await api.getFeedbackOptions();
-      this.setData({ echoOptions: res });
+      const res = await app.api.getFeedbackOptions();
+      // cloud 模式返回 { options: [...] }，REST 模式返回 [...]
+      const options = res.options || res;
+      this.setData({ echoOptions: options });
     } catch (e) {
       this.setData({
         echoOptions: [
@@ -75,7 +76,7 @@ Page({
     try {
       const user = wx.getStorageSync('pwb_user');
       const parentId = user?.parent?.id || user?.bound_to;
-      await api.submitEchoFeedback(user?.id || 'child_001', parentId, this.data.selectedEcho);
+      await app.api.submitEchoFeedback(user?.id || 'child_001', parentId, this.data.selectedEcho);
       this.setData({ echoSubmitted: true });
       wx.showToast({ title: '已发送', icon: 'success' });
     } catch (e) {
@@ -94,9 +95,8 @@ Page({
             showCancel: false
           });
         } else if (res.tapIndex === 1) {
-          const msg = this.data.action?.text || '爸妈，最近怎么样？';
           wx.setClipboardData({
-            data: msg,
+            data: this.data.action?.text || '爸妈，最近怎么样？',
             success: () => wx.showToast({ title: '已复制，去微信粘贴', icon: 'success' })
           });
         } else {
