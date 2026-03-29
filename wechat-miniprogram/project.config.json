@@ -34,7 +34,8 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "cloud": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.4",
@@ -45,5 +46,6 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "simulatorPluginLibVersion": {}
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionRoot": "../cloudfunctions/"
 }

@@ -27,3 +27,26 @@
 - 恢复 project.config.json/app.wxss/privacy.json/sitemap.json
 - 恢复 /api/auth/seed-parent 路由（bind 页面测试按钮依赖）
 - 创建 docs/known-issues.md 记录全部排查发现
+
+## 2026-03-29 — 云开发迁移方案
+
+### 新增
+- 创建 `cloudfunctions/` 目录结构（6 个云函数 + 公共模块）
+- `login` 云函数：用 cloudContext.OPENID 免 code2session
+- `invite` 云函数：邀请码绑定
+- `medication` 云函数：用药计划 + 确认 + 统计
+- `report` 云函数：周报生成（与 REST 版完全一致的逻辑）
+- `feedback` 云函数：子女回声
+- `werun` 云函数：微信运动数据
+- `common/` 公共模块：db.js + response.js + constants.js
+- `utils/cloud-api.js` 云函数调用封装
+- `docs/cloud-migration-plan.md` 迁移方案文档
+- `cloudfunctions-config.md` 云函数配置文档
+
+### 前端改造
+- `app.js` 支持 `API_MODE: 'cloud'|'rest'` 模式切换
+- `pages/index/index.js` 登录适配云函数
+- `pages/child/bind/index.js` 绑定适配云函数
+- `pages/parent/home/index.js` 父母首页适配云函数
+- `pages/child/weekly-report/index.js` 周报适配云函数
+- `project.config.json` 增加 `cloudfunctionRoot` + `cloud: true`
