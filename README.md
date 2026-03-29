@@ -36,32 +36,32 @@
 
 ```
 parents-weekly-briefing/
-├── backend/                 # Node.js 后端服务（REST API + SQLite 数据库）
-│   ├── src/                 #   源码：路由、业务逻辑、数据模型
-│   ├── .env.example         #   环境变量模板
-│   └── package.json
-├── wechat-miniprogram/      # 微信小程序源码（生产版，使用云开发）
-│   ├── pages/               #   页面：report / med-confirm / echo 等
-│   ├── utils/               #   工具函数：API 请求封装、数据格式化
-│   └── images/              #   静态图片资源
-├── miniprogram/             # 小程序早期版本（本地开发用）
-│   ├── pages/               #   页面组件
-│   └── styles/              #   全局样式（色板变量）
-├── ui-prototype/            # HTML 高保真原型（浏览器直接打开）
-│   ├── index.html           #   可直接打开的手机模拟器
-│   └── screenshots/         #   真机截图
+## 项目结构
+
+```
+parents-weekly-briefing/
+├── wechat-miniprogram/      # 微信小程序源码（✅ 当前推荐版本）
+│   ├── pages/               #   小程序页面（report / parent / child 等）
+│   ├── utils/               #   工具函数（API 封装、认证等）
+│   ├── app.js               #   小程序入口，含 API_BASE_URL 配置
+│   └── app.json             #   小程序全局配置
+├── miniprogram/             # ⚠️ 旧版小程序，暂不推荐使用（已迁移到 wechat-miniprogram/）
+├── backend/                 # Node.js 后端服务（Express + SQLite）
+│   ├── src/                 #   源码（路由、控制器、数据库）
+│   └── .env.example         #   环境变量模板
 ├── docs/                    # 产品文档 & 设计规范
-│   ├── prd/                 #   PRD 需求文档
+│   ├── prd/                 #   PRD 文档
 │   ├── ui/color-palette.md  #   全端色板规范
 │   ├── design-brief.md      #   设计简报
 │   ├── icon-guidelines.md   #   图标指南
-│   ├── pilot-manual.md      #   内测用户手册
-│   ├── known-issues.md      #   已知问题
-│   ├── privacy-and-security.md # 隐私与安全说明
 │   └── roadmap.md           #   产品路线图
-├── CHANGELOG.md             # 变更日志
-├── LICENSE                  # CC BY-NC 4.0 + 商业授权
-└── project.config.json      # 微信小程序项目配置
+├── ui-prototype/            # HTML 高保真原型
+│   ├── index.html           #   可直接打开的手机模拟器
+│   └── screenshots/         #   真机截图
+└── LICENSE                  # CC BY-NC 4.0 + 商业授权
+```
+
+## 快速开始
 ```
 
 ## 快速开始
@@ -111,6 +111,25 @@ npm run dev
 独立的 Android 演示应用，纯本地假数据，不联网：
 → [parents-weekly-briefing-demo-app](https://github.com/aitogether/parents-weekly-briefing-demo-app)
 
+## 本地一键跑起来
+
+### 后端服务
+
+```bash
+cd backend
+cp .env.example .env      # 复制环境变量模板，按需修改
+npm install
+npm run dev               # 启动开发服务器，默认监听 http://localhost:3000
+```
+
+### 微信小程序
+
+1. 下载并安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
+2. 导入项目：选择 `wechat-miniprogram/` 目录
+3. AppID：使用「测试号」即可（无需真实 AppID）
+4. 修改后端 API 地址：编辑 `wechat-miniprogram/app.js`，将 `API_BASE_URL` 改为你的后端地址（默认 `http://192.168.1.100:3000`）
+5. 编译运行即可预览
+
 ## 配色方案
 
 <p align="center">
@@ -122,6 +141,12 @@ npm run dev
 </p>
 
 完整色板定义 → [docs/ui/color-palette.md](docs/ui/color-palette.md)
+
+---
+
+## 🗺 Roadmap
+
+未来 2–3 个月的产品计划，详见 [docs/roadmap.md](docs/roadmap.md)。
 
 ---
 
