@@ -1,0 +1,30 @@
+/* pages/child/settings/index.wxss */
+
+.setting-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.setting-item:last-of-type {
+  border-bottom: none;
+}
+
+.setting-label {
+  font-size: 30rpx;
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  margin-top: 8rpx;
+  padding-bottom: 8rpx;
+}
+
+.about-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 28rpx;
+}
+
+.about-item:last-child {
+  border-bottom: none;
+}

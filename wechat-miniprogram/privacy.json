@@ -1,0 +1,7 @@
+{
+  "privacy": {
+    "prompt": "privacy",
+    "desc": "我们需要收集您的个人信息（如微信头像、昵称）用于展示和个性化服务，同时需要获取您的健康数据以生成周报和用药提醒。详细内容请查看《隐私政策》。",
+    "support": "https://your-domain.com/privacy.html"
+  }
+}

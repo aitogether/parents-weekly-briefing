@@ -112,4 +112,17 @@ router.post('/bind', (req, res) => {
   });
 });
 
+// POST /auth/seed-parent — 快速创建测试父母用户（仅开发用）
+router.post('/seed-parent', (req, res) => {
+  const { nickname } = req.body;
+  const db = getDB();
+  const open_id = `mock_parent_${Date.now()}`;
+  const user = db.createUser({ open_id, role: 'parent', nickname: nickname || '妈妈' });
+  console.log(`[Auth] 测试父母创建: ${user.id} 邀请码: ${user.invite_code}`);
+  res.json({
+    success: true,
+    user: { id: user.id, nickname: user.nickname, invite_code: user.invite_code }
+  });
+});
+
 module.exports = router;

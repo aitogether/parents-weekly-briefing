@@ -19,3 +19,11 @@
 ### 已验证
 - 后端 API 全部通过测试（登录、邀请码、用药、周报、反馈）
 - 微信开发者工具 CLI 替代脚本工作正常
+
+### Bug 修复与恢复
+- 修复 weekly-report CSS class 不匹配（data-sub/v-line/echo-btn/echo-label/.page）
+- 从 git 历史恢复被 rebase 删除的 6 个页面目录
+- 恢复 images/ 和 utils/api.js
+- 恢复 project.config.json/app.wxss/privacy.json/sitemap.json
+- 恢复 /api/auth/seed-parent 路由（bind 页面测试按钮依赖）
+- 创建 docs/known-issues.md 记录全部排查发现

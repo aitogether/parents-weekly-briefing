@@ -1,0 +1,20 @@
+<!-- pages/child/daily-summary/index.wxml -->
+<view class="container">
+  <view class="card text-center" wx:for="{{summaries}}" wx:key="date">
+    <view class="summary-item">
+      <view class="status-light {{item.status}}" style="width:48rpx; height:48rpx;"></view>
+      <view class="summary-content">
+        <view class="summary-date text-gray">{{item.date}}</view>
+        <view class="summary-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card text-center" wx:if="{{loading}}">
+    <view class="text-gray">加载中...</view>
+  </view>
+
+  <view class="card text-center" wx:if="{{!loading && summaries.length === 0}}">
+    <view class="text-gray">暂无小结数据</view>
+  </view>
+</view>

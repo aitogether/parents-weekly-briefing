@@ -1,6 +1,7 @@
 /* pages/child/weekly-report/index.wxss — 紧凑单屏布局 */
 
 page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; }
+.page { min-height: 100vh; padding-bottom: 20px; }
 
 /* 状态条 */
 .status-bar {
@@ -29,8 +30,8 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
 .parent-label { font-size: 12px; color: #999; margin-bottom: 2px; }
 .data-val { font-size: 22px; font-weight: 700; color: #0F5960; }
 .data-unit { font-size: 10px; color: #aaa; }
-.data-small { font-size: 11px; color: #888; margin-top: 2px; }
-.divider { width: 1px; height: 40px; background: #eee; margin: 0 4px; }
+.data-sub { font-size: 11px; color: #888; margin-top: 2px; }
+.v-line { width: 1px; height: 40px; background: #eee; margin: 0 4px; }
 
 /* 建议 */
 .action-card { background: #E5F6F7; padding: 10px 14px; }
@@ -44,7 +45,7 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
 
 /* 回声 */
 .echo-card { padding: 10px 12px; }
-.echo-title { font-size: 12px; color: #999; margin-bottom: 6px; display: block; }
+.echo-label { font-size: 12px; color: #999; margin-bottom: 6px; display: block; }
 .echo-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .echo-chip {
   flex: 1; min-width: 0; padding: 8px 6px;
@@ -52,7 +53,7 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
   font-size: 12px; color: #333; text-align: center;
 }
 .echo-chip.selected { border-color: #1C9CA7; background: #E5F6F7; color: #0F5960; }
-.echo-submit {
+.echo-btn {
   margin-top: 8px; background: #1C9CA7; color: #fff; border: none;
   border-radius: 8px; font-size: 14px;
 }

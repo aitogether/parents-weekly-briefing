@@ -1,0 +1,24 @@
+/* pages/child/daily-summary/index.wxss */
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 0;
+}
+
+.summary-content {
+  margin-left: 24rpx;
+  text-align: left;
+  flex: 1;
+}
+
+.summary-date {
+  font-size: 24rpx;
+  margin-bottom: 4rpx;
+}
+
+.summary-text {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #222;
+}
