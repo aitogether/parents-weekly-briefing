@@ -1,4 +1,4 @@
-/* pages/parent/home/index.wxss */
+/* pages/parent/home/index.wxss — 父母端首页 v0.2（一键确认） */
 .parent-home {
   min-height: 100vh;
   background: #F5F5F5;
@@ -63,117 +63,110 @@
   color: #66BB6A;
 }
 
-/* ── 确认区域 ── */
-.confirm-section {
-  margin-bottom: 32rpx;
-}
-
-.section-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #222;
-  display: block;
-  margin-bottom: 20rpx;
-}
-
-.done-title {
-  color: #4CAF50;
-}
-
-.confirm-card {
+/* ── 今日步数 ── */
+.steps-card {
   background: #fff;
   border-radius: 20rpx;
-  padding: 32rpx;
-  margin-bottom: 20rpx;
+  padding: 40rpx 32rpx;
+  margin-bottom: 32rpx;
+  text-align: center;
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
 }
 
-.confirm-q {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24rpx;
+.steps-label {
+  font-size: 26rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 8rpx;
 }
 
-.confirm-icon {
-  font-size: 48rpx;
-  margin-right: 16rpx;
+.steps-value {
+  font-size: 80rpx;
+  font-weight: 800;
+  color: #188068;
+  display: block;
 }
 
-.confirm-label {
-  font-size: 32rpx;
-  font-weight: 500;
-  color: #333;
+.steps-unit {
+  font-size: 28rpx;
+  color: #666;
 }
 
-/* ── 大按钮 ── */
-.btn-row {
-  display: flex;
-  gap: 20rpx;
+/* ── 一键确认按钮 ── */
+.confirm-section {
+  margin-bottom: 32rpx;
+  text-align: center;
 }
 
-.big-btn {
-  flex: 1;
-  height: 120rpx;
+.one-btn {
+  width: 100%;
+  height: 140rpx;
   border-radius: 20rpx;
+  background: #188068;
+  color: #fff;
+  font-size: 40rpx;
+  font-weight: 700;
+  border: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(24,128,104,0.3);
+}
+
+.one-btn::after {
   border: none;
-  padding: 0;
 }
 
-.big-btn::after {
-  border: none;
+.one-btn:active {
+  transform: scale(0.98);
 }
 
-.big-btn.done {
-  background: #E8F5E9;
+.one-btn.confirmed {
+  background: #E0E0E0;
+  color: #999;
+  box-shadow: none;
 }
 
-.big-btn.done .btn-emoji {
-  font-size: 36rpx;
+.one-btn-text {
+  font-size: 40rpx;
+  font-weight: 700;
 }
 
-.big-btn.done .btn-text {
+.confirm-feedback {
+  margin-top: 20rpx;
+}
+
+.feedback-heart {
   font-size: 28rpx;
-  color: #2E7D32;
-  font-weight: 600;
-  margin-top: 4rpx;
+  color: #E84040;
 }
 
-.big-btn.skip {
-  background: #FFF3E0;
+/* ── 本周统计 ── */
+.week-stats {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
 }
 
-.big-btn.skip .btn-emoji {
-  font-size: 36rpx;
-}
-
-.big-btn.skip .btn-text {
+.stat-item {
   font-size: 28rpx;
-  color: #E65100;
+  color: #555;
+  display: block;
+  line-height: 2;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-link {
+  font-size: 26rpx;
+  color: #188068;
   font-weight: 600;
-  margin-top: 4rpx;
-}
-
-/* ── 已确认 ── */
-.confirmed {
-  text-align: center;
-  padding: 16rpx 0;
-}
-
-.confirmed-text {
-  font-size: 30rpx;
-  font-weight: 500;
-}
-
-.confirmed-text.done {
-  color: #4CAF50;
-}
-
-.confirmed-text.skip {
-  color: #FF9800;
 }
 
 /* ── 回声 ── */
@@ -197,34 +190,6 @@
   font-weight: 500;
 }
 
-/* ── 完成卡片 ── */
-.done-card {
-  background: linear-gradient(135deg, #E8F5E9, #A5D6A7);
-  border-radius: 20rpx;
-  padding: 48rpx 32rpx;
-  text-align: center;
-  margin-bottom: 32rpx;
-}
-
-.done-emoji {
-  font-size: 64rpx;
-  display: block;
-  margin-bottom: 16rpx;
-}
-
-.done-text {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: #2E7D32;
-  display: block;
-  margin-bottom: 8rpx;
-}
-
-.done-sub {
-  font-size: 26rpx;
-  color: #66BB6A;
-}
-
 /* ── 重置按钮 ── */
 .reset-btn {
   margin-top: 24rpx;
@@ -237,4 +202,69 @@
 
 .reset-btn::after {
   border: none;
+}
+
+/* ── 用药确认 ActionSheet ── */
+.action-sheet-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+}
+
+.action-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx;
+  z-index: 101;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.sheet-title {
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 32rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.sheet-btn {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  background: #F5F5F5;
+}
+
+.sheet-btn.taken {
+  color: #188068;
+  background: #E8F5E9;
+}
+
+.sheet-btn.missed {
+  color: #E65100;
+  background: #FFF3E0;
+}
+
+.sheet-cancel {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 8rpx;
 }

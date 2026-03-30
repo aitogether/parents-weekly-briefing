@@ -1,7 +1,89 @@
-/* pages/child/weekly-report/index.wxss — 紧凑单屏布局 */
+/* pages/child/weekly-report/index.wxss — v0.2 首屏一句话化 */
 
 page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; }
 .page { min-height: 100vh; padding-bottom: 20px; }
+
+/* ===== 首屏一句话卡片 ===== */
+.one-liner-card {
+  margin: 16px 16px 12px;
+  background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.one-liner-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1B5E20;
+  display: block;
+  line-height: 1.5;
+}
+
+.quote-text {
+  font-size: 13px;
+  color: #4CAF50;
+  display: block;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ===== 行动按钮 ===== */
+.action-btns {
+  display: flex;
+  gap: 10px;
+  margin: 0 16px 12px;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 14px;
+  padding: 18px 0;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.action-btn::after { border: none; }
+
+.call-btn {
+  background: #188068;
+  color: #fff;
+}
+
+.remind-btn {
+  background: #F6B25C;
+  color: #fff;
+}
+
+.action-icon { font-size: 22px; }
+.action-label { color: #fff; }
+
+/* ===== 折叠触发器 ===== */
+.fold-trigger {
+  text-align: center;
+  padding: 12px 0;
+  margin: 0 16px 8px;
+}
+
+.fold-text {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ===== 展开详情（原有样式） ===== */
+.detail-section { animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* 状态条 */
 .status-bar {
@@ -13,7 +95,6 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
 .status-dot.green { background: #22A060; }
 .status-dot.yellow { background: #F6A623; }
 .status-dot.red { background: #D6453D; }
-.status-info { display: flex; flex-direction: column; }
 .status-title { font-size: 16px; font-weight: 700; color: #0F5960; }
 .status-liner { font-size: 12px; color: #888; margin-top: 2px; }
 
@@ -35,12 +116,9 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
 
 /* 建议 */
 .action-card { background: #E5F6F7; padding: 10px 14px; }
-.action-label { font-size: 12px; color: #1C9CA7; font-weight: 600; }
 .action-text { font-size: 13px; color: #0F5960; line-height: 1.5; margin-top: 4px; display: block; }
 
 /* 好奇 */
-.wonder-card { padding: 10px 14px; }
-.wonder-title { font-size: 12px; color: #999; font-weight: 600; }
 .wonder-item { font-size: 12px; color: #666; line-height: 1.8; display: block; }
 
 /* 回声 */
@@ -58,27 +136,20 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
   border-radius: 8px; font-size: 14px;
 }
 
-/* 去问候按钮 */
-.greet-section {
-  margin: 0 12px 8px;
+/* 提醒成功 toast */
+.remind-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.75);
+  border-radius: 12px;
+  padding: 16px 24px;
+  z-index: 200;
 }
 
-.greet-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+.remind-toast-text {
   color: #fff;
-  border: none;
-  border-radius: 16px;
-  padding: 16px 0;
-  font-size: 16px;
-  font-weight: 600;
-  box-shadow: 0 4px 16px rgba(76,175,80,0.3);
+  font-size: 15px;
+  font-weight: 500;
 }
-
-.greet-btn::after { border: none; }
-
-.greet-icon { font-size: 20px; }
-.greet-text { color: #fff; }

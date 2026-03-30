@@ -1,0 +1,55 @@
+<!-- pages/parent/med-reminder/index.wxml — 用药提醒设置 v0.2 -->
+<view class="reminder-page">
+
+  <view class="page-header">
+    <text class="page-title">用药提醒 💊</text>
+    <text class="page-desc">设置吃药时间，我们会提前 10 分钟提醒你</text>
+  </view>
+
+  <!-- 提醒时间列表 -->
+  <view class="time-list">
+    <view class="time-item" wx:for="{{reminderTimes}}" wx:key="index">
+      <view class="time-info">
+        <text class="time-value">{{item}}</text>
+        <text class="time-note">提前 10 分钟提醒（{{getRemindTime(item)}}）</text>
+      </view>
+      <view class="time-delete" bindtap="onDeleteTime" data-index="{{index}}" wx:if="{{reminderTimes.length > 1}}">
+        <text class="delete-icon">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加时间按钮 -->
+  <button class="add-btn" bindtap="onAddTime" wx:if="{{reminderTimes.length < 3}}">
+    <text class="add-icon">＋</text>
+    <text>添加提醒时间</text>
+  </button>
+
+  <!-- 保存按钮 -->
+  <button class="save-btn" bindtap="onSave">保存设置</button>
+
+  <!-- 说明 -->
+  <view class="tips">
+    <text class="tip-text">• 最多设置 3 个提醒时间</text>
+    <text class="tip-text">• 每个时间点前 10 分钟，通过微信消息提醒你</text>
+    <text class="tip-text">• 你也可以在子女的周报中看到下次提醒时间</text>
+  </view>
+
+</view>
+
+<!-- 时间选择器弹窗 -->
+<view class="picker-mask" wx:if="{{showPicker}}" bindtap="onClosePicker"></view>
+<view class="picker-panel" wx:if="{{showPicker}}">
+  <view class="picker-header">
+    <text class="picker-title">选择吃药时间</text>
+  </view>
+  <picker-view class="time-picker" indicator-style="height:50px;" value="{{pickerValue}}" bindchange="onPickerChange">
+    <picker-view-column>
+      <view class="picker-item" wx:for="{{hours}}" wx:key="index">{{item}}时</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view class="picker-item" wx:for="{{minutes}}" wx:key="index">{{item}}分</view>
+    </picker-view-column>
+  </picker-view>
+  <button class="picker-confirm" bindtap="onConfirmPicker">确定</button>
+</view>

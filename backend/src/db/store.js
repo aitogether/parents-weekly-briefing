@@ -153,6 +153,62 @@ function getDB() {
       return parent.bound_to.map(cid => db.users.find(u => u.id === cid)).filter(Boolean);
     },
 
+    // --- v0.2 每日确认 ---
+    addDailyConfirm({ parent_id, date, med_taken }) {
+      const db = load();
+      if (!db.daily_confirms) db.daily_confirms = [];
+      const record = { id: uuidv4(), parent_id, date, med_taken, confirmed_at: new Date().toISOString() };
+      // 去重：同一天只保留最后一次
+      db.daily_confirms = db.daily_confirms.filter(c => !(c.parent_id === parent_id && c.date === date));
+      db.daily_confirms.push(record);
+      save(db);
+      return record;
+    },
+    getDailyConfirms(parent_id, days = 7) {
+      const db = load();
+      if (!db.daily_confirms) return [];
+      const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
+      return db.daily_confirms.filter(c => c.parent_id === parent_id && c.date >= since);
+    },
+
+    // --- v0.2 每周用药确认 ---
+    addWeeklyMedConfirm({ parent_id, date, answer }) {
+      const db = load();
+      if (!db.weekly_med_confirms) db.weekly_med_confirms = [];
+      const record = { id: uuidv4(), parent_id, date, answer, confirmed_at: new Date().toISOString() };
+      // 去重：同一天只保留最后一次
+      db.weekly_med_confirms = db.weekly_med_confirms.filter(c => !(c.parent_id === parent_id && c.date === date));
+      db.weekly_med_confirms.push(record);
+      save(db);
+      return record;
+    },
+
+    // --- v0.2 用药提醒设置 ---
+    getReminderSettings(parent_id) {
+      const db = load();
+      if (!db.reminder_settings) return null;
+      return db.reminder_settings.find(s => s.parent_id === parent_id) || null;
+    },
+    saveReminderSettings(parent_id, reminder_times) {
+      const db = load();
+      if (!db.reminder_settings) db.reminder_settings = [];
+      const existing = db.reminder_settings.find(s => s.parent_id === parent_id);
+      if (existing) {
+        existing.reminder_times = reminder_times;
+        existing.updated_at = new Date().toISOString();
+      } else {
+        db.reminder_settings.push({
+          parent_id,
+          reminder_times,
+          subscribe_authorized: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+      }
+      save(db);
+      return db.reminder_settings.find(s => s.parent_id === parent_id);
+    },
+
     // --- 子女回声 ---
     addFeedback({ child_id, parent_id, feedback_type, report_id }) {
       const db = load();

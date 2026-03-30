@@ -1,14 +1,14 @@
-<!-- pages/parent/home/index.wxml — 父母端首页 -->
+<!-- pages/parent/home/index.wxml — 父母端首页 v0.2（一键确认） -->
 <view class="parent-home">
 
   <!-- 日期 & 问候 -->
   <view class="header">
     <text class="date">{{today}}</text>
-    <text class="greeting">{{nickname}}，你好！</text>
+    <text class="greeting">{{nickname}}，{{greetingText}} 👋</text>
   </view>
 
   <!-- 邀请码卡片（让子女用来绑定） -->
-  <view class="invite-card" bindtap="onCopyCode">
+  <view class="invite-card" wx:if="{{showInviteCode}}" bindtap="onCopyCode">
     <view class="invite-label">
       <text>📱 让子女输入这个码来绑定你</text>
     </view>
@@ -18,35 +18,31 @@
     <text class="invite-hint">点击复制邀请码</text>
   </view>
 
-  <!-- 今日确认 -->
+  <!-- 今日步数 -->
+  <view class="steps-card">
+    <text class="steps-label">今日步数</text>
+    <text class="steps-value">{{todaySteps}}</text>
+    <text class="steps-unit">步 🚶</text>
+  </view>
+
+  <!-- 一键确认按钮 -->
   <view class="confirm-section">
-    <text class="section-title" wx:if="{{!allDone}}">今天的确认</text>
-    <text class="section-title done-title" wx:else>✅ 今天都确认了，辛苦了！</text>
+    <button class="one-btn {{confirmed ? 'confirmed' : ''}}" bindtap="onOneTapConfirm" disabled="{{confirmed}}">
+      <text class="one-btn-text">{{confirmed ? '今日已确认 ✓' : '今天我很好 ✅'}}</text>
+    </button>
 
-    <view class="confirm-card" wx:for="{{items}}" wx:key="id">
-      <view class="confirm-q">
-        <text class="confirm-icon">{{item.icon}}</text>
-        <text class="confirm-label">{{item.label}}</text>
-      </view>
+    <!-- 确认后的反馈 -->
+    <view class="confirm-feedback" wx:if="{{confirmed}}">
+      <text class="feedback-heart">子女已关注您的健康❤️</text>
+    </view>
+  </view>
 
-      <!-- 未确认：显示两个大按钮 -->
-      <view class="btn-row" wx:if="{{item.status === null}}">
-        <button class="big-btn done" data-id="{{item.id}}" data-status="done" bindtap="onConfirm">
-          <text class="btn-emoji">👍</text>
-          <text class="btn-text">好了</text>
-        </button>
-        <button class="big-btn skip" data-id="{{item.id}}" data-status="skip" bindtap="onConfirm">
-          <text class="btn-emoji">🤷</text>
-          <text class="btn-text">没有</text>
-        </button>
-      </view>
-
-      <!-- 已确认 -->
-      <view class="confirmed" wx:else>
-        <text class="confirmed-text {{item.status}}">
-          {{item.status === 'done' ? '👍 已确认' : '🤷 今天没有'}}
-        </text>
-      </view>
+  <!-- 本周统计 -->
+  <view class="week-stats">
+    <text class="stat-item">本周已确认：{{weekConfirmed}}/7 天</text>
+    <view class="stat-row">
+      <text class="stat-item">下次吃药提醒：{{nextReminder}} 💊</text>
+      <text class="stat-link" bindtap="onGoReminder">设置</text>
     </view>
   </view>
 
@@ -56,13 +52,15 @@
     <text class="echo-text">{{echoText}}</text>
   </view>
 
-  <!-- 全部完成后的鼓励 -->
-  <view class="done-card" wx:if="{{allDone}}">
-    <text class="done-emoji">🌟</text>
-    <text class="done-text">今天的确认全部完成了</text>
-    <text class="done-sub">子女可以看到你的记录了</text>
-  </view>
-
   <!-- 开发用重置按钮 -->
   <button class="reset-btn" bindtap="onReset">🔄 重置今日（测试用）</button>
+</view>
+
+<!-- 用药确认 ActionSheet -->
+<view class="action-sheet-mask" wx:if="{{showMedSheet}}" bindtap="onCloseMedSheet"></view>
+<view class="action-sheet" wx:if="{{showMedSheet}}">
+  <view class="sheet-title">药吃了吗？ 💊</view>
+  <view class="sheet-btn taken" bindtap="onMedConfirm" data-answer="taken">吃了 👍</view>
+  <view class="sheet-btn missed" bindtap="onMedConfirm" data-answer="missed">还没吃</view>
+  <view class="sheet-cancel" bindtap="onCloseMedSheet">取消</view>
 </view>

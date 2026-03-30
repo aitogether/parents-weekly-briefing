@@ -1,62 +1,87 @@
-<!-- pages/child/weekly-report/index.wxml — 紧凑单屏 -->
+<!-- pages/child/weekly-report/index.wxml — v0.2 首屏一句话化 -->
 <view class="page">
 
-  <!-- 状态条：一行搞定 -->
-  <view class="status-bar">
-    <view class="status-dot {{summary.level}}"></view>
-    <text class="status-title">{{summary.title}}</text>
-    <text class="status-liner">{{summary.oneLiner}}</text>
+  <!-- ===== 首屏：一句话卡片 ===== -->
+  <view class="one-liner-card">
+    <text class="one-liner-text">{{oneLiner}}</text>
+    <text class="quote-text" wx:if="{{quote}}">{{quote}}</text>
   </view>
 
-  <!-- 爸妈数据横排 -->
-  <view class="card data-card">
-    <view class="parent-row">
-      <view class="parent-col">
-        <text class="parent-label">妈</text>
-        <text class="data-val">{{parentA.steps.dailyAvg}}</text>
-        <text class="data-unit">步/天</text>
-        <text class="data-sub" wx:if="{{parentA.medAdherence}}">💊 {{parentA.medAdherence.rate}}%</text>
-      </view>
-      <view class="v-line"></view>
-      <view class="parent-col">
-        <text class="parent-label">爸</text>
-        <text class="data-val">{{parentB.steps.dailyAvg}}</text>
-        <text class="data-unit">步/天</text>
-        <text class="data-sub">{{parentB.steps.note}}</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- 建议 -->
-  <view class="card action-card">
-    <text class="action-text">💡 {{action.text}}</text>
-  </view>
-
-  <!-- 去问候一下 -->
-  <view class="greet-section">
-    <button class="greet-btn" bindtap="onGreetParent">
-      <text class="greet-icon">💬</text>
-      <text class="greet-text">去问候一下</text>
+  <!-- 两个大行动按钮 -->
+  <view class="action-btns">
+    <button class="action-btn call-btn" bindtap="onCallParent">
+      <text class="action-icon">📞</text>
+      <text class="action-label">给{{parentName || '爸妈'}}打个电话</text>
+    </button>
+    <button class="action-btn remind-btn" bindtap="onRemindMed">
+      <text class="action-icon">💊</text>
+      <text class="action-label">提醒{{parentName || '爸妈'}}吃药</text>
     </button>
   </view>
 
-  <!-- 好奇（紧凑列表） -->
-  <view class="card" wx:if="{{youMayWonder.length > 0}}">
-    <view class="wonder-item" wx:for="{{youMayWonder}}" wx:key="index">
-      <text>• {{item}}</text>
-    </view>
+  <!-- 折叠详情入口 -->
+  <view class="fold-trigger" bindtap="toggleDetail">
+    <text class="fold-text">{{showDetail ? '收起详情 ▲' : '查看详情 ▼'}}</text>
   </view>
 
-  <!-- 回声 -->
-  <view class="card echo-card">
-    <text class="echo-label">告诉爸妈你看过了</text>
-    <view class="echo-row">
-      <view class="echo-chip {{selectedEcho === item.type ? 'selected' : ''}}"
-            wx:for="{{echoOptions}}" wx:key="type"
-            bindtap="onEchoSelect" data-type="{{item.type}}">
-        {{item.text}}
+  <!-- ===== 展开详情：原有 5 板块 ===== -->
+  <view class="detail-section" wx:if="{{showDetail}}">
+
+    <!-- 状态条 -->
+    <view class="status-bar">
+      <view class="status-dot {{summary.level}}"></view>
+      <text class="status-title">{{summary.title}}</text>
+      <text class="status-liner">{{summary.oneLiner}}</text>
+    </view>
+
+    <!-- 爸妈数据横排 -->
+    <view class="card data-card">
+      <view class="parent-row">
+        <view class="parent-col">
+          <text class="parent-label">妈</text>
+          <text class="data-val">{{parentA.steps.dailyAvg}}</text>
+          <text class="data-unit">步/天</text>
+          <text class="data-sub" wx:if="{{parentA.medAdherence}}">💊 {{parentA.medAdherence.rate}}%</text>
+        </view>
+        <view class="v-line"></view>
+        <view class="parent-col">
+          <text class="parent-label">爸</text>
+          <text class="data-val">{{parentB.steps.dailyAvg}}</text>
+          <text class="data-unit">步/天</text>
+          <text class="data-sub">{{parentB.steps.note}}</text>
+        </view>
       </view>
     </view>
-    <button class="echo-btn" size="mini" wx:if="{{selectedEcho}}" bindtap="onEchoSubmit">发送</button>
+
+    <!-- 建议 -->
+    <view class="card action-card">
+      <text class="action-text">💡 {{action.text}}</text>
+    </view>
+
+    <!-- 好奇（紧凑列表） -->
+    <view class="card" wx:if="{{youMayWonder.length > 0}}">
+      <view class="wonder-item" wx:for="{{youMayWonder}}" wx:key="index">
+        <text>• {{item}}</text>
+      </view>
+    </view>
+
+    <!-- 回声 -->
+    <view class="card echo-card">
+      <text class="echo-label">告诉爸妈你看过了</text>
+      <view class="echo-row">
+        <view class="echo-chip {{selectedEcho === item.type ? 'selected' : ''}}"
+              wx:for="{{echoOptions}}" wx:key="type"
+              bindtap="onEchoSelect" data-type="{{item.type}}">
+          {{item.text}}
+        </view>
+      </view>
+      <button class="echo-btn" size="mini" wx:if="{{selectedEcho}}" bindtap="onEchoSubmit">发送</button>
+    </view>
+
   </view>
+</view>
+
+<!-- 提醒成功 toast -->
+<view class="remind-toast" wx:if="{{showRemindToast}}">
+  <text class="remind-toast-text">✅ 已提醒{{parentName || '爸妈'}}吃药</text>
 </view>

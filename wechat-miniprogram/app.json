@@ -9,6 +9,7 @@
     "pages/parent/home/index",
     "pages/parent/med-confirm/index",
     "pages/parent/med-plans/index",
+    "pages/parent/med-reminder/index",
     "pages/report/index",
     "pages/privacy/index"
   ],

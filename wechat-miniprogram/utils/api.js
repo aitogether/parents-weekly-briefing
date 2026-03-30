@@ -92,6 +92,50 @@ function getLatestFeedback(parentId) {
   return request({ url: '/api/feedback/latest', data: { parent_id: parentId } });
 }
 
+// ── 每日确认（v0.2 一键确认） ──
+function confirmDaily(parentId, role, medTaken) {
+  return request({
+    url: '/api/med/daily-confirm',
+    method: 'POST',
+    data: { parent_id: parentId, role, med_taken: medTaken }
+  });
+}
+
+// ── 每周用药确认（v0.2 周日确认） ──
+function confirmMedWeekly(parentId, answer) {
+  return request({
+    url: '/api/med/weekly-confirm',
+    method: 'POST',
+    data: { parent_id: parentId, answer }
+  });
+}
+
+// ── 用药提醒设置（v0.2） ──
+function getReminderSettings(parentId) {
+  return request({ url: '/api/med/reminder-settings', data: { parent_id: parentId } });
+}
+function saveReminderSettings(parentId, times) {
+  return request({
+    url: '/api/med/reminder-settings',
+    method: 'POST',
+    data: { parent_id: parentId, reminder_times: times }
+  });
+}
+
+// ── 发送用药提醒（v0.2） ──
+function sendReminder(parentId, message) {
+  return request({
+    url: '/api/med/send-reminder',
+    method: 'POST',
+    data: { parent_id: parentId, message }
+  });
+}
+
+// ── 用户资料 ──
+function getProfile() {
+  return request({ url: '/api/auth/profile' });
+}
+
 module.exports = {
   request,
   injectWerunMock,
@@ -103,5 +147,11 @@ module.exports = {
   generateReport,
   getFeedbackOptions,
   submitEchoFeedback,
-  getLatestFeedback
+  getLatestFeedback,
+  confirmDaily,
+  confirmMedWeekly,
+  getReminderSettings,
+  saveReminderSettings,
+  getProfile,
+  sendReminder
 };
