@@ -11,6 +11,7 @@ const medicationRoutes = require('./routes/medication');
 const reportRoutes = require('./routes/report');
 const feedbackRoutes = require('./routes/feedback');
 const surveyRoutes = require('./routes/survey');
+const historyRoutes = require('./routes/history');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/api/med', medicationRoutes);
 app.use('/api/report', reportRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/survey', surveyRoutes);
+app.use('/api/report', historyRoutes);
 
 // ── 初始化数据库 ──
 initDB();

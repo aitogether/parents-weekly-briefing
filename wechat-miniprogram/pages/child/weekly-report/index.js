@@ -184,5 +184,20 @@ Page({
     } catch (e) {
       wx.showToast({ title: '发送失败', icon: 'none' });
     }
+  },
+
+  // ——— 分享周报（P2-3）———
+  onShareAppMessage() {
+    const { oneLiner, summary } = this.data;
+    return {
+      title: oneLiner || '父母这一周周报',
+      path: '/pages/child/weekly-report/index',
+      imageUrl: '' // 可以后续配置分享封面图
+    };
+  },
+
+  // ——— 步数趋势图（P2-2）———
+  onGoChart() {
+    wx.navigateTo({ url: '/pages/child/weekly-chart/index' });
   }
 });

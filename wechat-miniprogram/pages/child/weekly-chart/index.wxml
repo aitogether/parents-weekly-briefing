@@ -1,0 +1,68 @@
+<!-- pages/child/weekly-chart/index.wxml — 步数折线图 P2-2 -->
+<view class="chart-page">
+
+  <view class="page-header">
+    <text class="page-title">步数趋势</text>
+    <text class="page-range">{{weekRange}}</text>
+  </view>
+
+  <!-- 折线图（CSS 实现） -->
+  <view class="chart-container" wx:if="{{chartData.length > 0}}">
+    <view class="chart-y-axis">
+      <text class="y-label">{{maxSteps}}</text>
+      <text class="y-label">{{midSteps}}</text>
+      <text class="y-label">0</text>
+    </view>
+    <view class="chart-area">
+      <!-- 网格线 -->
+      <view class="grid-line top"></view>
+      <view class="grid-line mid"></view>
+      <view class="grid-line bottom"></view>
+
+      <!-- 数据点 + 连线 -->
+      <view class="chart-row">
+        <view class="data-col" wx:for="{{chartData}}" wx:key="date">
+          <view class="bar-wrapper" style="height: {{item.heightPct}}%">
+            <view class="bar {{item.level}}"></view>
+            <view class="data-dot {{item.level}}" style="bottom: {{item.heightPct}}%"></view>
+          </view>
+          <text class="date-label">{{item.dayLabel}}</text>
+          <text class="step-label">{{item.steps}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{chartData.length === 0}}">
+    <text class="empty-text">暂无步数数据</text>
+    <text class="empty-sub">父母需要先打开小程序授权微信运动</text>
+  </view>
+
+  <!-- 汇总 -->
+  <view class="summary-card" wx:if="{{chartData.length > 0}}">
+    <view class="summary-row">
+      <view class="summary-item">
+        <text class="summary-val">{{avgSteps}}</text>
+        <text class="summary-label">日均步数</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-val">{{maxDaySteps}}</text>
+        <text class="summary-label">最高一天</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-val">{{minDaySteps}}</text>
+        <text class="summary-label">最低一天</text>
+      </view>
+    </view>
+    <view class="trend-row">
+      <text class="trend-text">{{trendText}}</text>
+    </view>
+  </view>
+
+  <!-- 周报历史入口 -->
+  <view class="history-link" bindtap="onGoHistory">
+    <text class="history-text">📊 查看多周趋势</text>
+  </view>
+
+</view>

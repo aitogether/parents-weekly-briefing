@@ -3,6 +3,8 @@
     "pages/index/index",
     "pages/child/bind/index",
     "pages/child/anxiety-survey/index",
+    "pages/child/weekly-chart/index",
+    "pages/child/history-compare/index",
     "pages/child/weekly-report/index",
     "pages/child/daily-summary/index",
     "pages/child/medication-stats/index",

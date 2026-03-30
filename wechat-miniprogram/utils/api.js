@@ -146,6 +146,26 @@ function getAnxietyHistory(childId, limit) {
   });
 }
 
+// ── 步数查询（P2-2）──
+function getWerunSteps(parentId, days) {
+  return request({
+    url: `/api/werun/steps?parent_id=${parentId}&days=${days || 7}`
+  });
+}
+
+// ── 多周趋势对比（P2-4）──
+function getCompare(childId, weeks) {
+  return request({
+    url: `/api/report/compare?child_id=${childId}&weeks=${weeks || 4}`
+  });
+}
+
+function getHistory(childId, weeks) {
+  return request({
+    url: `/api/report/history?child_id=${childId}&weeks=${weeks || 4}`
+  });
+}
+
 // ── 用户资料 ──
 function getProfile() {
   return request({ url: '/api/auth/profile' });
@@ -170,5 +190,8 @@ module.exports = {
   getProfile,
   sendReminder,
   submitAnxietySurvey,
-  getAnxietyHistory
+  getAnxietyHistory,
+  getWerunSteps,
+  getCompare,
+  getHistory
 };

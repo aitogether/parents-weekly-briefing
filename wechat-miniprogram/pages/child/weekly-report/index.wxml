@@ -19,6 +19,16 @@
     </button>
   </view>
 
+  <!-- 分享 + 步数趋势 -->
+  <view class="secondary-links">
+    <button class="share-btn" open-type="share">
+      <text>📤 分享周报</text>
+    </button>
+    <view class="chart-link" bindtap="onGoChart">
+      <text>📊 步数趋势</text>
+    </view>
+  </view>
+
   <!-- 折叠详情入口 -->
   <view class="fold-trigger" bindtap="toggleDetail">
     <text class="fold-text">{{showDetail ? '收起详情 ▲' : '查看详情 ▼'}}</text>

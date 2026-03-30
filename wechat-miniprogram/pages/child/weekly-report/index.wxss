@@ -65,6 +65,31 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
 .action-icon { font-size: 22px; }
 .action-label { color: #fff; }
 
+/* ===== 分享 + 步数趋势 ===== */
+.secondary-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 8px 16px 12px;
+}
+
+.share-btn {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  color: #188068;
+  padding: 4px 0;
+}
+
+.share-btn::after { border: none; }
+
+.chart-link {
+  font-size: 13px;
+  color: #188068;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
 /* ===== 折叠触发器 ===== */
 .fold-trigger {
   text-align: center;

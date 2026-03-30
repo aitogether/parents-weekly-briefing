@@ -1,0 +1,62 @@
+<!-- pages/child/history-compare/index.wxml — 多周趋势对比 P2-4 -->
+<view class="compare-page">
+
+  <view class="page-header">
+    <text class="page-title">多周趋势</text>
+    <text class="page-desc">{{weeks}} 周灯号变化</text>
+  </view>
+
+  <!-- 灯号时间线 -->
+  <view class="timeline" wx:for="{{trends}}" wx:key="id">
+    <text class="parent-name">{{item.label}}</text>
+
+    <view class="level-dots">
+      <view class="week-col" wx:for="{{item.weekly}}" wx:for-item="wk" wx:key="weekIndex">
+        <view class="level-dot {{wk.level}}">
+          <text class="dot-label">{{wk.level === 'green' ? '✓' : wk.level === 'yellow' ? '!' : '⚠'}}</text>
+        </view>
+        <text class="week-label">{{wk.weekLabel}}</text>
+      </view>
+    </view>
+
+    <!-- 趋势总结 -->
+    <view class="trend-summary">
+      <text class="trend-item">
+        步数：{{
+          item.overallStepsTrend === 'improving' ? '📈 越来越好' :
+          item.overallStepsTrend === 'declining' ? '📉 在走下坡' :
+          '➡️ 整体稳定'
+        }}
+      </text>
+      <text class="trend-item">
+        用药：{{
+          item.overallMedTrend === 'improving' ? '📈 越来越规律' :
+          item.overallMedTrend === 'declining' ? '📉 最近有松懈' :
+          '➡️ 整体稳定'
+        }}
+      </text>
+    </view>
+
+    <!-- 统计 -->
+    <view class="stats-row">
+      <view class="stat green-stat">
+        <text class="stat-num">{{item.greenWeeks}}</text>
+        <text class="stat-label">绿灯周</text>
+      </view>
+      <view class="stat yellow-stat">
+        <text class="stat-num">{{item.yellowWeeks}}</text>
+        <text class="stat-label">黄灯周</text>
+      </view>
+      <view class="stat red-stat">
+        <text class="stat-num">{{item.redWeeks}}</text>
+        <text class="stat-label">红灯周</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回到步数图 -->
+  <view class="back-link" bindtap="onGoChart">
+    <text class="back-text">← 回到步数趋势图</text>
+  </view>
+
+</view>

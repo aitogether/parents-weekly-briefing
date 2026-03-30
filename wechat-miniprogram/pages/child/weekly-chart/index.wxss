@@ -1,0 +1,188 @@
+/* pages/child/weekly-chart/index.wxss — 步数折线图 P2-2 */
+
+.chart-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+  padding: 32rpx;
+}
+
+.page-header {
+  margin-bottom: 32rpx;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #222;
+  display: block;
+}
+
+.page-range {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 图表容器 */
+.chart-container {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 16rpx 16rpx;
+  display: flex;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  margin-bottom: 20rpx;
+}
+
+.chart-y-axis {
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 8rpx;
+  height: 360rpx;
+}
+
+.y-label {
+  font-size: 20rpx;
+  color: #bbb;
+}
+
+.chart-area {
+  flex: 1;
+  position: relative;
+  height: 360rpx;
+}
+
+.grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1rpx;
+  background: #f0f0f0;
+}
+
+.grid-line.top { top: 0; }
+.grid-line.mid { top: 50%; }
+.grid-line.bottom { bottom: 0; }
+
+.chart-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.data-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar-wrapper {
+  width: 40rpx;
+  border-radius: 8rpx 8rpx 0 0;
+  position: relative;
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+
+.bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx 8rpx 0 0;
+  opacity: 0.7;
+}
+
+.bar.green { background: #188068; }
+.bar.yellow { background: #F6B25C; }
+.bar.red { background: #E74C3C; }
+
+.data-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.data-dot.green { background: #188068; }
+.data-dot.yellow { background: #F6B25C; }
+.data-dot.red { background: #E74C3C; }
+
+.date-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.step-label {
+  font-size: 18rpx;
+  color: #bbb;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.empty-sub {
+  font-size: 24rpx;
+  color: #ccc;
+}
+
+/* 汇总卡片 */
+.summary-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  margin-bottom: 20rpx;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16rpx;
+}
+
+.summary-item { text-align: center; }
+
+.summary-val {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #188068;
+  display: block;
+}
+
+.summary-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.trend-row { text-align: center; }
+.trend-text { font-size: 26rpx; color: #666; }
+
+/* 历史入口 */
+.history-link {
+  text-align: center;
+  padding: 12rpx 0;
+}
+
+.history-text {
+  font-size: 26rpx;
+  color: #188068;
+  text-decoration: underline;
+}
