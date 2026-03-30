@@ -77,6 +77,19 @@ page { background: #F5F5F7; font-family: -apple-system, "PingFang SC", sans-seri
   color: #999;
 }
 
+/* ===== 焦虑量表入口 ===== */
+.survey-link {
+  text-align: center;
+  padding: 10px 0;
+  margin: 4px 16px 8px;
+}
+
+.survey-link-text {
+  font-size: 13px;
+  color: #188068;
+  text-decoration: underline;
+}
+
 /* ===== 展开详情（原有样式） ===== */
 .detail-section { animation: fadeIn 0.3s ease; }
 

@@ -24,6 +24,11 @@
     <text class="fold-text">{{showDetail ? '收起详情 ▲' : '查看详情 ▼'}}</text>
   </view>
 
+  <!-- 焦虑量表入口 -->
+  <view class="survey-link" bindtap="onGoSurvey">
+    <text class="survey-link-text">📋 关心状态自查（10 秒）</text>
+  </view>
+
   <!-- ===== 展开详情：原有 5 板块 ===== -->
   <view class="detail-section" wx:if="{{showDetail}}">
 

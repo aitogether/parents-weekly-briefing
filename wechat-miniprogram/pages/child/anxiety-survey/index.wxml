@@ -1,0 +1,41 @@
+<!-- pages/child/anxiety-survey/index.wxml — 焦虑感自报量表 P1-7 -->
+<view class="survey-page">
+
+  <view class="page-header">
+    <text class="page-title">关心状态自查</text>
+    <text class="page-desc">花 10 秒钟，了解一下你对爸妈的担心程度</text>
+  </view>
+
+  <!-- 问题列表 -->
+  <view class="question-list" wx:if="{{!submitted}}">
+    <view class="question-card" wx:for="{{questions}}" wx:key="id">
+      <text class="q-index">Q{{index + 1}}</text>
+      <text class="q-text">{{item.text}}</text>
+
+      <view class="scale-row">
+        <text class="scale-label">{{item.scale.minLabel}}</text>
+        <view class="scale-dots">
+          <view
+            class="scale-dot {{answers[index] >= n ? 'active' : ''}}"
+            wx:for="{{scaleRange}}" wx:for-item="n" wx:key="n"
+            bindtap="onScore" data-qi="{{index}}" data-score="{{n}}"
+          >{{n}}</view>
+        </view>
+        <text class="scale-label">{{item.scale.maxLabel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button class="submit-btn" bindtap="onSubmit" wx:if="{{!submitted}}" disabled="{{!allAnswered}}">
+    提交
+  </button>
+
+  <!-- 结果 -->
+  <view class="result-card" wx:if="{{submitted}}">
+    <text class="result-score">{{avgScore}} 分</text>
+    <text class="result-msg">{{resultMessage}}</text>
+    <button class="done-btn" bindtap="onDone">知道了</button>
+  </view>
+
+</view>

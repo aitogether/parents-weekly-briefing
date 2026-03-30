@@ -227,6 +227,34 @@ function getDB() {
         .filter(f => f.parent_id === parent_id && f.created_at >= since)
         .sort((a, b) => b.created_at.localeCompare(a.created_at));
       return feedbacks[0] || null;
+    },
+
+    // --- P1-7 焦虑量表 ---
+    addAnxietySurvey({ child_id, answers, submitted_at }) {
+      const db = load();
+      if (!db.anxiety_surveys) db.anxiety_surveys = [];
+      const record = { id: uuidv4(), child_id, answers, submitted_at };
+      db.anxiety_surveys.push(record);
+      save(db);
+      return record;
+    },
+    getAnxietyHistory(child_id, limit = 10) {
+      const db = load();
+      if (!db.anxiety_surveys) return [];
+      return db.anxiety_surveys
+        .filter(s => s.child_id === child_id)
+        .sort((a, b) => b.submitted_at.localeCompare(a.submitted_at))
+        .slice(0, limit);
+    },
+
+    // --- 通知日志 ---
+    addNotificationLog({ type, target_id, message, sent_at }) {
+      const db = load();
+      if (!db.notification_logs) db.notification_logs = [];
+      const record = { id: uuidv4(), type, target_id, message, sent_at };
+      db.notification_logs.push(record);
+      save(db);
+      return record;
     }
   };
 }

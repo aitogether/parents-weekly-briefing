@@ -111,6 +111,11 @@ Page({
     this.setData({ showDetail: !this.data.showDetail });
   },
 
+  // ——— 焦虑量表 ———
+  onGoSurvey() {
+    wx.navigateTo({ url: '/pages/child/anxiety-survey/index' });
+  },
+
   // ——— 行动按钮 ———
   onCallParent() {
     wx.showActionSheet({

@@ -131,6 +131,21 @@ function sendReminder(parentId, message) {
   });
 }
 
+// ── 焦虑量表（P1-7） ──
+function submitAnxietySurvey(childId, answers) {
+  return request({
+    url: '/api/survey/anxiety',
+    method: 'POST',
+    data: { child_id: childId, answers }
+  });
+}
+
+function getAnxietyHistory(childId, limit) {
+  return request({
+    url: `/api/survey/anxiety/history?child_id=${childId}&limit=${limit || 10}`
+  });
+}
+
 // ── 用户资料 ──
 function getProfile() {
   return request({ url: '/api/auth/profile' });
@@ -153,5 +168,7 @@ module.exports = {
   getReminderSettings,
   saveReminderSettings,
   getProfile,
-  sendReminder
+  sendReminder,
+  submitAnxietySurvey,
+  getAnxietyHistory
 };
