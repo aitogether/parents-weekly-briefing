@@ -15,7 +15,7 @@
 
 ## 📸 Screenshots
 
-| 周报详情 | 用药确认 | 用药计划 | 回声结果 |
+| 周报详情 | 用药确认 | 回声结果 | 用药计划 |
 | --- | --- | --- | --- |
 | ![](ui-prototype/screenshots/phone-02-report.jpg) | ![](ui-prototype/screenshots/phone-03-med-confirm.jpg) | ![](ui-prototype/screenshots/phone-04-med-plan.jpg) | ![](ui-prototype/screenshots/phone-05-echo.jpg) |
 
