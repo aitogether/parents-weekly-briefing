@@ -44,7 +44,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/aitogether/parents-weekly-briefing.git
+git clone https://github.com/aitogether.git
 cd parents-weekly-briefing/backend
 
 # 安装依赖
