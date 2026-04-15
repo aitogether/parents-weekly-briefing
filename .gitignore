@@ -5,3 +5,7 @@ node_modules/
 build/
 *.iml
 .idea/
+
+# 私密报告 - 本地保留不上传
+silver-economy-mvp-selection.md
+silver-economy-pain-points-report.md
