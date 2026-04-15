@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../db/store');
 const CHECKLIST_ITEMS = [
   { id: 1, name: "检查燃气阀门是否关闭", category: "燃气安全" },
   { id: 2, name: "检查水龙头是否关紧", category: "用水安全" },
