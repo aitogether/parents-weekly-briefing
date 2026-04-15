@@ -24,7 +24,7 @@ jobs:
       - name: 📦 安装依赖
         run: |
           cd backend
-          npm ci --only=production
+          npm install --only=production
       
       - name: 🚀 启动服务
         run: |
