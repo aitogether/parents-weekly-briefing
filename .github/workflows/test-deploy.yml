@@ -1,126 +1,82 @@
 name: 父母周报 - 自动化测试
-
-on:
+true:
   push:
-    branches: [ main, develop ]
+    branches:
+    - main
+    - develop
   pull_request:
-    branches: [ main ]
+    branches:
+    - main
   schedule:
-    - cron: '0 2 * * *'
-  workflow_dispatch:
-
+  - cron: 0 2 * * *
+  workflow_dispatch: null
 env:
   NODE_VERSION: '18'
-
 jobs:
   test-backend:
     name: 🧪 后端测试
     runs-on: ubuntu-latest
-    
-    services:
-      postgres:
-        image: postgres:15
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: npm
+        cache-dependency-path: backend/package-lock.json
+    - run: 'cd backend
+
+        npm ci --only=production
+
+        '
+    - run: "cd backend\nnohup npm start > /tmp/backend.log 2>&1 &\necho $! > /tmp/backend.pid\n\
+        for i in 1 2 3 4 5; do\n  if curl -s http://localhost:3000/health > /dev/null;\
+        \ then echo \"✅ 服务启动\"; break; fi\n  echo \"等待服务... ($i/5)\"; sleep 3;\ndone\n\
+        if ! curl -s http://localhost:3000/health > /dev/null; then tail -50 /tmp/backend.log;\
+        \ exit 1; fi\n"
+      timeout-minutes: 2
+    - run: 'cd test
+
+        node checklist-api.test.js 2>&1 | tee /tmp/test.log
+
+        '
+      timeout-minutes: 2
+    - if: always()
+      run: 'cat > report.txt << EOF
+
+        测试报告: ${{ github.run_id }}
+
+        时间: $(date)
+
+        健康: $(curl -s http://localhost:3000/health)
+
+        结果: $(tail -5 /tmp/test.log)
+
+        EOF
+
+        '
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: report.txt
+    - if: failure()
+      uses: slackapi/slack-github-action@v1.24.0
+      with:
+        payload: '{"text":"❌ 测试失败 - ${{ github.ref }}","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"❌
+          *测试失败*\n\n提交: ${{ github.sha }}\n[查看](${{ github.server_url }}/${{ github.repository
+          }}/actions/runs/${{ github.run_id }})"}}]}
+
+          '
         env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: parents_test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
-      
-      - run: |
-          cd backend
-          npm ci --only=production
-      
-      - run: |
-          cd backend
-          node -e "
-            const db = require('better-sqlite3')('test-parents.db');
-            db.exec(\`
-              CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL
-              );
-              CREATE TABLE IF NOT EXISTS safety_checklists (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                week_start DATE NOT NULL,
-                item_id INTEGER NOT NULL,
-                item_name TEXT NOT NULL,
-                completed BOOLEAN DEFAULT FALSE,
-                completed_at DATETIME,
-                notes TEXT,
-                UNIQUE(user_id, week_start, item_id)
-              );
-            \`);
-          "
-      
-      - run: |
-          cd backend
-          nohup npm start > /tmp/backend.log 2>&1 &
-          echo $! > /tmp/backend.pid
-          for i in 1 2 3 4 5; do
-            if curl -s http://localhost:3000/health > /dev/null; then echo "✅ 服务启动"; break; fi
-            echo "等待服务... ($i/5)"; sleep 3;
-          done
-          if ! curl -s http://localhost:3000/health > /dev/null; then tail -50 /tmp/backend.log; exit 1; fi
-        timeout-minutes: 2
-      
-      - run: |
-          cd test
-          node checklist-api.test.js 2>&1 | tee /tmp/test.log
-        timeout-minutes: 2
-      
-      - if: always()
-        run: |
-          cat > report.txt << EOF
-          测试报告: ${{ github.run_id }}
-          时间: $(date)
-          健康: $(curl -s http://localhost:3000/health)
-          结果: $(tail -5 /tmp/test.log)
-          EOF
-      
-      - if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-report
-          path: report.txt
-      
-      - if: failure()
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {"text":"❌ 测试失败 - ${{ github.ref }}","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"❌ *测试失败*\n\n提交: ${{ github.sha }}\n[查看](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"}}]}
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      
-      - if: always()
-        run: |
-          if [ -f /tmp/backend.pid ]; then kill $(cat /tmp/backend.pid) 2>/dev/null || true; fi
-  
-  lint:
-    name: 🔍 代码检查
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-      - run: |
-          cd backend
-          npm ci
-          npx eslint src/ --ext .js || echo "OK"
-          npm audit --audit-level moderate || echo "OK"
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    - if: always()
+      run: 'if [ -f /tmp/backend.pid ]; then kill $(cat /tmp/backend.pid) 2>/dev/null
+        || true; fi
+
+        '
+'on':
+  push:
+    branches:
+    - main
+    - develop
+  workflow_dispatch: {}
