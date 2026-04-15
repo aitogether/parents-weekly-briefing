@@ -236,3 +236,14 @@ console.log(getCurrentPages())
 
 欢迎提交 Pull Request！请先阅读 [CONTRIBUTING.md](../CONTRIBUTING.md)。
 
+
+
+## 联系与支持
+
+如需技术支持，请扫码关注「父母周报」公众号，回复「内测咨询」联系管理员。
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注「父母周报」公众号" width="200"/>
+  <br>
+  <small>微信扫码关注「父母周报」公众号，回复「内测咨询」获取帮助</small>
+</p>
