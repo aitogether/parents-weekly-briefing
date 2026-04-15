@@ -12,7 +12,7 @@
 - 直接参与产品改进，影响未来方向
 - 获得详细的个人周报分析
 
-**报名链接**：[点击这里填写内测申请](https://forms.gle/xxxx)
+**报名方式**：扫码关注「父母周报」公众号，回复关键词【内测报名】获取报名链接
 *申请截止：2026年4月30日*
 
 </div>
@@ -21,7 +21,7 @@
 > **正在寻找 5–10 个家庭参与 P0 内测（2周免费体验）** | [立即申请](#-加入内测)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing-demo-app/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="关注「父母周报」公众号" width="200"/>
 </p>
 
 <p align="center">
@@ -134,12 +134,18 @@
 - ✅ 1对1 微信答疑
 
 ### 申请流程
-1. 填写申请问卷（约 2 分钟）：[腾讯问卷链接（待补充）]
+1. 扫码关注「父母周报」公众号，回复【内测报名】获取报名链接
 2. 等待 24 小时内审核结果（邮件/微信通知）
 3. 通过后，您将收到：
-   - 小程序邀请二维码
+   - 小程序使用权限（审核通过后开通）
    - 内测使用文档（`docs/pilot-manual.md`）
    - 内测反馈问卷链接
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注公众号报名" width="180"/>
+  <br><small>微信扫码关注「父母周报」公众号，回复【内测报名】</small>
+</p>
+
 
 > ⚠️ 注意：本次内测仅限 **5-10 个家庭**，额满即止。所有数据仅用于产品改进，测试结束后可选择永久免费使用或退出。
 
@@ -191,7 +197,7 @@ parents-weekly-briefing/
 - [内测使用手册](docs/pilot-manual.md) ← **内测用户必读**
 - [隐私与安全说明](docs/privacy-and-security.md)
 - [开发者文档](backend/README.md) | [小程序开发文档](wechat-miniprogram/README.md)
-- [常见问题 (FAQ)](docs/faq.md)（待补充）
+- [常见问题 (FAQ)](docs/faq.md)
 
 ---
 
@@ -216,7 +222,13 @@ parents-weekly-briefing/
 ## 联系我们
 
 - GitHub Issues: https://github.com/aitogether/parents-weekly-briefing/issues
-- 邮箱: <待补充>
+- 微信公众号：**父母周报**（扫码关注，回复「内测咨询」）
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="关注公众号" width="150"/>
+  <br><small>扫码关注「父母周报」公众号</small>
+</p>
+
 
 ## 🚀 快速开始
 
