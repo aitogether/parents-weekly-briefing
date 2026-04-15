@@ -230,6 +230,48 @@ parents-weekly-briefing/
 </p>
 
 
+
+
+---
+
+## 📸 真实界面预览
+
+以下是我们在模拟器中运行的真实界面截图：
+
+### 子女端 - 周报查看
+<p align="center">
+  <img src="docs/images/screenshots/02-report.png" alt="子女查看父母周报" width="500"/>
+  <br>
+  <small>子女查看父母周报</small>
+</p>
+
+### 父母端 - 每日用药确认
+<div align="center">
+
+<p align="center">
+  <img src="docs/images/screenshots/06-medication-mom.png" alt="母亲确认用药" width="300"/>
+  <br>
+  <small>母亲确认用药</small>
+</p>
+
+<p align="center">
+  <img src="docs/images/screenshots/07-medication-dad.png" alt="父亲确认用药" width="300"/>
+  <br>
+  <small>父亲确认用药</small>
+</p>
+
+</div>
+
+### 父母端 - 用药计划
+<p align="center">
+  <img src="docs/images/screenshots/08-medication-plan.png" alt="查看用药计划" width="400"/>
+  <br>
+  <small>查看用药计划</small>
+</p>
+
+> 所有截图来自真机模拟器，实际界面可能略有差异。
+
+
 ## 🚀 快速开始
 
 ### 后端服务
