@@ -12,7 +12,8 @@ async function run(){
   for(let i=1;i<=10;i++){ try{ const r=await req("GET","/health"); if(r.status===200){ console.log("✅ 服务就绪"); break; } }catch{} if(i<10) await new Promise(x=>setTimeout(x,3000)); }
   const h=await req("GET","/health"); assert(h.status===200,"健康检查");
   const r401=await req("GET","/api/checklist/weekly",null,"bad"); assert(r401.status===401,"未授权401");
-  const list=await req("GET","/api/checklist/weekly"); assert(list.status===200,"获取清单"); assert(list.data.success,"成功标记"); assert(list.data.data.items.length===8,"8项检查"); assert(list.data.data.completed_count===0,"初始0完成");
+  const list=await req("GET","/api/checklist/weekly");
+  console.log("DEBUG list:", JSON.stringify(list, null, 2)); assert(list.status===200,"获取清单"); assert(list.data.success,"成功标记"); assert(list.data.data.items.length===8,"8项检查"); assert(list.data.data.completed_count===0,"初始0完成");
   const c1=await req("POST","/api/checklist/complete/1",{notes:"已检查"}); assert(c1.status===200,"完成第1项");
   const v1=await req("GET","/api/checklist/weekly"); const i1=v1.data.data.items.find(i=>i.id===1); assert(i1.completed,"第1项已更新"); assert(v1.data.data.completed_count===1,"完成数=1");
   await req("POST","/api/checklist/complete/2",{},TOKEN); await req("POST","/api/checklist/complete/3",{},TOKEN); const v3=await req("GET","/api/checklist/weekly"); assert(v3.data.data.completed_count===3,"完成3项总数=3");
