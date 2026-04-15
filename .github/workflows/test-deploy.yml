@@ -35,24 +35,40 @@ jobs:
             if curl -s http://localhost:3000/health > /dev/null; then echo "✅ 服务启动"; break; fi
             echo "等待服务... ($i/5)"; sleep 3;
           done
-          if ! curl -s http://localhost:3000/health > /dev/null; then tail -50 /tmp/backend.log; exit 1; fi
+          # 无论成功失败都保存日志
+          echo "=== 后端日志 ===" >> $GITHUB_STEP_SUMMARY
+          tail -50 /tmp/backend.log >> $GITHUB_STEP_SUMMARY 2>/dev/null || true
+          if ! curl -s http://localhost:3000/health > /dev/null; then
+            echo "❌ 健康检查失败"
+            exit 1
+          fi
         timeout-minutes: 2
       
       - name: 🧪 运行测试
+        if: always()
         run: |
           cd test
           node checklist-api.test.js 2>&1 | tee /tmp/test.log
+          echo "=== 测试日志 ===" >> $GITHUB_STEP_SUMMARY
+          tail -20 /tmp/test.log >> $GITHUB_STEP_SUMMARY
         timeout-minutes: 2
+      
+      - name: 📤 上传日志
+        if: always()
+        run: |
+          mkdir -p artifacts
+          cp /tmp/backend.log artifacts/backend.log
+          cp /tmp/test.log artifacts/test.log
+          echo "服务状态: $(curl -s http://localhost:3000/health || echo '无法连接')" > artifacts/status.txt
+        continue-on-error: true
       
       - name: 📊 生成报告
         if: always()
         run: |
-          cat > report.txt << EOF
-          测试报告: ${{ github.run_id }}
-          时间: $(date)
-          健康: $(curl -s http://localhost:3000/health)
-          结果: $(tail -5 /tmp/test.log)
-          EOF
+          echo "测试报告: ${{ github.run_id }}" > report.txt
+          echo "时间: $(date)" >> report.txt
+          echo "健康: $(curl -s http://localhost:3000/health || echo 'failed')" >> report.txt
+          echo "结果: $(tail -5 /tmp/test.log 2>/dev/null || echo '无测试日志')" >> report.txt
       
       - name: 📤 上传报告
         if: always()
@@ -61,14 +77,13 @@ jobs:
           name: test-report
           path: report.txt
       
-      - name: 📤 上传测试日志
+      - name: 📤 上传完整日志
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-logs
+          name: full-logs
           path: |
-            /tmp/test.log
-            /tmp/backend.log
+            artifacts/
       
       - name: 🛑 清理
         if: always()
