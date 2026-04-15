@@ -27,14 +27,12 @@ function loadDB() {
   if (fs.existsSync(DB_FILE)) {
     try {
       const raw = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-      // 确保 safety_checklists 字段存在且为数组
       if (!Array.isArray(raw.safety_checklists)) {
         raw.safety_checklists = [];
       }
-      // 合并默认字段（防止旧数据缺失）
       return { ...defaultData, ...raw };
     } catch (e) {
-      console.error('[Checklist] 读取 data.json 失败:', e.message);
+      console.error('[Checklist] 读取 data.json 失败:', e);
       return defaultData;
     }
   }
@@ -45,7 +43,7 @@ function saveDB(data) {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
   } catch (e) {
-    console.error('[Checklist] 保存 data.json 失败:', e.message);
+    console.error('[Checklist] 保存失败:', e);
     throw e;
   }
 }
@@ -70,7 +68,7 @@ module.exports = {
         completed_at: null,
         notes: ''
       }));
-      if (!db.safety_checklists) return Promise.resolve(baseItems);
+      if (!db.safety_checklists) return baseItems;
       const records = db.safety_checklists.filter(
         r => r.user_id === uid && r.week_start === weekStart
       );
@@ -82,10 +80,10 @@ module.exports = {
           item.notes = rec.notes || '';
         }
       });
-      return Promise.resolve(baseItems);
+      return baseItems;
     } catch (e) {
-      console.error('[Checklist] getWeeklyChecklist error:', e);
-      return Promise.reject(e);
+      console.error('[Checklist] getWeeklyChecklist 异常:', e);
+      throw e;
     }
   },
 
@@ -120,17 +118,17 @@ module.exports = {
         });
       }
       saveDB(db);
-      return Promise.resolve({ changes: 1 });
+      return { changes: 1 };
     } catch (e) {
-      console.error('[Checklist] completeItem error:', e);
-      return Promise.reject(e);
+      console.error('[Checklist] completeItem 异常:', e);
+      throw e;
     }
   },
 
   getHistory: (uid, limit = 4) => {
     try {
       const db = loadDB();
-      if (!db.safety_checklists) return Promise.resolve([]);
+      if (!db.safety_checklists) return [];
       const weeks = {};
       db.safety_checklists.forEach(r => {
         if (r.user_id !== uid) return;
@@ -139,13 +137,12 @@ module.exports = {
         weeks[ws].total++;
         if (r.completed) weeks[ws].done++;
       });
-      const arr = Object.values(weeks)
+      return Object.values(weeks)
         .sort((a, b) => b.week_start.localeCompare(a.week_start))
         .slice(0, limit);
-      return Promise.resolve(arr);
     } catch (e) {
-      console.error('[Checklist] getHistory error:', e);
-      return Promise.reject(e);
+      console.error('[Checklist] getHistory 异常:', e);
+      throw e;
     }
   }
 };

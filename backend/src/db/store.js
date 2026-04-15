@@ -26,7 +26,8 @@ function load() {
     med_confirmations: [],
     werun_data: [],
     daily_summaries: [],
-    child_feedback: []
+    child_feedback: [],
+    safety_checklists: []
   };
 }
 
