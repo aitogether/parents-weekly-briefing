@@ -208,3 +208,14 @@ describe('POST /api/medication/confirm', () => {
 
 **最后更新**：2026-04-16  
 **维护者**：[aitogether](https://github.com/aitogether)
+
+
+## 联系方式
+
+如需技术支持或合作咨询，请扫码关注「父母周报」公众号，回复「内测咨询」。
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注「父母周报」公众号" width="200"/>
+  <br>
+  <small>微信扫码关注「父母周报」公众号，回复「内测咨询」获取帮助</small>
+</p>
