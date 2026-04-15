@@ -14,9 +14,14 @@ const CHECKLIST_ITEMS = [
   { id: 8, name: "检查烟雾报警器电池", category: "火灾预防" }
 ];
 
+function ensureFields(data) {
+  if (!data.safety_checklists) data.safety_checklists = [];
+  return data;
+}
 function loadDB() {
   if (fs.existsSync(DB_FILE)) {
-    return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+    return ensureFields(raw);
   }
   return { users: [], medication_plans: [], med_confirmations: [], werun_data: [], daily_summaries: [], child_feedback: [], safety_checklists: [] };
 }
