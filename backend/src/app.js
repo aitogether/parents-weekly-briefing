@@ -23,6 +23,10 @@ app.use(rateLimit);
 // ── 基础中间件 ──
 app.use(express.json());
 app.use(cors());
+
+// 注册安全检查路由
+const checklistRouter = require('./routes/checklist');
+app.use('/api/checklist', checklistRouter);
 app.use(sanitizeBody);
 
 // ── 健康检查 ──

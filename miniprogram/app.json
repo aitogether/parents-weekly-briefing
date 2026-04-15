@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/report/report",
+    "pages/checklist/checklist"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "父母周报",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

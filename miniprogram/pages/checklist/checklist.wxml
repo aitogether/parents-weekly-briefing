@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="header"><text class="title">安全检查</text><text class="subtitle">每周一次，守护安全</text></view>
+  <view class="week-info"><text>本周完成度：{{completedCount}}/{{totalCount}}</text><progress percent="{{percent}}" stroke-width="8" activeColor="#20A080"/></view>
+  <view class="items">
+    <view wx:for="{{items}}" wx:key="id" class="item {{item.completed ? 'done' : ''}}" bindtap="toggle" data-id="{{item.id}}">
+      <view class="checkbox">{{item.completed ? '✓' : ''}}</view>
+      <view class="info"><text>{{item.name}}</text><text class="cat">{{item.category}}</text></view>
+    </view>
+  </view>
+  <view class="actions"><button bindtap="save">保存</button><button bindtap="history">历史</button></view>
+</view>

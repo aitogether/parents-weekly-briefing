@@ -85,6 +85,20 @@ function getDB() {
   if (!db) {
     throw new Error('Database not initialized. Call initDB() first.');
   }
+  // 安全检查清单表
+  db.run(`CREATE TABLE IF NOT EXISTS safety_checklists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    week_start DATE NOT NULL,
+    item_id INTEGER NOT NULL,
+    item_name TEXT NOT NULL,
+    completed BOOLEAN DEFAULT FALSE,
+    completed_at DATETIME,
+    notes TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, week_start, item_id)
+  )`);
   return db;
 }
 

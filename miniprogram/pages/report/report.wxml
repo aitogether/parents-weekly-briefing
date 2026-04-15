@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="section" bindtap="goChecklist">
+    <view class="section-title">安全检查</view>
+    <view class="section-content">
+      <text class="stat">本周已完成 {{safetyCompleted}}/8 项</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+  <view class="section"><text>报告内容...</text></view>
+</view>
