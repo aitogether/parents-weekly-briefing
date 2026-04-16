@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>让关心不再距离遥远</strong><br/>
+  <strong>让关心不再因距离而遥远</strong><br/>
   Weekly health briefing for families — gentle, respectful, no surveillance.
 </p>
 
