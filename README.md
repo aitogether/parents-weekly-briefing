@@ -196,6 +196,8 @@ parents-weekly-briefing/
 - [产品需求文档 (PRD)](docs/prd/parents-weekly-briefing-prd-p0.md)
 - [内测使用手册](docs/pilot-manual.md)
   - 内测家庭指南 → docs/pilot-manual.md
+  - 合作伙伴说明 → docs/for-partners.md
+  - 内测家庭指南 → docs/pilot-manual.md
   - 合作伙伴说明 → docs/for-partners.md ← **内测用户必读**
   - 内测家庭指南 → docs/pilot-manual.md
   - 合作伙伴说明 → docs/for-partners.md
