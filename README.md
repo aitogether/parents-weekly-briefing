@@ -194,7 +194,11 @@ parents-weekly-briefing/
 ## 📖 完整文档
 
 - [产品需求文档 (PRD)](docs/prd/parents-weekly-briefing-prd-p0.md)
-- [内测使用手册](docs/pilot-manual.md) ← **内测用户必读**
+- [内测使用手册](docs/pilot-manual.md)
+  - 内测家庭指南 → docs/pilot-manual.md
+  - 合作伙伴说明 → docs/for-partners.md ← **内测用户必读**
+  - 内测家庭指南 → docs/pilot-manual.md
+  - 合作伙伴说明 → docs/for-partners.md
 - [隐私与安全说明](docs/privacy-and-security.md)
 - [开发者文档](backend/README.md) | [小程序开发文档](wechat-miniprogram/README.md)
 - [常见问题 (FAQ)](docs/faq.md)
