@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <strong>让关心不再距离遥远</strong><br/>
+  <strong>让关心不再因距离而遥远</strong><br/>
   <em>Weekly health briefing for families — gentle, respectful, no surveillance.</em><br/>
   <small>一个轻量级家庭健康关怀工具，献给异地打拼的 80/90 后与他们的父母。</small>
 </p>
