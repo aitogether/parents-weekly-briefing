@@ -42,7 +42,7 @@
 4. AppID 选择：
    - **测试**：使用"测试号"（内测阶段推荐）
    - **正式**：填入你的小程序 AppID
-5. 项目名称：父母周报
+5. 项目名称：父母这一周
 6. 点击「导入」即可
 
 ---
@@ -240,10 +240,10 @@ console.log(getCurrentPages())
 
 ## 联系与支持
 
-如需技术支持，请扫码关注「父母周报」公众号，回复「内测咨询」联系管理员。
+如需技术支持，请扫码关注「父母这一周」公众号，回复「内测咨询」联系管理员。
 
 <p align="center">
-  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注「父母周报」公众号" width="200"/>
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注「父母这一周」公众号" width="200"/>
   <br>
-  <small>微信扫码关注「父母周报」公众号，回复「内测咨询」获取帮助</small>
+  <small>微信扫码关注「父母这一周」公众号，回复「内测咨询」获取帮助</small>
 </p>
