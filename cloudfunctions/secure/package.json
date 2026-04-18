@@ -1,0 +1,8 @@
+{
+  "name": "secure",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~0.0.1"
+  }
+}
