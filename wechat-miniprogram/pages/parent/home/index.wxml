@@ -46,6 +46,16 @@
     </view>
   </view>
 
+  <!-- 扫码帮手入口 -->
+  <view class="scan-shortcut card" bindtap="onGoScan">
+    <view class="scan-icon">📷</view>
+    <view class="scan-text">
+      <text class="scan-title">扫码记录</text>
+      <text class="scan-subtitle">扫描药品/食品二维码，记录健康信息</text>
+    </view>
+    <text class="scan-arrow">→</text>
+  </view>
+
   <!-- 子女回声 -->
   <view class="echo-card" wx:if="{{echoText}}">
     <text class="echo-label">💬 来自子女的一句话</text>

@@ -1,0 +1,76 @@
+<!-- pages/parent/scan/index.wxml - 扫码帮手 -->
+<view class="page scan-page">
+  <!-- 扫描按钮 -->
+  <view class="scan-actions">
+    <button class="primary-btn scan-btn" bindtap="onScan">
+      <text class="btn-icon">📷</text>
+      <text>扫描二维码</text>
+    </button>
+    <text class="hint">扫描药品/食品二维码，记录健康信息</text>
+  </view>
+
+  <!-- 快速选择类型（无码时手动录入） -->
+  <view class="manual-section">
+    <text class="section-title">或手动选择类型</text>
+    <view class="type-buttons">
+      <button class="type-btn" data-type="medicine" bindtap="onSelectType">
+        <text class="type-icon">💊</text>
+        <text>药品</text>
+      </button>
+      <button class="type-btn" data-type="food" bindtap="onSelectType">
+        <text class="type-icon">🍎</text>
+        <text>食品</text>
+      </button>
+      <button class="type-btn" data-type="product" bindtap="onSelectType">
+        <text class="type-icon">📦</text>
+        <text>商品</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 手动录入表单（默认隐藏） -->
+  <view class="manual-form" wx:if="{{showManualForm}}">
+    <view class="form-item">
+      <text class="form-label">类型</text>
+      <picker mode="selector" range="{{typeLabels}}" value="{{formTypeIndex}}" bindchange="onTypeChange">
+        <view class="picker-value">{{typeLabels[formTypeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">内容（二维码文本或商品名称）</text>
+      <textarea class="form-textarea" placeholder="请输入或粘贴内容" value="{{qrValue}}" bindinput="onQrInput" maxlength="500"/>
+    </view>
+    <button class="submit-btn" bindtap="onSubmitManual">保存记录</button>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <view class="history-section">
+    <view class="history-header">
+      <text class="section-title">最近扫描</text>
+      <text class="history-count">共 {{scans.length}} 条</text>
+    </view>
+
+    <view class="scan-list" wx:if="{{scans.length > 0}}">
+      <view class="scan-item" wx:for="{{scans}}" wx:key="_id">
+        <view class="scan-type-icon">
+          <text wx:if="{{item.qr_type === 'medicine'}}">💊</text>
+          <text wx:elif="{{item.qr_type === 'food'}}">🍎</text>
+          <text wx:else>📦</text>
+        </view>
+        <view class="scan-content">
+          <text class="scan-type-label">{{item.typeLabel}}</text>
+          <text class="scan-value">{{item.qr_value}}</text>
+          <text class="scan-date">{{item.scanned_date}}</text>
+        </view>
+        <view class="scan-action" bindtap="onDelete" data-id="{{item._id}}">
+          <text class="delete-icon">🗑️</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:else>
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">暂无扫描记录</text>
+    </view>
+  </view>
+</view>

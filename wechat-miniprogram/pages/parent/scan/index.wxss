@@ -1,0 +1,223 @@
+/* pages/parent/scan/index.wxss - 扫码帮手 */
+.scan-page {
+  padding: 24rpx;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 扫描操作区 */
+.scan-actions {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 48rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.primary-btn.scan-btn {
+  background: linear-gradient(135deg, #07C160, #06AD56);
+  color: #fff;
+  border-radius: 48rpx;
+  padding: 32rpx 64rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  border: none;
+}
+
+.btn-icon {
+  font-size: 40rpx;
+}
+
+.hint {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 手动录入区 */
+.manual-section {
+  margin-top: 32rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.history-count {
+  font-size: 26rpx;
+  color: #999;
+  font-weight: 400;
+}
+
+.type-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 20rpx;
+}
+
+.type-btn {
+  flex: 1;
+  background: #f0f9ff;
+  border: 2rpx solid #e6f7ff;
+  border-radius: 12rpx;
+  padding: 24rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.type-icon {
+  font-size: 48rpx;
+}
+
+/* 手动表单 */
+.manual-form {
+  margin-top: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.form-item {
+  margin-bottom: 32rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.picker-value {
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 160rpx;
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  background: #4CAF50;
+  color: #fff;
+  border-radius: 48rpx;
+  padding: 28rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+}
+
+/* 历史记录 */
+.history-section {
+  margin-top: 32rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.scan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.scan-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background: #f5f7fa;
+  border-radius: 12rpx;
+  gap: 20rpx;
+}
+
+.scan-type-icon {
+  font-size: 48rpx;
+  width: 80rpx;
+  text-align: center;
+}
+
+.scan-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.scan-type-label {
+  font-size: 24rpx;
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.scan-value {
+  font-size: 30rpx;
+  color: #333;
+  word-break: break-all;
+}
+
+.scan-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.scan-action {
+  padding: 12rpx;
+}
+
+.delete-icon {
+  font-size: 36rpx;
+  opacity: 0.6;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+}

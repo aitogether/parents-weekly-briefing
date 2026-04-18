@@ -16,3 +16,12 @@ module.exports = {
   INVITE_CHARS: 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789',
   INVITE_LENGTH: 6
 };
+
+// 扫码帮手类型
+QR_TYPE: {
+  MEDICINE: 'medicine',
+  FOOD: 'food',
+  PRODUCT: 'product'
+},
+QR_MAX_HISTORY_DAYS: 30,
+QR_MAX_HISTORY_COUNT: 100

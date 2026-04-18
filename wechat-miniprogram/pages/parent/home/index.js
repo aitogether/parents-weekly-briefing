@@ -192,5 +192,10 @@ Page({
   // ——— 跳转提醒设置 ———
   onGoReminder() {
     wx.navigateTo({ url: '/pages/parent/med-reminder/index' });
+  },
+
+  // ——— 跳转扫码帮手 ———
+  onGoScan() {
+    wx.navigateTo({ url: '/pages/parent/scan/index' });
   }
 });

@@ -169,6 +169,54 @@
   font-weight: 600;
 }
 
+/* ── 扫码帮手入口 ── */
+.scan-shortcut.card {
+  background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(33, 150, 243, 0.12);
+}
+
+.scan-icon {
+  font-size: 64rpx;
+  width: 96rpx;
+  height: 96rpx;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.scan-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1976D2;
+}
+
+.scan-subtitle {
+  font-size: 24rpx;
+  color: #5E92F3;
+  line-height: 1.4;
+}
+
+.scan-arrow {
+  font-size: 48rpx;
+  color: #1976D2;
+  font-weight: 300;
+}
+
 /* ── 回声 ── */
 .echo-card {
   background: #FFF8E1;

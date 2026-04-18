@@ -10,6 +10,7 @@
     "pages/child/medication-stats/index",
     "pages/child/settings/index",
     "pages/parent/home/index",
+    "pages/parent/scan/index",
     "pages/parent/med-confirm/index",
     "pages/parent/med-plans/index",
     "pages/parent/med-reminder/index",

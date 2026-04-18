@@ -127,6 +127,17 @@ function getAnxietyHistory(childId, limit) {
   return call('survey', { action: 'history', child_id: childId, limit });
 }
 
+// ── 扫码帮手（P1-1 新增） ──
+function scanQRCode(parentId, qrType, qrValue) {
+  return call('qrscan', { action: 'scan', parent_id: parentId, qr_type: qrType, qr_value: qrValue });
+}
+function getQRHistory(parentId, days = 30) {
+  return call('qrscan', { action: 'history', parent_id: parentId, days });
+}
+function deleteQRScan(scanId) {
+  return call('qrscan', { action: 'delete', scan_id: scanId });
+}
+
 module.exports = {
   call,
   // 登录
@@ -145,5 +156,7 @@ module.exports = {
   // 安全检查清单
   getChecklistWeekly, completeChecklist, getChecklistHistory,
   // 焦虑量表
-  getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory
+  getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory,
+  // 扫码帮手
+  scanQRCode, getQRHistory, deleteQRScan
 };
