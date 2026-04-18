@@ -56,6 +56,16 @@
     <text class="scan-arrow">→</text>
   </view>
 
+  <!-- 叫车帮手入口 -->
+  <view class="taxi-shortcut card" bindtap="onGoTaxi">
+    <view class="taxi-icon">🚗</view>
+    <view class="taxi-text">
+      <text class="taxi-title">叫车帮手</text>
+      <text class="taxi-subtitle">记录出行需求，子女查看行程保障安全</text>
+    </view>
+    <text class="taxi-arrow">→</text>
+  </view>
+
   <!-- 子女回声 -->
   <view class="echo-card" wx:if="{{echoText}}">
     <text class="echo-label">💬 来自子女的一句话</text>

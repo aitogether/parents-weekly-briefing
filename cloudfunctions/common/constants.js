@@ -25,3 +25,12 @@ QR_TYPE: {
 },
 QR_MAX_HISTORY_DAYS: 30,
 QR_MAX_HISTORY_COUNT: 100
+
+// 叫车帮手状态
+TAXI_STATUS: {
+  PENDING: 'pending',
+  ASSIGNED: 'assigned',
+  COMPLETED: 'completed',
+  CANCELLED: 'cancelled'
+},
+TAXI_MAX_HISTORY: 50

@@ -1,0 +1,120 @@
+<!-- pages/parent/taxi/index.wxml - 叫车帮手 -->
+<view class="page taxi-page">
+  <!-- 顶部说明 -->
+  <view class="intro-card">
+    <text class="intro-icon">🚗</text>
+    <text class="intro-title">叫车帮手</text>
+    <text class="intro-desc">记录出行需求，子女可查看行程记录，保障出行安全</text>
+  </view>
+
+  <!-- 新建叫车按钮 -->
+  <view class="create-section">
+    <button class="create-btn" bindtap="onShowCreateModal">
+      <text class="create-icon">+</text>
+      <text>新建叫车需求</text>
+    </button>
+  </view>
+
+  <!-- 筛选 Tab -->
+  <view class="filter-tabs">
+    <view class="tab {{filterStatus === 'all' ? 'active' : ''}}" bindtap="onFilterChange" data-status="all">
+      <text>全部</text>
+    </view>
+    <view class="tab {{filterStatus === 'pending' ? 'active' : ''}}" bindtap="onFilterChange" data-status="pending">
+      <text>待处理</text>
+    </view>
+    <view class="tab {{filterStatus === 'completed' ? 'active' : ''}}" bindtap="onFilterChange" data-status="completed">
+      <text>已完成</text>
+    </view>
+  </view>
+
+  <!-- 请求列表 -->
+  <view class="request-list" wx:if="{{requests.length > 0}}">
+    <view class="request-card" wx:for="{{requests}}" wx:key="_id">
+      <view class="request-header">
+        <view class="status-badge status-{{item.status}}">
+          <text wx:if="{{item.status === 'pending'}}">⏳ 待处理</text>
+          <text wx:elif="{{item.status === 'assigned'}}">🚕 已派车</text>
+          <text wx:elif="{{item.status === 'completed'}}">✅ 已完成</text>
+          <text wx:else>❌ 已取消</text>
+        </view>
+        <text class="request-date">{{item.created_date}}</text>
+      </view>
+
+      <view class="request-body">
+        <view class="dest-item">
+          <text class="dest-icon">📍</text>
+          <text class="dest-text">{{item.destination}}</text>
+        </view>
+        <view class="time-item" wx:if="{{item.scheduled_time}}">
+          <text class="time-icon">🕐</text>
+          <text class="time-text">{{item.scheduled_time_display}}</text>
+        </view>
+        <view class="notes-item" wx:if="{{item.notes}}">
+          <text class="notes-icon">📝</text>
+          <text class="notes-text">{{item.notes}}</text>
+        </view>
+      </view>
+
+      <view class="request-actions" wx:if="{{item.status === 'pending'}}">
+        <button class="action-btn cancel" bindtap="onCancel" data-id="{{item._id}}">取消</button>
+        <button class="action-btn complete" bindtap="onComplete" data-id="{{item._id}}">标记完成</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">🚗</text>
+    <text class="empty-text">暂无叫车记录</text>
+    <text class="empty-hint">点击上方按钮创建出行需求</text>
+  </view>
+
+  <!-- 统计摘要 -->
+  <view class="stats-summary" wx:if="{{stats.total > 0}}">
+    <view class="stat-item">
+      <text class="stat-value">{{stats.total}}</text>
+      <text class="stat-label">总次数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.completed}}</text>
+      <text class="stat-label">已完成</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.pending}}</text>
+      <text class="stat-label">待处理</text>
+    </view>
+  </view>
+</view>
+
+<!-- 创建 modal -->
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="onHideCreateModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">新建叫车需求</view>
+
+    <view class="form-group">
+      <text class="form-label">目的地 <text class="required">*</text></text>
+      <input class="form-input" placeholder="如：医院、超市、机场" value="{{formDestination}}" bindinput="onDestInput" maxlength="50"/>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">计划时间（可选）</text>
+      <picker mode="date" value="{{formDate}}" bindchange="onDateChange">
+        <view class="picker">{{formDate || '选择日期'}}</view>
+      </picker>
+      <picker mode="time" value="{{formTime}}" bindchange="onTimeChange">
+        <view class="picker">{{formTime || '选择时间'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">备注（可选）</text>
+      <textarea class="form-textarea" placeholder="如：去体检、买药" value="{{formNotes}}" bindinput="onNotesInput" maxlength="200"/>
+    </view>
+
+    <view class="modal-actions">
+      <button class="modal-btn cancel" bindtap="onHideCreateModal">取消</button>
+      <button class="modal-btn submit" bindtap="onSubmit">创建</button>
+    </view>
+  </view>
+</view>

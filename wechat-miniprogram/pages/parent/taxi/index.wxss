@@ -1,0 +1,352 @@
+/* pages/parent/taxi/index.wxss - 叫车帮手 */
+.taxi-page {
+  padding: 24rpx;
+  background: #F5F5F5;
+  min-height: 100vh;
+}
+
+/* 介绍卡片 */
+.intro-card {
+  background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.intro-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.intro-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #E65100;
+  margin-bottom: 12rpx;
+}
+
+.intro-desc {
+  font-size: 26rpx;
+  color: #F57C00;
+  line-height: 1.5;
+}
+
+/* 创建按钮 */
+.create-section {
+  margin-bottom: 24rpx;
+}
+
+.create-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  border: none;
+}
+
+.create-icon {
+  font-size: 40rpx;
+  font-weight: 300;
+}
+
+/* 筛选 Tab */
+.filter-tabs {
+  display: flex;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 8rpx;
+  margin-bottom: 24rpx;
+  gap: 8rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 8rpx;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #FF9800;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 请求列表 */
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.request-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.status-badge {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.status-assigned {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.status-completed {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.status-cancelled {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.request-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.request-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.dest-item, .time-item, .notes-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+}
+
+.dest-icon, .time-icon, .notes-icon {
+  font-size: 32rpx;
+}
+
+.dest-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.time-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.notes-text {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.4;
+}
+
+.request-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+}
+
+.action-btn.cancel {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.action-btn.complete {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  margin-bottom: 12rpx;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: #bbb;
+}
+
+/* 统计摘要 */
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-value {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #FF9800;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* Modal */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 85%;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 32rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.required {
+  color: #F44336;
+}
+
+.form-input {
+  width: 100%;
+  padding: 24rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.picker {
+  padding: 24rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 24rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 28rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+}
+
+.modal-btn.cancel {
+  background: #F5F5F5;
+  color: #666;
+}
+
+.modal-btn.submit {
+  background: #FF9800;
+  color: #fff;
+}

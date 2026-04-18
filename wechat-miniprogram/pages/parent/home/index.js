@@ -197,5 +197,10 @@ Page({
   // ——— 跳转扫码帮手 ———
   onGoScan() {
     wx.navigateTo({ url: '/pages/parent/scan/index' });
+  },
+
+  // ——— 跳转叫车帮手 ———
+  onGoTaxi() {
+    wx.navigateTo({ url: '/pages/parent/taxi/index' });
   }
 });

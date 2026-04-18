@@ -127,6 +127,28 @@ function getAnxietyHistory(childId, limit) {
   return call('survey', { action: 'history', child_id: childId, limit });
 }
 
+// ── 叫车帮手（P1-2 新增） ──
+function createTaxiRequest(parentId, destination, scheduledTime, notes) {
+  return call('taxi', {
+    action: 'createRequest',
+    parent_id: parentId,
+    destination,
+    scheduled_time: scheduledTime,
+    notes
+  });
+}
+function getTaxiRequests(parentId, status, limit = 20) {
+  const params = { parent_id: parentId, limit };
+  if (status) params.status = status;
+  return call('taxi', { action: 'getRequests', ...params });
+}
+function updateTaxiStatus(requestId, status, notes) {
+  return call('taxi', { action: 'updateStatus', request_id: requestId, status, notes });
+}
+function getTaxiStats(parentId, days = 30) {
+  return call('taxi', { action: 'stats', parent_id: parentId, days });
+}
+
 // ── 扫码帮手（P1-1 新增） ──
 function scanQRCode(parentId, qrType, qrValue) {
   return call('qrscan', { action: 'scan', parent_id: parentId, qr_type: qrType, qr_value: qrValue });
@@ -157,6 +179,8 @@ module.exports = {
   getChecklistWeekly, completeChecklist, getChecklistHistory,
   // 焦虑量表
   getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory,
-  // 扫码帮手
+  // 叫车帮手
+  createTaxiRequest, getTaxiRequests, updateTaxiStatus, getTaxiStats
+};
   scanQRCode, getQRHistory, deleteQRScan
 };
