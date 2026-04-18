@@ -1,4 +1,27 @@
 # 更新日志
+## 2026-04-16 — Beta 测试准备阶段
+
+### 📚 文档完善
+- 重写 README.md：添加故事化叙述、用户画像、Beta 招募流程
+- 新增 `docs/pilot-manual.md`：完整的内测家庭使用指南（含截图指引）
+- 新增 `docs/privacy-simple-zh.md`：简洁版数据承诺说明（面向非技术用户）
+- 新增 `docs/faq.md`：8-10 个常见问题（Beta  tester 关心的问题）
+- 新增 `CONTRIBUTING.md`：开发者贡献指南
+- 更新 `backend/README.md`：扩展为完整的 API 文档 + 本地开发说明（7265 字符）
+- 新增 `wechat-miniprogram/README.md`：微信开发者工具完整设置指南（5833 字符）
+- 修复 README 中的断链：`docs/prd/product-requirements.md` → `docs/prd/parents-weekly-briefing-prd-p0.md`
+- 删除临时测试文件 `docs/test.md`
+
+### 🎯 Beta 招募目标
+- 目标：5-10 个家庭（异地子女 + 年迈父母）
+- 周期：2 周
+- 核心场景验证：
+  1. 父母每日服药确认流程
+  2. 子女每周查看周报
+  3. 子女向父母发送留言（回声消息）
+
+---
+
 
 ## 2026-03-29
 

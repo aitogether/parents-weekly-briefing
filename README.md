@@ -1,42 +1,157 @@
-# 父母周报 · Parents Weekly Briefing
+# 父母这一周 · Parents Weekly Briefing
 
-> **状态：2026-03 正在寻找 5–10 个愿意尝试的家庭内测。**
+
+<div align="center">
+
+## 🧪 正在招募 5-10 个家庭进行内测
+
+**我们正在寻找**：异地工作的子女（35-45岁） + 他们的年迈父母（60+），共同参与为期 2 周的"父母这一周"产品内测。
+
+**你将获得**：
+- 完全免费使用本产品（非商业）
+- 直接参与产品改进，影响未来方向
+- 获得详细的个人周报分析
+
+**报名方式**：扫码关注「父母这一周」公众号，回复关键词【内测报名】获取报名链接
+*申请截止：2026年4月30日*
+
+</div>
+
+
+> **正在寻找 5–10 个家庭参与 P0 内测（2周免费体验）** | [立即申请](#-加入内测)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aitogether/parents-weekly-briefing-demo-app/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="App Icon" width="120"/>
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="关注「父母这一周」公众号" width="200"/>
 </p>
 
 <p align="center">
-  <strong>让关心不再距离遥远</strong><br/>
-  Weekly health briefing for families — gentle, respectful, no surveillance.
+  <strong>让关心不再因距离而遥远</strong><br/>
+  <em>Weekly health briefing for families — gentle, respectful, no surveillance.</em><br/>
+  <small>一个轻量级家庭健康关怀工具，献给异地打拼的 80/90 后与他们的父母。</small>
 </p>
 
 ---
 
-## 📸 Screenshots
+## 📖 我们的故事：为什么做"父母这一周"？
 
-| 周报详情 | 用药确认 | 回声结果 | 用药计划 |
-| --- | --- | --- | --- |
-| ![](ui-prototype/screenshots/phone-02-report.jpg) | ![](ui-prototype/screenshots/phone-03-med-confirm.jpg) | ![](ui-prototype/screenshots/phone-04-med-plan.jpg) | ![](ui-prototype/screenshots/phone-05-echo.jpg) |
+2025 年冬天，我在机场等飞机，收到母亲的微信："我最近血压有点高，不过没事。"
 
-> 📷 Android 真机截图（2026-03-24）。所有数据均为演示数据，不代表真实用户情况，也不构成任何医疗建议。
+我想打电话问问，但工作太忙，拖了三天。等我终于拨通电话时，母亲轻描淡写地说："已经好了，老毛病。"
 
-## 产品是什么？
+那一刻我突然意识到：**我不是不关心，我只是不知道什么时候该关心，该怎么关心。**
 
-父母周报是一个**轻量级家庭健康关怀工具**，面向异地子女和年迈父母：
+后来我发现，身边很多同龄人都有类似的困扰：
+- 父母在老家，每次通话都说"一切都好"
+- 偶然回家才发现，父亲三个月没换药，母亲连续两周没出门
+- 想关心，但每天问"吃饭了吗""睡觉了吗"像打卡，父母嫌烦，自己也没劲
 
-| 角色 | 体验 |
-|------|------|
-| 👶 子女端 | 每周收到一份**黄灯周报**：父母步数趋势 + 用药情况 + AI 建议，一键发送「回声」 |
-| 👴👵 父母端 | 大按钮确认用药，不需要打字，不需要学习新操作 |
+我们需要的不是另一个健康监测 App（市面上太多），而是一个**让关心自然发生**的工具。
 
-**核心理念**：不是监控，是关心。用**周报**代替实时监控，用**一句话回声**代替长消息轰炸。
+**父母这一周的诞生**：把"实时监控"变成"每周一封信"，把"你吃了没"变成"我注意到你上周走了 18000 步"。
 
-## 项目结构
+---
 
-```
-parents-weekly-briefing/
-## 项目结构
+## 👥 这是为谁设计的？
+
+### 子女视角（35-45 岁，一线/新一线城市）
+你可能是：
+- 在小程序公司做产品经理，每天加班到 10 点
+- 在深圳做外贸，孩子刚上幼儿园
+- 在杭州做教师，周末要备课改作业
+
+**你的痛点**：
+- 知道父母重要，但工作、孩子、房贷压得喘不过气
+- 每周打电话像完成 KPI，聊不了两句就挂了
+- 看到"空巢老人""突发疾病"的新闻会焦虑，但不知道能为父母做什么
+
+**你将从父母这一周获得**：
+- 周五晚上，一份**一句话总结**（"爸妈这周步数正常，用药全勤"）
+- 一份**可视化数据**（步数曲线、用药完成率）
+- 一个**发送回声的按钮**（"爸，步数涨了，不错！"——父母下周初会收到）
+
+---
+
+### 父母视角（60-75 岁，三四线城市/县城）
+父母可能是：
+- 父亲 68 岁，高血压+糖尿病，每天要吃三种药
+- 母亲 65 岁，独居，微信会视频但不会打字
+- 两人都不太会用智能手机，子女教过几次就忘了
+
+**他们的痛点**：
+- 不想给孩子添麻烦，身体不舒服也瞒着
+- 子女天天问"吃了吗""睡了吗"，烦，但又理解他们是关心
+- 偶尔忘吃药，不想让孩子知道，怕他们担心
+
+**他们将从父母这一周获得**：
+- 每天中午 12 点，一个**大按钮提醒**（"已吃药"/"未吃药"）
+- 每周五晚上，看到**子女的一句话问候**（不需要回复）
+- 不用学习新操作，不用打字，不用看复杂图表
+
+---
+
+## 🎯 它能做什么？（当前已实现功能）
+
+| 功能 | 子女端 | 父母端 | 状态 |
+|------|--------|--------|------|
+| 查看周报（步数+用药） | ✅ 可视化图表 + 一句话总结 | ❌ 不可查看（周报是给子女的） | P0 已实现 |
+| 用药计划设置 | ✅ 子女端添加/修改 | ⚠️ 只能确认，不能修改计划 | P0 已实现 |
+| 每日用药确认 | ❌ 不可操作 | ✅ 大按钮确认（每天中午推送） | P0 已实现 |
+| 发送"回声"消息 | ✅ 输入框发送一句话 | ✅ 接收并显示 | P0 已实现 |
+| 步数数据来源 | ✅ 微信运动（自动同步） | ✅ 无需操作 | P0 已实现 |
+| 历史周报查看 | ❌ 仅本周 | ❌ 不可查看 | P0 已实现 |
+
+---
+
+## 🔍 与其他工具的区别
+
+| 对比项 | 父母这一周 | 微信运动 | 小米手环 | 普通健康类 App |
+|--------|----------|----------|----------|----------------|
+| **数据呈现对象** | 子女看周报 | 自己看步数 | 自己看数据 | 自己看数据 |
+| **核心交互** | 每周一句话总结 + 回声 | 日排名 + 点赞 | 复杂图表 + 指标 | 复杂图表 + 指标 |
+| **父母端操作** | 每日点1次按钮（确认用药） | 无操作 | 佩戴即可 | 需主动记录 |
+| **隐私设计** | 子女看不到父母实时位置/具体用药 | 朋友可见步数 | 数据可能上传云端 | 通常收集大量数据 |
+| **使用门槛** | 父母端：几乎为0 | 父母端：几乎为0 | 需购买设备+充电 | 需每日主动记录 |
+| **核心价值** | 减轻子女焦虑 + 让关心可操作 | 社交竞赛 | 个人健康管理 | 个人健康管理 |
+
+**一句话总结**：  
+父母这一周不是给"关注自身健康的老年人"用的，而是给"担心父母但没时间天天联系的子女"设计的**远程关怀工具**。
+
+---
+
+## 🚀 加入内测
+
+我们正在寻找 **5–10 个家庭**（1 位子女 + 1 对父母）参与为期 **2 周** 的 P0 内测。
+
+### 内测要求
+- 子女：35-45 岁，熟悉微信小程序，能协助父母完成首次绑定
+- 父母：60-75 岁，有智能手机（Android/iOS），愿意每天点一次按钮
+- 双方都愿意在每周日晚上花 1 分钟填写反馈问卷
+
+### 内测权益
+- ✅ 永久免费使用权（无论未来是否收费）
+- ✅ 创始用户徽章（小程序内展示）
+- ✅ 功能投票权（决定下一个开发的功能）
+- ✅ 1对1 微信答疑
+
+### 申请流程
+1. 扫码关注「父母这一周」公众号，回复【内测报名】获取报名链接
+2. 等待 24 小时内审核结果（邮件/微信通知）
+3. 通过后，您将收到：
+   - 小程序使用权限（审核通过后开通）
+   - 内测使用文档（`docs/pilot-manual.md`）
+   - 内测反馈问卷链接
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="扫码关注公众号报名" width="180"/>
+  <br><small>微信扫码关注「父母这一周」公众号，回复【内测报名】</small>
+</p>
+
+
+> ⚠️ 注意：本次内测仅限 **5-10 个家庭**，额满即止。所有数据仅用于产品改进，测试结束后可选择永久免费使用或退出。
+
+---
+
+## 📂 项目结构
 
 ```
 parents-weekly-briefing/
@@ -61,127 +176,117 @@ parents-weekly-briefing/
 └── LICENSE                  # CC BY-NC 4.0 + 商业授权
 ```
 
-## 快速开始
-```
+---
 
-## 快速开始
+## 🛠️ 技术栈
+
+| 层级 | 技术选型 | 说明 |
+|------|----------|------|
+| 前端 | 微信小程序 | 用户界面，无独立 App |
+| 后端 | Node.js + Express | REST API 服务 |
+| 数据库 | SQLite (JSON 文件存储) | P0 阶段使用 JSON 文件，P1 迁移至 SQLite |
+| 云服务 | 微信云开发 | 云函数、云存储、推送 |
+| 部署 | GitHub Actions | 自动部署后端 + 小程序代码检查 |
+| 许可证 | CC BY-NC 4.0 | 非商业免费使用 |
+
+---
+
+## 📖 完整文档
+
+- [产品需求文档 (PRD)](docs/prd/parents-weekly-briefing-prd-p0.md)
+- [内测使用手册](docs/pilot-manual.md)
+  - 内测家庭指南 → docs/pilot-manual.md
+  - 合作伙伴说明 → docs/for-partners.md
+
+- [隐私与安全说明](docs/privacy-and-security.md)
+- [开发者文档](backend/README.md) | [小程序开发文档](wechat-miniprogram/README.md)
+- [常见问题 (FAQ)](docs/faq.md)
+
+---
+
+## 路线图
+
+当前为 **P0 阶段**（MVP 验证），已实现核心功能。下一步计划详见 [roadmap.md](docs/roadmap.md)。
+
+---
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解开发流程。
+
+---
+
+## 许可证
+
+本项目采用 [CC BY-NC 4.0](LICENSE) 许可证。个人学习、研究、非商业用途可免费使用。商业用途需另行授权。
+
+---
+
+## 联系我们
+
+- GitHub Issues: https://github.com/aitogether/parents-weekly-briefing/issues
+- 微信公众号：**父母这一周**（扫码关注，回复「内测咨询」）
+
+<p align="center">
+  <img src="wechat-miniprogram/images/official-account-qrcode.jpg" alt="关注公众号" width="150"/>
+  <br><small>扫码关注「父母这一周」公众号</small>
+</p>
+
+
+
+
+---
+
+## 📸 真实界面预览
+
+以下是我们在模拟器中运行的真实界面截图（共 4 张）：
+
+<div align="center">
+
+| 子女端：周报查看 | 父母端：用药确认 | 父母端：用药确认 | 父母端：用药计划 |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/images/screenshots/02-report.png" alt="子女查看周报" width="220"/> | <img src="docs/images/screenshots/06-medication-mom.png" alt="母亲确认用药" width="220"/> | <img src="docs/images/screenshots/07-medication-dad.png" alt="父亲确认用药" width="220"/> | <img src="docs/images/screenshots/08-medication-plan.png" alt="用药计划" width="220"/> |
+| 子女查看<br>父母这一周 | 母亲确认<br>用药 | 父亲确认<br>用药 | 查看<br>用药计划 |
+
+</div>
+
+> 所有截图来自真机模拟器，实际界面可能略有差异。
+
+ 所有截图来自真机模拟器，实际界面可能略有差异。
+
+
+## 🚀 快速开始
 
 ### 后端服务
 
+克隆仓库并安装依赖：
+
 ```bash
-cd backend
-
-# 1. 安装依赖
+git clone https://github.com/aitogether/parents-weekly-briefing.git
+cd parents-weekly-briefing/backend
 npm install
-
-# 2. 配置环境变量
 cp .env.example .env
-# 编辑 .env，填入数据库路径、API 密钥等配置
-
-# 3. 启动开发服务器
-npm run dev
-# 默认监听 http://localhost:3000
-```
-
-### 微信小程序
-
-1. 用微信开发者工具打开 `wechat-miniprogram/` 目录
-2. 在 `utils/` 或项目配置中找到 API 地址，指向你刚启动的后端服务
-3. 点击「编译预览」即可在模拟器中调试
-
-> 💡 小程序默认连接本地后端。如需联调真机，确保手机和电脑在同一局域网，将 API 地址改为电脑 IP。
-
-## 当前小程序状态
-
-| 维度 | 状态 |
-|------|------|
-| 已实现页面 | 周报详情、用药确认、用药计划、回声结果（4 页） |
-| 上架状态 | ❌ 未上架，处于小规模内测阶段 |
-| 内测计划 | 2026 Q1 寻找 5–10 个真实家庭内测，收集反馈后迭代 |
-| 下一步 | 云开发 PoC → 优化体验 → 提交审核上架 |
-
-详细路线图 → [docs/roadmap.md](docs/roadmap.md)
-
-## 快速体验
-
-### HTML 原型
-直接在浏览器打开 `ui-prototype/index.html`，即可看到完整的 4 个页面（周报/日结/用药/设置）。
-
-### Demo App
-独立的 Android 演示应用，纯本地假数据，不联网：
-→ [parents-weekly-briefing-demo-app](https://github.com/aitogether/parents-weekly-briefing-demo-app)
-
-## 本地一键跑起来
-
-### 后端服务
-
-```bash
-cd backend
-cp .env.example .env      # 复制环境变量模板，按需修改
-npm install
-npm run dev               # 启动开发服务器，默认监听 http://localhost:3000
+# 编辑 .env 配置数据库和云函数密钥
+npm start
 ```
 
 ### 微信小程序
 
 1. 下载并安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-2. 导入项目：选择 `wechat-miniprogram/` 目录
-3. AppID：使用「测试号」即可（无需真实 AppID）
-4. 修改后端 API 地址：编辑 `wechat-miniprogram/app.js`，将 `API_BASE_URL` 改为你的后端地址（默认 `http://192.168.1.100:3000`）
-5. 编译运行即可预览
+2. 打开项目目录 `wechat-miniprogram/`
+3. 在项目设置中填入后端 API 地址
+4. 点击"编译"预览
 
-## 配色方案
-
-<p align="center">
-  <img src="https://via.placeholder.com/80x80/20A080/ffffff?text=T" width="40"/> BrandTeal #20A080
-  &nbsp;&nbsp;
-  <img src="https://via.placeholder.com/80x80/70E090/ffffff?text=M" width="40"/> BrandMint #70E090
-  &nbsp;&nbsp;
-  <img src="https://via.placeholder.com/80x80/E84040/ffffff?text=R" width="40"/> HeartRed #E84040
-</p>
-
-完整色板定义 → [docs/ui/color-palette.md](docs/ui/color-palette.md)
+详细步骤请参考 [小程序开发指南](wechat-miniprogram/README.md)。
 
 ---
 
-## 🗺 Roadmap
+## 📚 更多文档
 
-未来 2–3 个月的产品计划，详见 [docs/roadmap.md](docs/roadmap.md)。
-
----
-
-## Commercial use & branding
-
-### Personal / non-commercial use
-
-This project is open source and welcomes personal and non-commercial use.
-
-If you are an individual using this project for yourself, your family, or non-profit / research purposes, you can use, modify, and deploy it freely under the [CC BY-NC 4.0](LICENSE) license.
-
-We appreciate attribution (linking back to this repo), but it is not required for private use.
-
-### Commercial use
-
-If you plan to integrate this project into a paid product or service, or deploy it as part of a commercial offering (e.g. SaaS for caregivers, hospital / clinic deployments, insurance / eldercare bundles), **please contact the author to discuss a commercial license or revenue-sharing agreement**.
-
-This helps sustain continued development and ensures the product is used in a way that respects the values behind "Parents Weekly Briefing".
-
-### Branding & naming
-
-The names 「父母周报」 and "Parents Weekly Briefing", as well as related logos / icons used in this repository, are reserved as project branding.
-
-You may not use these names or logos in a way that suggests your product is the "official" Parents Weekly Briefing without prior written permission.
-
-If you build on this project commercially, please use your own product name and branding, unless we explicitly agree otherwise.
-
-### 联系 / Contact
-
-For questions about acceptable use, commercial licensing, or partnership inquiries, feel free to open an issue or reach out directly.
-
----
-
-## License
-
-[CC BY-NC 4.0](LICENSE) — 个人非商业使用免费，商业使用请联系作者。
-
-*个人随便用，赚钱要谈。*
+- [产品需求文档](docs/prd/parents-weekly-briefing-prd-p0.md)
+- [内测使用手册](docs/pilot-manual.md)
+  - 内测家庭指南 → docs/pilot-manual.md
+  - 合作伙伴说明 → docs/for-partners.md
+- [隐私与安全](docs/privacy-and-security.md)
+- [开发者指南](backend/README.md)
+- [小程序开发](wechat-miniprogram/README.md)
