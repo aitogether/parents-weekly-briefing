@@ -1,0 +1,40 @@
+<!-- pages/index/index.wxml — 角色选择首页 -->
+<view class="landing">
+  <view class="logo-area">
+    <view class="logo-circle">
+      <text class="logo-emoji">🏠</text>
+    </view>
+    <text class="app-title">父母周报</text>
+    <text class="app-desc">让牵挂不再错过</text>
+  </view>
+
+  <view class="role-section">
+    <text class="role-prompt">请选择你的身份</text>
+
+    <view class="role-card" data-role="child" bindtap="onSelectRole">
+      <view class="role-icon">👨‍👩‍👧</view>
+      <view class="role-info">
+        <text class="role-name">我是子女</text>
+        <text class="role-desc">查看父母周报，随时了解近况</text>
+      </view>
+      <text class="role-arrow">›</text>
+    </view>
+
+    <view class="role-card" data-role="parent" bindtap="onSelectRole">
+      <view class="role-icon">👴</view>
+      <view class="role-info">
+        <text class="role-name">我是父母</text>
+        <text class="role-desc">每天点一下，让子女放心</text>
+      </view>
+      <text class="role-arrow">›</text>
+    </view>
+  </view>
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议，紧急情况请拨打120。
+  </view>
+</view>
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议，紧急情况请拨打120。
+  </view>
+</view>

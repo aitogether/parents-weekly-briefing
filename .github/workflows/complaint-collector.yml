@@ -1,0 +1,54 @@
+name: Complaint Collector
+
+on:
+  schedule:
+    # 每天凌晨2点执行
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 pandas
+          
+      - name: Collect Complaints from Zhihu
+        run: |
+          python scripts/collect_zhihu.py
+          echo "✅ 知乎收集完成"
+          
+      - name: Collect Complaints from Baidu Tieba
+        run: |
+          python scripts/collect_tieba.py
+          echo "✅ 贴吧收集完成"
+          
+      - name: Collect Complaints from Douban
+        run: |
+          python scripts/collect_douban.py
+          echo "✅ 豆瓣收集完成"
+          
+      - name: Aggregate Results
+        run: |
+          python scripts/aggregate_complaints.py
+          echo "✅ 数据聚合完成"
+          
+      - name: Update OpenClaw Workspace
+        run: |
+          cp data/elder_care_complaints_*.json ~/.openclaw/workspace/data/
+          git -C ~/.openclaw/workspace add data/elder_care_complaints_*.json
+          git -C ~/.openclaw/workspace commit -m "Update complaints: $(date)"
+          
+      - name: Generate Report
+        run: |
+          python scripts/generate_report.py
+          echo "📊 报告已生成"

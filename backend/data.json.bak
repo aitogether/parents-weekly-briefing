@@ -1,0 +1,188 @@
+{
+  "users": [
+    {
+      "id": "9ecab954-377b-4d44-aa49-3dee148db69c",
+      "open_id": "mock_parent_1774756046326",
+      "role": "parent",
+      "nickname": "\u5988\u5988",
+      "invite_code": "YHT4CT",
+      "bound_to": [
+        "8d4d9cf1-211b-474c-bf29-14b8a74948f4"
+      ],
+      "created_at": "2026-03-29T03:47:26.327Z"
+    },
+    {
+      "id": "8d4d9cf1-211b-474c-bf29-14b8a74948f4",
+      "open_id": "mock_child_test123",
+      "role": "child",
+      "nickname": "\u5b50\u5973",
+      "invite_code": null,
+      "bound_to": "9ecab954-377b-4d44-aa49-3dee148db69c",
+      "created_at": "2026-03-29T03:47:26.394Z"
+    },
+    {
+      "id": "3ea1d816-4210-47c6-af95-a6d5a5f2c460",
+      "open_id": "mock_test123",
+      "role": "parent",
+      "nickname": "\u5988\u5988",
+      "invite_code": "76QW9Z",
+      "bound_to": null,
+      "created_at": "2026-03-29T06:15:05.649Z"
+    },
+    {
+      "id": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "open_id": "mock_test_parent_001",
+      "role": "parent",
+      "nickname": "\u5988\u5988",
+      "invite_code": "NLZDCC",
+      "bound_to": [
+        "dcdf286b-d5bc-411a-af85-4ea4c4886c8d"
+      ],
+      "created_at": "2026-03-29T09:17:07.142Z"
+    },
+    {
+      "id": "dcdf286b-d5bc-411a-af85-4ea4c4886c8d",
+      "open_id": "mock_test_child_001",
+      "role": "child",
+      "nickname": "\u5c0f\u660e",
+      "invite_code": null,
+      "bound_to": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "created_at": "2026-03-29T09:17:28.289Z"
+    },
+    {
+      "id": "4c668585-372d-4f88-a8d6-964dd3ee0917",
+      "open_id": "mock_parent_1774776723122",
+      "role": "parent",
+      "nickname": "\u6d4b\u8bd5\u7238\u7238",
+      "invite_code": "C5FNNX",
+      "bound_to": [
+        "1c78a3a0-656e-400d-9a27-9426bdf478a6"
+      ],
+      "created_at": "2026-03-29T09:32:03.123Z"
+    },
+    {
+      "id": "1c78a3a0-656e-400d-9a27-9426bdf478a6",
+      "open_id": "mock_child_test",
+      "role": "child",
+      "nickname": "\u5c0f\u660e",
+      "invite_code": null,
+      "bound_to": "4c668585-372d-4f88-a8d6-964dd3ee0917",
+      "created_at": "2026-03-29T09:32:03.212Z"
+    },
+    {
+      "id": "181032db-5d37-4830-8779-ac05b13ce072",
+      "open_id": "mock_mock_code",
+      "role": "parent",
+      "nickname": "\u6d4b\u8bd5\u5988",
+      "invite_code": "TRYK5P",
+      "bound_to": null,
+      "created_at": "2026-03-30T10:05:14.056Z"
+    },
+    {
+      "id": "827d209d-0553-47a9-a798-46143e759103",
+      "open_id": "mock_parent_1774865114384",
+      "role": "parent",
+      "nickname": "\u6d4b\u8bd5\u7238",
+      "invite_code": "835M6W",
+      "bound_to": null,
+      "created_at": "2026-03-30T10:05:14.384Z"
+    }
+  ],
+  "medication_plans": [],
+  "med_confirmations": [
+    {
+      "id": "fdfc7a51-e80c-477d-bb07-03490ad9804c",
+      "plan_id": "med_am",
+      "parent_id": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "confirmed_date": "2026-03-29",
+      "confirmed_at": "2026-03-29T09:17:08.160Z",
+      "status": "taken"
+    },
+    {
+      "id": "de5b81cb-e698-4463-96bd-f255740a88ad",
+      "plan_id": "meal",
+      "parent_id": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "confirmed_date": "2026-03-29",
+      "confirmed_at": "2026-03-29T09:17:08.253Z",
+      "status": "taken"
+    },
+    {
+      "id": "11960c73-560c-45ad-a6b3-69b240fae9aa",
+      "plan_id": "walk",
+      "parent_id": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "confirmed_date": "2026-03-29",
+      "confirmed_at": "2026-03-29T09:17:08.361Z",
+      "status": "skipped"
+    }
+  ],
+  "werun_data": [
+    {
+      "id": "545f6f9b-f665-44ad-a04f-6898a6749a9f",
+      "parent_id": "181032db-5d37-4830-8779-ac05b13ce072",
+      "steps": 1607,
+      "data_date": "2026-03-30",
+      "created_at": "2026-03-30T10:06:20.829Z"
+    },
+    {
+      "id": "bf36ba7b-d40b-4368-bcee-522304a5ceec",
+      "parent_id": "827d209d-0553-47a9-a798-46143e759103",
+      "steps": 3307,
+      "data_date": "2026-03-30",
+      "created_at": "2026-03-30T10:06:20.962Z"
+    }
+  ],
+  "daily_summaries": [],
+  "child_feedback": [
+    {
+      "id": "df77bfe3-92ca-4aa3-9252-3cc99900a56d",
+      "child_id": "dcdf286b-d5bc-411a-af85-4ea4c4886c8d",
+      "parent_id": "ea2b5600-c81b-4d52-8edc-a3a46eb5e465",
+      "feedback_type": "reassured",
+      "created_at": "2026-03-29T09:17:28.680Z"
+    }
+  ],
+  "anxiety_surveys": [
+    {
+      "id": "f5763e7e-761d-4d8a-a029-b2d3039deaa2",
+      "child_id": "child_001",
+      "answers": [
+        {
+          "question_id": "anxiety_worry",
+          "score": 4
+        },
+        {
+          "question_id": "anxiety_contact",
+          "score": 6
+        },
+        {
+          "question_id": "anxiety_sleep",
+          "score": 3
+        }
+      ],
+      "submitted_at": "2026-03-30T10:04:46.912Z"
+    }
+  ],
+  "reminder_settings": [
+    {
+      "parent_id": "parent_001",
+      "reminder_times": [
+        "07:30",
+        "12:00",
+        "20:00"
+      ],
+      "subscribe_authorized": false,
+      "created_at": "2026-03-30T10:04:47.184Z",
+      "updated_at": "2026-03-30T10:04:47.184Z"
+    }
+  ],
+  "daily_confirms": [
+    {
+      "id": "c55af6fa-5dcf-4f3c-8ee5-129b2290896f",
+      "parent_id": "181032db-5d37-4830-8779-ac05b13ce072",
+      "date": "2026-03-30",
+      "med_taken": true,
+      "confirmed_at": "2026-03-30T10:06:20.989Z"
+    }
+  ],
+  "safety_checklists": []
+}

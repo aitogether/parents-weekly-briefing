@@ -1,21 +1,28 @@
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
+const { validators, validate } = require('../middleware/validation');
 
 const router = express.Router();
 
-// POST /med/plan — 创建用药计划
-router.post('/plan', (req, res) => {
+// 所有用药相关路由需要认证 + 所有权校验
+// 注意：parent_id必须属于当前用户或其绑定的亲属
+
+// POST /med/plan — 创建用药计划（子女为父母创建）
+router.post('/plan', authMiddleware, checkOwnership('parent_id'), validate([
+  validators.parentId(),
+  validators.nickname(),
+  validators.dosage(),
+  validators.schedule()
+]), (req, res) => {
   const { parent_id, nickname, dosage, schedule } = req.body;
-  if (!parent_id || !nickname || !dosage || !schedule) {
-    return res.status(400).json({ error: 'parent_id, nickname, dosage, schedule required' });
-  }
   const db = getDB();
   const plan = db.createMedPlan({ parent_id, nickname, dosage, schedule });
   res.json({ success: true, plan });
 });
 
 // GET /med/plans?parent_id=xxx
-router.get('/plans', (req, res) => {
+router.get('/plans', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { parent_id } = req.query;
   if (!parent_id) return res.status(400).json({ error: 'parent_id required' });
   const db = getDB();
@@ -23,7 +30,7 @@ router.get('/plans', (req, res) => {
 });
 
 // POST /med/confirm — 父母确认用药（role 必须为 parent）
-router.post('/confirm', (req, res) => {
+router.post('/confirm', authMiddleware, (req, res) => {
   const { plan_id, parent_id, status, role, confirm_date } = req.body;
   if (role !== 'parent') {
     return res.status(403).json({ error: 'Only parent role can confirm medication' });
@@ -40,7 +47,7 @@ router.post('/confirm', (req, res) => {
 });
 
 // GET /med/stats?parent_id=xxx&days=7
-router.get('/stats', (req, res) => {
+router.get('/stats', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { parent_id, days = '7' } = req.query;
   if (!parent_id) return res.status(400).json({ error: 'parent_id required' });
   const db = getDB();
@@ -60,7 +67,7 @@ router.get('/stats', (req, res) => {
 // ── v0.2 新增接口 ──
 
 // POST /med/daily-confirm — 每日一键确认（v0.2）
-router.post('/daily-confirm', (req, res) => {
+router.post('/daily-confirm', authMiddleware, (req, res) => {
   const { parent_id, role, med_taken } = req.body;
   if (role !== 'parent') {
     return res.status(403).json({ error: 'Only parent role can confirm' });
@@ -75,7 +82,7 @@ router.post('/daily-confirm', (req, res) => {
 });
 
 // POST /med/weekly-confirm — 每周用药确认（v0.2，周日调用）
-router.post('/weekly-confirm', (req, res) => {
+router.post('/weekly-confirm', authMiddleware, (req, res) => {
   const { parent_id, answer } = req.body;
   if (!parent_id || !answer) {
     return res.status(400).json({ error: 'parent_id and answer required' });
@@ -91,7 +98,7 @@ router.post('/weekly-confirm', (req, res) => {
 });
 
 // GET /med/reminder-settings?parent_id=xxx
-router.get('/reminder-settings', (req, res) => {
+router.get('/reminder-settings', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { parent_id } = req.query;
   if (!parent_id) return res.status(400).json({ error: 'parent_id required' });
   const db = getDB();
@@ -100,7 +107,7 @@ router.get('/reminder-settings', (req, res) => {
 });
 
 // POST /med/reminder-settings — 保存用药提醒时间（v0.2）
-router.post('/reminder-settings', (req, res) => {
+router.post('/reminder-settings', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { parent_id, reminder_times } = req.body;
   if (!parent_id || !reminder_times) {
     return res.status(400).json({ error: 'parent_id and reminder_times required' });
@@ -114,14 +121,14 @@ router.post('/reminder-settings', (req, res) => {
 });
 
 // POST /med/send-reminder — 发送用药提醒（供定时任务或手动调用）
-router.post('/send-reminder', (req, res) => {
+router.post('/send-reminder', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { parent_id, message } = req.body;
   if (!parent_id) {
     return res.status(400).json({ error: 'parent_id required' });
   }
   // TODO: 调用微信订阅消息 API
-  // 当前仅记录日志
-  console.log(`[Reminder] 发送给 ${parent_id}: ${message || '该吃药啦 💊'}`);
+  // 当前仅记录日志（已清理 parent_id）
+  console.log(`[Reminder] 用药提醒已发送（parent_id 已隐藏）`);
   res.json({ success: true, message: '提醒已发送（mock）' });
 });
 

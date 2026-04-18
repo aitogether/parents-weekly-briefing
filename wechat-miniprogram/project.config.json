@@ -35,17 +35,26 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "cloud": true
+    "cloud": true,
+    "compileWorklet": false,
+    "localPlugins": false,
+    "useCompilerPlugins": false,
+    "condition": true,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.4",
-  "appid": "touristappid",
+  "appid": "wx72e942d02df8d557",
   "projectname": "parents-weekly-briefing",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "simulatorPluginLibVersion": {},
-  "cloudfunctionRoot": "../cloudfunctions/"
+  "simulatorPluginLibVersion": {
+    "wxext14566970e7e9f62": "2.27.3"
+  },
+  "cloudfunctionRoot": "cloudfunctions/",
+  "projectArchitecture": "multiPlatform"
 }

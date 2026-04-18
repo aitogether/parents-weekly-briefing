@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "total_pain_points": 50,
+    "mvp_scenes": 5,
+    "description": "基于已归纳的50个子女痛点映射到5个MVP场景",
+    "last_updated": "2026-04-17"
+  },
+  "mvp_scenes": {
+    "用药焦虑": {
+      "pain_points": [
+        {
+          "id": 39,
+          "title": "长期服药种类多易错",
+          "scene": "用药焦虑"
+        },
+        {
+          "id": 16,
+          "title": "沉迷保健品停正规治疗",
+          "scene": "骗子识别"
+        },
+        {
+          "id": 8,
+          "title": "保姆骗光养老钱",
+          "scene": "骗子识别"
+        }
+      ],
+      "count": 3,
+      "source": "silver-economy-pain-points-report.md (50个子女痛点)"
+    },
+    "步数焦虑": {
+      "pain_points": [],
+      "count": 0,
+      "source": "silver-economy-pain-points-report.md (50个子女痛点)"
+    },
+    "失联焦虑": {
+      "pain_points": [
+        {
+          "id": 11,
+          "title": "走失全城寻找心累",
+          "scene": "失联焦虑"
+        },
+        {
+          "id": 32,
+          "title": "孤独死数日才发现",
+          "scene": "失联焦虑"
+        },
+        {
+          "id": 37,
+          "title": "半夜要出门拦不住",
+          "scene": "失联焦虑"
+        }
+      ],
+      "count": 3,
+      "source": "silver-economy-pain-points-report.md (50个子女痛点)"
+    },
+    "就医困惑": {
+      "pain_points": [
+        {
+          "id": 5,
+          "title": "固执拒绝就医劝不动",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 7,
+          "title": "摔倒骨折全家崩溃",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 26,
+          "title": "住院陪护身心崩溃",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 38,
+          "title": "骨质疏松易骨折",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 42,
+          "title": "插尿管感染高烧",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 45,
+          "title": "吞咽药片卡住送医",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 47,
+          "title": "长期卧床肌肉萎缩",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 48,
+          "title": "被养老院赶出难再安置",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 50,
+          "title": "临终抢救两难抉择",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 4,
+          "title": "认知障碍反复问话",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 9,
+          "title": "夜间不睡折腾全家",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 10,
+          "title": "耳聋沟通困难致隔阂",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 14,
+          "title": "捡垃圾堆满屋惹邻怨",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 15,
+          "title": "口味重盐劝不动",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 17,
+          "title": "脾气暴躁骂人摔东西",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 19,
+          "title": "疼痛忍痛不说拖病情",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 27,
+          "title": "农村养老条件极差",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 30,
+          "title": "失明看不见亲人",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 34,
+          "title": "养老院关禁限制自由",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 35,
+          "title": "吞咽困难喂饭难",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 43,
+          "title": "褥疮溃烂露骨恶臭",
+          "scene": "就医困惑"
+        },
+        {
+          "id": 44,
+          "title": "多疑猜忌无端指责",
+          "scene": "就医困惑"
+        }
+      ],
+      "count": 22,
+      "source": "silver-economy-pain-points-report.md (50个子女痛点)"
+    },
+    "情绪变化": {
+      "pain_points": [
+        {
+          "id": 18,
+          "title": "被赶出家门无家可归",
+          "scene": "情绪变化"
+        },
+        {
+          "id": 21,
+          "title": "父母长寿是'罪'的罪恶感",
+          "scene": "情绪变化"
+        },
+        {
+          "id": 29,
+          "title": "抑郁自杀风险高",
+          "scene": "情绪变化"
+        },
+        {
+          "id": 31,
+          "title": "被骂'老不死'精神伤害",
+          "scene": "情绪变化"
+        }
+      ],
+      "count": 4,
+      "source": "silver-economy-pain-points-report.md (50个子女痛点)"
+    }
+  }
+}

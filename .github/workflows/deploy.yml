@@ -1,0 +1,77 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install WeChat Miniprogram CLI
+        run: npm install -g @wechat-miniprogram/miniprogram-ci
+        
+      - name: Deploy Miniprogram
+        run: |
+          # 使用微信小程序 CI 工具部署
+          # 需要配置 WECHAT_APP_ID 和 WECHAT_PRIVATE_KEY 密钥
+          echo "🚀 开始部署微信小程序..."
+          # miniprogram-ci upload --appid ${{ secrets.WECHAT_APP_ID }} ...
+        env:
+          WECHAT_APP_ID: ${{ secrets.WECHAT_APP_ID }}
+          WECHAT_PRIVATE_KEY: ${{ secrets.WECHAT_PRIVATE_KEY }}
+          
+      - name: Deploy Cloud Functions
+        run: |
+          echo "🚀 部署云函数..."
+          # 使用微信云开发 CLI 部署
+          # tcb-cloudbase deploy ...
+        env:
+          TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+          TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          
+      - name: Update OpenClaw Workspace
+        run: |
+          echo "📝 更新 OpenClaw Workspace..."
+          git config --global user.email "hermes@parents-weekly-briefing.com"
+          git config --global user.name "Hermes Agent"
+          
+          # 更新部署记录
+          echo "Deployed at: $(date)" >> ~/.openclaw/workspace/DEPLOYMENT_LOG.md
+          git -C ~/.openclaw/workspace add DEPLOYMENT_LOG.md
+          git -C ~/.openclaw/workspace commit -m "Deploy: $(date)"
+          
+      - name: Health Check
+        run: |
+          echo "🏥 健康检查..."
+          # curl -f https://your-domain.com/health || exit 1
+          
+      - name: Notify Success
+        if: success()
+        run: |
+          echo "✅ 部署成功！"
+          # 发送通知到飞书/钉钉
+          
+      - name: Notify Failure
+        if: failure()
+        run: |
+          echo "❌ 部署失败！"
+          # 发送告警通知

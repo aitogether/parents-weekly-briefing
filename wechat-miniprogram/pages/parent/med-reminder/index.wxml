@@ -35,6 +35,10 @@
     <text class="tip-text">• 你也可以在子女的周报中看到下次提醒时间</text>
   </view>
 
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议，紧急情况请拨打120。
+  </view>
 </view>
 
 <!-- 时间选择器弹窗 -->

@@ -14,10 +14,12 @@ App({
 
     TOKEN_KEY: 'pwb_auth_token',
     USER_ROLE_KEY: 'pwb_user_role',
+    PRIVACY_AGREED_KEY: 'pwb_privacy_agreed',
 
     userInfo: null,
     userRole: null,
-    token: null
+    token: null,
+    privacyAgreed: false
   },
 
   onLaunch() {
@@ -33,8 +35,13 @@ App({
 
     const token = wx.getStorageSync(this.globalData.TOKEN_KEY);
     const role = wx.getStorageSync(this.globalData.USER_ROLE_KEY);
+    const privacyAgreed = wx.getStorageSync(this.globalData.PRIVACY_AGREED_KEY);
     if (token) this.globalData.token = token;
     if (role) this.globalData.userRole = role;
+    if (privacyAgreed) this.globalData.privacyAgreed = privacyAgreed;
+
+    // 检查隐私协议状态（微信小程序隐私接口）
+    this._checkPrivacyAndShow();
 
     this.checkUpdate();
   },
@@ -49,6 +56,96 @@ App({
     } else {
       this.api = require('./utils/api');
     }
+  },
+
+  /**
+   * 检查隐私协议状态并显示弹窗
+   * 遵循微信小程序隐私保护指引
+   */
+  _checkPrivacyAndShow() {
+    // 检查是否已同意隐私协议
+    if (this.globalData.privacyAgreed) {
+      console.log('[Privacy] 用户已同意隐私协议');
+      return;
+    }
+
+    // 使用微信隐私接口检查需要授权的隐私信息
+    if (wx.getPrivacySetting) {
+      wx.getPrivacySetting({
+        success: res => {
+          console.log('[Privacy] 隐私设置检查:', res);
+          if (res.needAuthorization) {
+            // 需要用户授权，显示自定义隐私弹窗
+            this._showPrivacyDialog();
+          } else {
+            // 不需要授权，标记为已同意
+            this._setPrivacyAgreed();
+          }
+        },
+        fail: err => {
+          console.error('[Privacy] 检查失败:', err);
+          // 失败时保守起见，显示隐私弹窗
+          this._showPrivacyDialog();
+        }
+      });
+    } else {
+      // 低版本微信，使用自定义弹窗
+      console.log('[Privacy] 微信版本不支持 getPrivacySetting，使用自定义弹窗');
+      this._showPrivacyDialog();
+    }
+  },
+
+  /**
+   * 显示隐私协议弹窗
+   */
+  _showPrivacyDialog() {
+    wx.showModal({
+      title: '隐私政策',
+      content: '欢迎使用家长周刊。我们将收集您的微信昵称、头像以及健康数据，用于提供用药提醒和周报服务。\n\n点击"同意"即表示您已阅读并同意我们的隐私政策和服务协议。',
+      confirmText: '同意',
+      cancelText: '不同意',
+      showCancel: true,
+      success: res => {
+        if (res.confirm) {
+          // 用户同意
+          this._setPrivacyAgreed();
+          // 对于微信要求的敏感接口，调用requirePrivacyAuthorize（如需要）
+          if (wx.requirePrivacyAuthorize) {
+            wx.requirePrivacyAuthorize({
+              success: () => {
+                console.log('[Privacy] 授权成功');
+              },
+              fail: err => {
+                console.warn('[Privacy] 授权失败:', err);
+              }
+            });
+          }
+        } else {
+          // 用户拒绝，显示提示并限制功能
+          wx.showModal({
+            title: '温馨提示',
+            content: '不同意隐私政策将无法使用服务。您可以在"设置"-"隐私政策"中随时查看并同意。',
+            showCancel: false,
+            success: () => {
+              // 可以退出小程序或跳转到隐私政策页面
+              // wx.reLaunch({ url: '/pages/privacy/index' });
+            }
+          });
+        }
+      },
+      fail: err => {
+        console.error('[Privacy] 弹窗显示失败:', err);
+      }
+    });
+  },
+
+  /**
+   * 标记用户已同意隐私协议
+   */
+  _setPrivacyAgreed() {
+    this.globalData.privacyAgreed = true;
+    wx.setStorageSync(this.globalData.PRIVACY_AGREED_KEY, true);
+    console.log('[Privacy] 用户隐私协议状态已标记为同意');
   },
 
   // 兼容：未调 _registerCloudApi 时延迟加载

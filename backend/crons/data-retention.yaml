@@ -1,0 +1,97 @@
+# Data Retention Cron Configuration (P2-1 GDPR/PIPL Compliance)
+#
+# 数据保留策略定时任务配置
+# 每日凌晨3点执行数据清理任务
+#
+# 功能：
+# - 自动清理超过30天的未确认用药记录
+# - 自动清理超过30天的运动步数记录
+# - 自动清理超过30天的反馈记录
+# - 匿名化超过90天的用户数据（保留open_id用于关联）
+# - 详细的审计日志记录
+#
+# 安全要求：
+# - 生产环境启用前需人工确认
+# - 提供dry-run模式用于测试
+# - 所有删除操作都有审计日志
+
+# 基本配置
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+HOME=/root
+
+# 工作目录设置
+WORKDIR=/Users/diygun/parents-weekly-briefing/backend
+
+# 日志配置
+LOG_DIR=${WORKDIR}/logs
+AUDIT_LOG_FILE=data-retention-audit.log
+
+# 脚本路径
+SCRIPT_PATH=${WORKDIR}/scripts/data-retention.js
+
+# ================================
+# 定时任务配置
+# ================================
+
+# 每日凌晨3点执行数据保留策略
+# 格式：分 时 日 月 周
+# 这里设置为每天凌晨3:00执行
+0 3 * * * cd ${WORKDIR} && node ${SCRIPT_PATH} >> ${LOG_DIR}/data-retention-cron.log 2>&1
+
+# ================================
+# 可选：每周日凌晨4点执行额外清理
+# 0 4 * * 0 cd ${WORKDIR} && node ${SCRIPT_PATH} --dry-run >> ${LOG_DIR}/data-retention-weekly.log 2>&1
+# ================================
+
+# ================================
+# 监控和告警配置
+# ================================
+
+# 如果主脚本失败，发送邮件通知（需要配置邮件服务器）
+# MAILTO=admin@yourdomain.com
+
+# 错误重试机制（如果需要）
+# 第一次失败后5分钟后重试
+# 5 3 * * * cd ${WORKDIR} && node ${SCRIPT_PATH} || echo "Data retention failed at $(date)" >> ${LOG_DIR}/failures.log
+
+# ================================
+# 使用说明
+# ================================
+
+# 1. 测试运行（dry-run模式）：
+#    crontab -e
+#    # 注释掉上面的主任务行
+#    # 添加临时任务进行测试
+#    * * * * * cd /Users/diygun/parents-weekly-briefing/backend && node scripts/data-retention.js --dry-run >> logs/test-retention.log 2>&1
+
+# 2. 查看日志：
+#    tail -f logs/data-retention-cron.log
+#    tail -f logs/data-retention-audit.log
+
+# 3. 手动执行：
+#    cd /Users/diygun/parents-weekly-briefing/backend
+#    node scripts/data-retention.js --dry-run
+#    node scripts/data-retention.js
+
+# 4. 验证cron是否生效：
+#    crontab -l
+#    systemctl restart cron (在Linux上)
+
+# ================================
+# 安全注意事项
+# ================================
+
+# 1. 权限设置：
+#    - 确保cron任务以正确的用户身份运行
+#    - 确保数据库文件有适当的读写权限
+#    - 确保日志目录可写
+
+# 2. 备份建议：
+#    - 在执行生产任务前，确保有完整的数据库备份
+#    - 定期备份audit log文件
+
+# 3. 监控建议：
+#    - 定期检查data-retention-audit.log
+#    - 监控cron日志中的错误信息
+#    - 设置异常情况下的告警机制

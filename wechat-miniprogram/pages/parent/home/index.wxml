@@ -54,6 +54,11 @@
 
   <!-- 开发用重置按钮 -->
   <button class="reset-btn" bindtap="onReset">🔄 重置今日（测试用）</button>
+
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议，紧急情况请拨打120。
+  </view>
 </view>
 
 <!-- 用药确认 ActionSheet -->

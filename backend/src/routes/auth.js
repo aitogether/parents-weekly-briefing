@@ -1,16 +1,27 @@
 /**
- * 认证路由 — 微信登录 + 角色注册
- * 支持：真实微信 code2session / 开发环境 mock 降级
+ * 认证路由 — 微信登录 + 角色注册（JWT 重构版）
+ *
+ * 改动：
+ * - 登录返回 JWT token（有效期7天）
+ * - 所有端点使用 JWT 验证而非 user.id
+ * - 支持登出（黑名单 token）
  */
+
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
 const { code2session } = require('../auth/wechat');
+const {
+  generateToken,
+  blacklistToken,
+  authMiddleware,
+  roleMiddleware
+} = require('../middleware/auth');
 
 const router = express.Router();
 
 // POST /auth/login — 微信登录
 // 入参: { code, role, nickname }
-// 出参: { token, user }
+// 出参: { token, user, expires_in }
 router.post('/login', async (req, res) => {
   const { code, role, nickname } = req.body;
 
@@ -31,14 +42,15 @@ router.post('/login', async (req, res) => {
 
     if (!user) {
       user = db.createUser({ open_id, role, nickname });
-      console.log(`[Auth] 新用户注册: ${user.id} (${role}) open_id=${open_id}`);
+      console.log(`[Auth] 新用户注册: ${user.id} (${role})`); // 已清理 open_id
     }
 
-    // 生产环境应使用 JWT，MVP 用 user.id
-    const token = user.id;
+    // 生成 JWT token
+    const token = generateToken(user);
 
     res.json({
       token,
+      expires_in: 7 * 24 * 3600, // 7天（秒）
       user: {
         id: user.id,
         role: user.role,
@@ -53,14 +65,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// GET /auth/profile — 获取当前用户信息
-router.get('/profile', (req, res) => {
-  const token = req.headers.authorization?.replace('Bearer ', '');
-  if (!token) return res.status(401).json({ error: '未登录' });
+// POST /auth/logout — 登出（将token加入黑名单）
+router.post('/logout', authMiddleware, (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: '未提供认证令牌' });
+  }
 
+  const token = authHeader.slice(7);
+  blacklistToken(token);
+
+  res.json({ success: true, message: '已登出' });
+});
+
+// GET /auth/profile — 获取当前用户信息（需要认证）
+router.get('/profile', authMiddleware, (req, res) => {
   const db = getDB();
-  const user = db.getUserById(token);
-  if (!user) return res.status(401).json({ error: '用户不存在' });
+  const user = db.getUserById(req.user.id);
+
+  if (!user) {
+    return res.status(401).json({ error: '用户不存在' });
+  }
 
   const result = {
     id: user.id,
@@ -85,15 +110,10 @@ router.get('/profile', (req, res) => {
   res.json(result);
 });
 
-// POST /auth/bind — 子女通过邀请码绑定父母
-router.post('/bind', (req, res) => {
-  const token = req.headers.authorization?.replace('Bearer ', '');
-  if (!token) return res.status(401).json({ error: '未登录' });
-
+// POST /auth/bind — 子女通过邀请码绑定父母（需要认证，仅子女）
+router.post('/bind', authMiddleware, roleMiddleware(['child']), (req, res) => {
   const db = getDB();
-  const user = db.getUserById(token);
-  if (!user) return res.status(401).json({ error: '用户不存在' });
-  if (user.role !== 'child') return res.status(403).json({ error: '只有子女可以绑定父母' });
+  const user = db.getUserById(req.user.id);
 
   const { invite_code } = req.body;
   if (!invite_code) return res.status(400).json({ error: 'invite_code required' });
@@ -104,7 +124,7 @@ router.post('/bind', (req, res) => {
   const result = db.bindChildToParent(user.id, parent.id);
   if (!result) return res.status(500).json({ error: '绑定失败' });
 
-  console.log(`[Auth] 绑定成功: 子女 ${user.id} → 父母 ${parent.id}`);
+  console.log(`[Auth] 绑定成功: 子女 ${user.id} → 父母 ${parent.id}`); // 仅记录ID，不包含敏感信息
 
   res.json({
     success: true,
@@ -112,13 +132,13 @@ router.post('/bind', (req, res) => {
   });
 });
 
-// POST /auth/seed-parent — 快速创建测试父母用户（仅开发用）
+// POST /auth/seed-parent — 快速创建测试父母用户（仅开发用，不需要认证但应限制）
 router.post('/seed-parent', (req, res) => {
   const { nickname } = req.body;
   const db = getDB();
   const open_id = `mock_parent_${Date.now()}`;
   const user = db.createUser({ open_id, role: 'parent', nickname: nickname || '妈妈' });
-  console.log(`[Auth] 测试父母创建: ${user.id} 邀请码: ${user.invite_code}`);
+  console.log(`[Auth] 测试父母创建: ${user.id} 邀请码: ${user.invite_code}`); // mock用户，邀请码可记录
   res.json({
     success: true,
     user: { id: user.id, nickname: user.nickname, invite_code: user.invite_code }

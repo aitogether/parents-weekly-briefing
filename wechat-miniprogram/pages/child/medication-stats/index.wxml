@@ -37,4 +37,9 @@
   <view class="card text-center" wx:if="{{loading}}">
     <view class="text-gray">加载中...</view>
   </view>
+
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议，紧急情况请拨打120。
+  </view>
 </view>

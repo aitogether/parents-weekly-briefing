@@ -9,28 +9,25 @@
  */
 
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
+const { validators, validate } = require('../middleware/validation');
 
 const router = express.Router();
 
-// 量表问题
-const QUESTIONS = [
-  {
-    id: 'anxiety_worry',
-    text: '过去一周，你对父母身体的担心程度是？',
-    scale: { min: 1, minLabel: '完全不担心', max: 10, maxLabel: '非常担心' }
-  },
-  {
-    id: 'anxiety_contact',
-    text: '过去一周，你想联系父母但没联系的次数多吗？',
-    scale: { min: 1, minLabel: '从没有', max: 10, maxLabel: '经常有' }
-  },
-  {
-    id: 'anxiety_sleep',
-    text: '过去一周，因为担心父母而影响睡眠的情况？',
-    scale: { min: 1, minLabel: '完全没有', max: 10, maxLabel: '几乎每天' }
-  }
-];
+// 所有调查相关路由需要认证 + 所有权校验
+
+// POST /survey/submit — 提交调查问卷（子女为父母提交）
+router.post('/submit', authMiddleware, checkOwnership('parent_id'), validate([
+  validators.childId(),
+  validators.parentId(),
+  validators.surveyAnswers()
+]), (req, res) => {
+  const { child_id, parent_id, answers } = req.body;
+  const db = getDB();
+  const record = db.submitSurvey({ child_id, parent_id, answers });
+  res.json({ success: true, survey: record });
+});
 
 // POST /survey/anxiety — 提交焦虑量表
 router.post('/anxiety', (req, res) => {

@@ -1,13 +1,23 @@
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
+const { validators, validate } = require('../middleware/validation');
 
 const router = express.Router();
 
-const FEEDBACK_OPTIONS = [
-  { type: 'reassured', text: '今天我看过你的情况，一切放心。' },
-  { type: 'concerned', text: '最近有点担心，改天好好跟你聊聊。' },
-  { type: 'busy_caring', text: '我这几天有点忙，但一直惦记着你。' }
-];
+// 所有反馈相关路由需要认证 + 所有权校验
+
+// POST /feedback/create — 提交反馈（子女可提交父母的反馈）
+router.post('/create', authMiddleware, checkOwnership('parent_id'), validate([
+  validators.childId(),
+  validators.parentId(),
+  validators.feedbackType()
+]), (req, res) => {
+  const { child_id, parent_id, feedback_type, report_id } = req.body;
+  const db = getDB();
+  const record = db.addFeedback({ child_id, parent_id, feedback_type, report_id });
+  res.json({ success: true, feedback: record });
+});
 
 // GET /feedback/options — 返回三档选项
 router.get('/options', (req, res) => {
@@ -15,7 +25,11 @@ router.get('/options', (req, res) => {
 });
 
 // POST /feedback — 子女提交回声
-router.post('/', (req, res) => {
+router.post('/', validate([
+  validators.childId(),
+  validators.parentId(),
+  validators.feedbackType()
+]), (req, res) => {
   const { child_id, parent_id, feedback_type, report_id } = req.body;
   if (!child_id || !parent_id || !feedback_type) {
     return res.status(400).json({ error: 'child_id, parent_id, feedback_type required' });

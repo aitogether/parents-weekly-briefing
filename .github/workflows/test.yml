@@ -1,0 +1,125 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+  miniprogram-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: |
+          cd miniprogram
+          npm ci
+          
+      - name: Lint
+        run: |
+          cd miniprogram
+          npx eslint . --ext .js,.wxml,.wxss
+          
+      - name: Type check (if using TypeScript)
+        run: |
+          cd miniprogram
+          npx tsc --noEmit
+        
+  api-test:
+    runs-on: ubuntu-latest
+    needs: [test, miniprogram-test]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: |
+          cd cloudfunctions
+          npm ci
+          
+      - name: Run API tests
+        run: |
+          cd cloudfunctions
+          npm test
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+
+  openclaw-validation:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test, miniprogram-test, api-test]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Validate OpenClaw Configuration
+        run: |
+          # 检查必要的配置文件是否存在
+          test -f ~/.hermes/AGENTS.md || { echo "❌ AGENTS.md 缺失"; exit 1; }
+          test -f ~/.hermes/SOUL.md || { echo "❌ SOUL.md 缺失"; exit 1; }
+          test -f ~/.hermes/MEMORY.md || { echo "❌ MEMORY.md 缺失"; exit 1; }
+          echo "✅ OpenClaw 配置文件完整"
+          
+      - name: Validate Agent Personas
+        run: |
+          for agent in cabinet engineering finance security ops content compliance docs monitor censor; do
+            test -f ~/.hermes/agents/$agent/persona.md || { echo "❌ $agent 角色文件缺失"; exit 1; }
+            echo "✅ $agent 角色文件存在"
+          done
+          
+      - name: Validate Skills
+        run: |
+          for skill in complaint-collection pain-point-analysis mvp-prioritization scenario-design compliance-check; do
+            test -f ~/.hermes/skills/$skill/SKILL.md || { echo "❌ Skill $skill 缺失"; exit 1; }
+            echo "✅ Skill $skill 存在"
+          done
+
+  notification:
+    runs-on: ubuntu-latest
+    needs: [test, miniprogram-test, api-test, openclaw-validation]
+    if: always()
+    
+    steps:
+      - name: Send notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+            
+            let emoji = status === 'success' ? '✅' : '❌';
+            let message = `${emoji} 测试工作流 ${{status}}
+
+[查看详情](${url})`;
+            
+            // 可以集成钉钉/飞书通知
+            console.log(message);

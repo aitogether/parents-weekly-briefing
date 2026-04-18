@@ -64,9 +64,34 @@ function getMedStats(parentId, days = 7) {
   return call('medication', { action: 'stats', parent_id: parentId, days });
 }
 
+// v0.2 每日确认
+function confirmDaily(parentId, role, medTaken, date) {
+  if (role !== 'parent') return Promise.reject(new Error('Only parent can confirm'));
+  return call('medication', { action: 'dailyConfirm', parent_id: parentId, date, med_taken: medTaken });
+}
+
+// v0.2 每周确认
+function confirmMedWeekly(parentId, answer, date) {
+  return call('medication', { action: 'weeklyConfirm', parent_id: parentId, date, answer });
+}
+
+// v0.2 用药提醒设置
+function getReminderSettings(parentId) {
+  return call('medication', { action: 'getReminderSettings', parent_id: parentId });
+}
+function saveReminderSettings(parentId, times) {
+  return call('medication', { action: 'saveReminderSettings', parent_id: parentId, reminder_times: times });
+}
+
 // ── 周报 ──
 function generateReport(parentAId, parentBId) {
   return call('report', { action: 'generate', parent_a_id: parentAId, parent_b_id: parentBId });
+}
+function getReportHistory(childId, weeks = 4) {
+  return call('report', { action: 'history', child_id: childId, weeks });
+}
+function getCompare(childId, weeks = 4) {
+  return call('report', { action: 'compare', child_id: childId, weeks });
 }
 
 // ── 子女回声 ──
@@ -80,12 +105,45 @@ function getLatestFeedback(parentId) {
   return call('feedback', { action: 'latest', parent_id: parentId });
 }
 
+// ── 安全检查清单（P1 任务3） ──
+function getChecklistWeekly(user_id, week_start) {
+  return call('checklist', { action: 'getWeekly', user_id, week_start });
+}
+function completeChecklist(item_id, notes, user_id, week_start) {
+  return call('checklist', { action: 'complete', item_id, notes, user_id, week_start });
+}
+function getChecklistHistory(user_id, limit) {
+  return call('checklist', { action: 'history', user_id, limit });
+}
+
+// ── 焦虑量表（P1-7） ──
+function getAnxietyQuestions() {
+  return call('survey', { action: 'questions' });
+}
+function submitAnxietySurvey(childId, answers) {
+  return call('survey', { action: 'submit', child_id: childId, answers });
+}
+function getAnxietyHistory(childId, limit) {
+  return call('survey', { action: 'history', child_id: childId, limit });
+}
+
 module.exports = {
   call,
+  // 登录
   login, getProfile, seedParent,
+  // 绑定
   bindInvite,
+  // 微信运动
   injectWerunMock, getWerunSteps,
+  // 用药
   createMedPlan, getMedPlans, confirmMedication, getMedStats,
-  generateReport,
-  getFeedbackOptions, submitEchoFeedback, getLatestFeedback
+  confirmDaily, confirmMedWeekly, getReminderSettings, saveReminderSettings,
+  // 周报
+  generateReport, getReportHistory, getCompare,
+  // 子女回声
+  getFeedbackOptions, submitEchoFeedback, getLatestFeedback,
+  // 安全检查清单
+  getChecklistWeekly, completeChecklist, getChecklistHistory,
+  // 焦虑量表
+  getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory
 };

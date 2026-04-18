@@ -6,8 +6,10 @@ const R = require('../common/response');
 
 exports.main = async (event, context) => {
   const db = getDB(cloud);
+  const { action } = event;
 
-  switch (event.action) {
+  switch (action) {
+    // ==================== 用药计划 ====================
     case 'createPlan': {
       const { parent_id, nickname, dosage, schedule } = event;
       if (!parent_id || !nickname || !dosage || !schedule) return R.fail('parent_id, nickname, dosage, schedule required');
@@ -22,6 +24,7 @@ exports.main = async (event, context) => {
       return R.ok({ plans });
     }
 
+    // ==================== 用药确认（计划关联）====================
     case 'confirm': {
       const { plan_id, parent_id, role, status, confirm_date } = event;
       if (role !== 'parent') return R.fail('Only parent role can confirm', 403);
@@ -43,7 +46,38 @@ exports.main = async (event, context) => {
       });
     }
 
+    // ==================== v0.2 每日确认（一键确认）====================
+    case 'dailyConfirm': {
+      const { parent_id, date, med_taken } = event;
+      if (!parent_id) return R.fail('parent_id required');
+      const record = await db.addDailyConfirm({ parent_id, date, med_taken });
+      return R.ok({ confirmation: record });
+    }
+
+    // ==================== v0.2 每周用药确认 ====================
+    case 'weeklyConfirm': {
+      const { parent_id, date, answer } = event;
+      if (!parent_id || !answer) return R.fail('parent_id and answer required');
+      const record = await db.addWeeklyMedConfirm({ parent_id, date, answer });
+      return R.ok({ confirmation: record });
+    }
+
+    // ==================== v0.2 用药提醒设置 ====================
+    case 'getReminderSettings': {
+      const { parent_id } = event;
+      if (!parent_id) return R.fail('parent_id required');
+      const settings = await db.getReminderSettings(parent_id);
+      return R.ok(settings || { reminder_times: [] });
+    }
+
+    case 'saveReminderSettings': {
+      const { parent_id, reminder_times } = event;
+      if (!parent_id || !Array.isArray(reminder_times)) return R.fail('parent_id and reminder_times array required');
+      const settings = await db.saveReminderSettings(parent_id, reminder_times);
+      return R.ok({ settings });
+    }
+
     default:
-      return R.fail('unknown action: ' + event.action);
+      return R.fail('unknown action: ' + action);
   }
 };

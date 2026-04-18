@@ -1,17 +1,21 @@
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
-const { initDB } = require('./db/store');
+// 使用 SQLite + 加密存储（已迁移）
+const { initDB, getDB } = require('./db/encryption-enabled');
 const { rateLimit, sanitizeBody, httpsRedirect, securityHeaders } = require('./middleware/security');
 const { startScheduler } = require('./scheduler');
+const { requestLogger } = require('./utils/logger');
 
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 const werunRoutes = require('./routes/werun');
 const medicationRoutes = require('./routes/medication');
 const reportRoutes = require('./routes/report');
 const feedbackRoutes = require('./routes/feedback');
 const surveyRoutes = require('./routes/survey');
 const historyRoutes = require('./routes/history');
+const { logSanitizer } = require('./middleware/log-sanitizer');
 
 const app = express();
 
@@ -19,6 +23,7 @@ const app = express();
 app.use(httpsRedirect);
 app.use(securityHeaders);
 app.use(rateLimit);
+app.use(logSanitizer); // 日志敏感信息清理（P1-5）
 
 // ── 基础中间件 ──
 app.use(express.json());
@@ -36,6 +41,7 @@ app.get('/health', (req, res) => {
 
 // ── API 路由 ──
 app.use('/api/auth', authRoutes);
+app.use('/api/v1/user', userRoutes);
 app.use('/api/werun', werunRoutes);
 app.use('/api/med', medicationRoutes);
 app.use('/api/report', reportRoutes);
@@ -43,11 +49,14 @@ app.use('/api/feedback', feedbackRoutes);
 app.use('/api/survey', surveyRoutes);
 app.use('/api/report', historyRoutes);
 
+// ── Prometheus Metrics 端点 ──
+app.get('/metrics', (req, res) => {
+  res.setHeader('Content-Type', promClient.register.contentType);
+  res.end(promClient.register.metrics());
+});
+
 // ── 初始化数据库 ──
 initDB();
-
-// ── 启动服务器 ──
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`[Server] 父母周报后端运行在 http://localhost:${PORT}`);
   if (!process.env.WECHAT_APPID) {

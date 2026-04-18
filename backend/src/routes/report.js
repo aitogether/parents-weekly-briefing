@@ -1,8 +1,10 @@
 const express = require('express');
-const { getDB } = require('../db/store');
-const { generateTopics } = require('../engine/topics');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
 
 const router = express.Router();
+
+/**
 
 /**
  * POST /report/generate
@@ -15,7 +17,7 @@ const router = express.Router();
  *   连续3天零步数 → 红灯直接触发
  *   最终灯号取最差等级
  */
-router.post('/generate', (req, res) => {
+router.post('/generate', authMiddleware, (req, res) => {
   const { parent_a_id, parent_b_id } = req.body;
   if (!parent_a_id || !parent_b_id) {
     return res.status(400).json({ error: 'parent_a_id and parent_b_id required' });

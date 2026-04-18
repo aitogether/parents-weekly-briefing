@@ -36,4 +36,9 @@
 
   <!-- 开发测试按钮 -->
   <button class="test-btn" bindtap="onQuickTest">🧪 测试：创建父母并绑定</button>
+
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议或处方。所有健康信息仅供参考，不能替代专业医疗人员的诊断和建议。如有健康问题，请咨询医生或其他合格的医疗专业人士。
+  </view>
 </view>

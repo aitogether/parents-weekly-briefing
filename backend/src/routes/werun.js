@@ -1,13 +1,19 @@
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
+const { validators, validate } = require('../middleware/validation');
 
 const router = express.Router();
 
-// POST /werun/decrypt — Mock: 注入步数（支持 data_date + steps 参数）
-router.post('/decrypt', (req, res) => {
-  const { parent_id, steps, data_date } = req.body;
-  if (!parent_id) return res.status(400).json({ error: 'parent_id required' });
+// 所有路由都需要认证和所有权校验
 
+// POST /werun/create — 创建运动记录（子女为父母创建）
+router.post('/create', authMiddleware, checkOwnership('parent_id'), validate([
+  validators.parentId(),
+  validators.steps(),
+  validators.dataDate()
+]), (req, res) => {
+  const { parent_id, steps, data_date } = req.body;
   const db = getDB();
   const useDate = data_date || new Date().toISOString().slice(0, 10);
   const useSteps = typeof steps === 'number' ? steps : Math.floor(Math.random() * 5000) + 1000;

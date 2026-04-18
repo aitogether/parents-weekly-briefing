@@ -6,12 +6,15 @@
  */
 
 const express = require('express');
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
+const { authMiddleware, checkOwnership } = require('../middleware/auth');
 
 const router = express.Router();
 
-// ── 历史周报列表 ──
-router.get('/history', (req, res) => {
+// 所有历史相关路由需要认证 + 所有权校验
+
+// GET /history/list?parent_id=xxx&type=medication
+router.get('/list', authMiddleware, checkOwnership('parent_id'), (req, res) => {
   const { child_id, weeks = '4' } = req.query;
   if (!child_id) return res.status(400).json({ error: 'child_id required' });
 

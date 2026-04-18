@@ -1,5 +1,9 @@
 /**
- * JSON 文件存储（P0 MVP，不依赖原生编译）
+ * JSON 文件存储（P0 MVP，已废弃）
+ *
+ * ⚠️  本文件已废弃，请使用 SQLite 实现（db/encryption-enabled.js 或 db/init.js）
+ * 数据已迁移到 SQLite，此处仅保留历史参考
+ *
  * 后续可替换为 better-sqlite3 或 PostgreSQL
  */
 const fs = require('fs');

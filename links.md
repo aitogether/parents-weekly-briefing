@@ -1,0 +1,55 @@
+# 代表性原始链接列表
+
+## 子女抱怨类（代表性链接）
+
+1. https://www.reddit.com/r/CaregiverSupport/comments/1j8ixwd/thinking_of_all_the_mean_things_ive_said_as_a/
+2. https://www.reddit.com/r/dementia/comments/1fjv9mo/refusing_life_saving_heart_medication/
+3. https://www.reddit.com/r/CaregiverSupport/comments/1mrt33y/the_silent_sacrifice_of_caregiving/
+4. https://www.reddit.com/r/AgingParents/comments/1nddszo/anyones_parents_fell_for_online_scams/
+5. https://www.reddit.com/r/dementia/comments/1qrgvgr/dementia_wandering_what_to_do_if_they_walk_away/
+6. https://www.reddit.com/r/CaregiverSupport/comments/1g4j2s2/incontinence_frustration/
+7. https://www.reddit.com/r/CaregiverSupport/comments/18y2ozh/caregiving_for_horrid_abusive_parent/
+8. https://www.reddit.com/r/Aging/comments/1mks8ik/why_i_regret_moving_into_a_nursing_home_6_hard/
+9. https://www.reddit.com/r/CaregiverSupport/comments/1rj8071/being_a_caregiver_for_my_parents_when_i_have/
+10. https://www.reddit.com/r/Aging/comments/1lpw01b/7_things_no_one_tells_you_about_caregiver_burnout/
+11. https://www.reddit.com/r/CaregiverSupport/comments/184m446/caregiver_burnout/
+12. https://www.reddit.com/r/CaregiverSupport/comments/19fgrhz/when_caregiver_burnout_hits/
+13. https://www.reddit.com/r/CaregiverSupport/comments/1si7jfu/back_to_back_caregiver_burnout_help_please/
+14. https://www.reddit.com/r/dementia/comments/1pmmbp6/dementiarefusing_meds/
+15. https://www.reddit.com/r/AgingParents/comments/1ngovyi/wandering_behavior_in_dementia_parent/
+16. https://www.reddit.com/r/CaregiverSupport/comments/1eoxb53/grandmas_incontinence_situation_is_hard_to_keep/
+17. https://www.reddit.com/r/personalfinance/comments/135jpxd/protections_for_an_elderly_parent_who_will_keep/
+18. https://www.reddit.com/r/eldercare/comments/1q545y9/elderly_neighbor_being_financially_abused/
+19. https://www.reddit.com/r/Aging/comments/1mrt33y/the_silent_sacrifice_of_caregiving/
+20. https://www.reddit.com/r/GriefSupport/comments/1l8g1lt/caregiver_grief/
+21. https://www.reddit.com/r/CaregiverSupport/comments/1pzqkg5/frustrated_by_lack_of_help_from_siblings/
+22. https://www.reddit.com/r/CaregiverSupport/comments/1accbav/my_dad_passed_away_caregivers_remorse/
+23. https://www.reddit.com/r/CaregiverSupport/comments/13c5086/how_to_make_elderly_grandad_feel_useful_but_not/
+24. https://www.reddit.com/r/CaregiverSupport/comments/1py72no/im_impatient_and_intolerant_of_the_elderly_and/
+25. https://www.reddit.com/r/Aging/comments/1ch9mbd/realizing_im_the_old_person_now/
+26. https://www.reddit.com/r/AskOldPeople/comments/103rpwo/old_folks_who_live_alone_how_does_it_feel_and_how/
+27. https://www.reddit.com/r/GenX/comments/104gouu/m54_im_shocked_at_how_old_i_am_all_of_a_sudden_i/
+28. https://m.douban.com/group/topic/276230322/
+29. https://m.douban.com/doulist/150937369/
+30. https://m.douban.com/group/677774/
+31. https://www.v2ex.com/t/993792
+32. https://v2ex.com/t/1042809
+33. https://www.v2ex.com/t/1041548
+34. https://www.thepaper.cn/newsDetail_forward_3887155
+35. https://www.163.com/dy/article/GROMADG00552LUWF.html
+36. https://news.qq.com/rain/a/20260224A05GKT00
+37. http://www.news.cn/comments/20231022/5809fbc8445a402e8f066f4c29160f98/c.html
+38. https://www.sd.news.cn/20251103/f363c5ecef6849e5bb49bf01ce9ab65d/c.html
+
+## 老人抱怨类（代表性链接）
+
+1. https://www.reddit.com/r/RedditForGrownups/comments/1py72no/im_impatient_and_intolerant_of_the_elderly_and
+2. https://www.reddit.com/r/AskOldPeople/comments/103rpwo/old_folks_who_live_alone_how_does_it_feel_and_how/
+3. https://www.reddit.com/r/NoStupidQuestions/comments/14v5oef/how_do_old_people_deal_with_knowing_theyre_gonna/
+4. https://h5.ifeng.com/c/vivoArticle/v002Z--VcCddHnEPYsY-_UAowgSl5rAmbqsrZksR58tw3jcIQ__
+5. https://www.163.com/dy/article/HTF2O9OA0552LCNE.html
+6. https://www.163.com/dy/article/GROMADG00552LUWF.html
+7. http://archives.cnd.org/HXWK/author/JIN-Feng/kd070418-3.gb.html
+8. https://med.szu.edu.cn/yxrwzx/ssyl/content_4665
+9. https://www.cw.com.tw/aging/article/5137818
+10. https://news.umich.edu/zh-hans/%E7%A0%94%E7%A9%B6%EF%BC%9A%E8%80%81%E5%B9%B4%E4%BA%BA%E6%B6%88%E6%9E%81%E8%A1%B0%E8%80%81%E7%9C%8B%E6%B3%95%EF%BC%8C%E5%AF%B9%E5%85%B6%E9%85%8D%E5%81%B6%E6%9C%89%E5%BD%B1%E5%93%8D/

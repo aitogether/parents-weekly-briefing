@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const checklist = require('../models/checklist');
-const auth = require('../middleware/auth');
+const { authMiddleware } = require('../middleware/auth');
 
-router.get('/weekly', auth, async (req, res) => {
+router.get('/weekly', authMiddleware, async (req, res) => {
   try {
     const weekStart = checklist.getWeekStart();
     const items = await checklist.getWeeklyChecklist(req.user.id, weekStart);
@@ -26,7 +26,7 @@ router.get('/weekly', auth, async (req, res) => {
   }
 });
 
-router.post('/complete/:itemId', auth, async (req, res) => {
+router.post('/complete/:itemId', authMiddleware, async (req, res) => {
   try {
     const result = checklist.completeItem(req.user.id, checklist.getWeekStart(), parseInt(req.params.itemId), req.body.notes || '');
     res.json({ success: true, data: { completed: result.changes > 0 } });
@@ -36,7 +36,7 @@ router.post('/complete/:itemId', auth, async (req, res) => {
   }
 });
 
-router.get('/history', auth, async (req, res) => {
+router.get('/history', authMiddleware, async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 4;
     const weeks = await checklist.getHistory(req.user.id, limit);

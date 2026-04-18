@@ -8,7 +8,7 @@
  * - 接入微信订阅消息后替换 sendNotification()
  */
 
-const { getDB } = require('../db/store');
+const { getDB } = require('../db/encryption-enabled');
 
 // ── 通知记录（防重复） ──
 const sentNotifications = new Map(); // key -> timestamp
@@ -28,7 +28,8 @@ function markSent(key) {
 // ── 发送通知（mock） ──
 function sendNotification(type, targetId, message) {
   const db = getDB();
-  console.log(`[Scheduler][${type}] → ${targetId}: "${message}"`);
+  // 日志已清理：不输出具体 targetId 和消息内容
+  console.log(`[Scheduler][${type}] 通知已发送（目标ID已隐藏）`);
   // TODO: 微信订阅消息 API
   // wx.requestSubscribeMessage / 服务端 access_token 调用
   return { type, targetId, message, sentAt: new Date().toISOString() };
@@ -44,9 +45,8 @@ function checkDailySummary() {
   const key = `daily_summary_${now.toISOString().slice(0, 10)}`;
   if (hasSentToday(key)) return;
 
-  // 遍历所有父母用户
-  const data = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data.json'), 'utf8'));
-  const parents = data.users.filter(u => u.role === 'parent');
+  // 使用SQLite查询所有父母用户
+  const parents = db.getAllUsers().filter(u => u.role === 'parent');
 
   for (const parent of parents) {
     const todaySteps = db.getWerunData(parent.id, 1);
@@ -87,8 +87,7 @@ function checkFridayReport() {
   if (hasSentToday(key)) return;
 
   const db = getDB();
-  const data = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data.json'), 'utf8'));
-  const parents = data.users.filter(u => u.role === 'parent');
+  const parents = db.getAllUsers().filter(u => u.role === 'parent');
 
   for (const parent of parents) {
     if (!Array.isArray(parent.bound_to) || parent.bound_to.length === 0) continue;
@@ -140,11 +139,7 @@ function checkMedReminder() {
   const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
 
   const db = getDB();
-  const data = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data.json'), 'utf8'));
-
-  if (!data.reminder_settings) return;
-
-  for (const settings of data.reminder_settings) {
+  const settings = db.getReminderSettings(); // 获取所有用户的提醒设置
     if (!settings.reminder_times) continue;
 
     for (const schedTime of settings.reminder_times) {
