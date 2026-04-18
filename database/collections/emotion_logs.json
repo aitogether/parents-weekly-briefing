@@ -1,0 +1,27 @@
+{
+  "collection": "emotion_logs",
+  "fields": {
+    "_id": "string",
+    "parent_id": "string",
+    "child_id": "string",
+    "emotion_level": "number (1-5)",
+    "emotion_emoji": "string",
+    "week_start": "string (YYYY-MM-DD)",
+    "week_end": "string (YYYY-MM-DD)",
+    "recorded_at": "date",
+    "client_ip": "string (可选，用于去重)",
+    "created_at": "date",
+    "updated_at": "date"
+  },
+  "indexes": [
+    "parent_id + week_start (唯一索引，防止重复记录)",
+    "emotion_level (用于查询分布)",
+    "parent_id + created_at (用于趋势分析)"
+  ],
+  "constraints": {
+    "emotion_level_range": [1, 5],
+    "no_text_fields": true,
+    "weekly_unique": "每个父母每周仅保留最新记录"
+  },
+  "description": "情绪记录集合 - 存储父母每周情绪状态，仅记录编码，不存储具体事件"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "emotion-log",
+  "version": "1.0.0",
+  "description": "情绪记录云函数 - 记录父母每周情绪状态（5级编码）",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/emotion-log.test.js",
+    "lint": "eslint index.js"
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "author": "Nous Research",
+  "license": "MIT",
+  "cloudfunction-config": {
+    "triggers": [],
+    "memorySize": 128,
+    "timeout": 5000
+  }
+}

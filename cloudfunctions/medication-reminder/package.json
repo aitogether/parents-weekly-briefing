@@ -1,0 +1,27 @@
+{
+  "name": "medication-reminder",
+  "version": "1.0.0",
+  "description": "用药提醒云函数 - 定时触发，向父母端发送用药提醒模板消息",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/medication-reminder.test.js",
+    "lint": "eslint index.js"
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "author": "Nous Research",
+  "license": "MIT",
+  "cloudfunction-config": {
+    "triggers": [
+      {
+        "name": "medication-reminder-trigger",
+        "type": "timer",
+        "config": "0 0 8,13,18,22 * * *"
+      }
+    ]
+  }
+}

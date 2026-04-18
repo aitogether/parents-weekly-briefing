@@ -127,6 +127,24 @@ function getAnxietyHistory(childId, limit) {
   return call('survey', { action: 'history', child_id: childId, limit });
 }
 
+// ── 情绪记录（P2-1 情绪晴雨） ──
+function logEmotion(parentId, emotionLevel, childId, weekStart) {
+  const params = {
+    action: 'log',
+    parent_id: parentId,
+    emotion_level: emotionLevel
+  };
+  if (childId) params.child_id = childId;
+  if (weekStart) params.week_start = weekStart;
+  return call('emotion-log', params);
+}
+
+function getEmotionHistory(parentId, weeks = 4) {
+  // 注意：情绪数据目前通过云函数直接查询，这里使用通用查询接口
+  // 如果需要专门的查询接口，需要在 backend 或云函数中添加
+  return call('emotion-log', { action: 'history', parent_id: parentId, weeks });
+}
+
 // ── 叫车帮手（P1-2 新增） ──
 function createTaxiRequest(parentId, destination, scheduledTime, notes) {
   return call('taxi', {
@@ -180,7 +198,9 @@ module.exports = {
   // 焦虑量表
   getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory,
   // 叫车帮手
-  createTaxiRequest, getTaxiRequests, updateTaxiStatus, getTaxiStats
-};
-  scanQRCode, getQRHistory, deleteQRScan
+  createTaxiRequest, getTaxiRequests, updateTaxiStatus, getTaxiStats,
+  // 扫码帮手
+  scanQRCode, getQRHistory, deleteQRScan,
+  // 情绪记录
+  logEmotion, getEmotionHistory
 };

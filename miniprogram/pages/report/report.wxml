@@ -1,10 +1,128 @@
 <view class="container">
-  <view class="section" bindtap="goChecklist">
-    <view class="section-title">安全检查</view>
-    <view class="section-content">
-      <text class="stat">本周已完成 {{safetyCompleted}}/8 项</text>
-      <text class="arrow">›</text>
+  <!-- 本周总评 -->
+  <view class="section summary">
+    <view class="level-indicator green"></view>
+    <text class="section-title">{{report.summary.title}}</text>
+    <text class="section-desc">{{report.summary.oneLiner}}</text>
+  </view>
+
+  <!-- 情绪记录卡片 -->
+  <view class="section emotion-card" wx:if="{{showEmotionCard}}">
+    <view class="emotion-header">
+      <text class="emotion-icon">💝</text>
+      <view class="emotion-title-group">
+        <text class="emotion-title">为父母记录本周情绪</text>
+        <text class="emotion-desc">每周一次，点击选择表情</text>
+      </view>
+    </view>
+    <view class="emotion-options">
+      <view class="emoji-btn {{emotionLevel===1?'selected':''}}" data-level="1" bindtap="onSelectEmotion">
+        <text class="emoji">😊</text><text class="emoji-label">积极</text>
+      </view>
+      <view class="emoji-btn {{emotionLevel===2?'selected':''}}" data-level="2" bindtap="onSelectEmotion">
+        <text class="emoji">😐</text><text class="emoji-label">一般</text>
+      </view>
+      <view class="emoji-btn {{emotionLevel===3?'selected':''}}" data-level="3" bindtap="onSelectEmotion">
+        <text class="emoji">😢</text><text class="emoji-label">低落</text>
+      </view>
+      <view class="emoji-btn {{emotionLevel===4?'selected':''}}" data-level="4" bindtap="onSelectEmotion">
+        <text class="emoji">😠</text><text class="emoji-label">烦躁</text>
+      </view>
+      <view class="emoji-btn {{emotionLevel===5?'selected':''}}" data-level="5" bindtap="onSelectEmotion">
+        <text class="emoji">😰</text><text class="emoji-label">焦虑</text>
+      </view>
+    </view>
+    <button class="submit-emotion-btn" disabled="{{!emotionLevel}}" bindtap="onSubmitEmotion">
+      记录本周情绪
+    </button>
+  </view>
+
+  <!-- 已记录状态展示 -->
+  <view class="section emotion-recorded" wx:if="{{!showEmotionCard && lastEmotion}}">
+    <view class="recorded-header">
+      <text class="recorded-icon">✅</text>
+      <text class="recorded-title">本周情绪已记录</text>
+    </view>
+    <view class="recorded-info">
+      <text class="recorded-emoji">{{lastEmotion.emotion_emoji}}</text>
+      <text class="recorded-level">{{lastEmotion.level_text}}</text>
+      <text class="recorded-week">本周 ({{lastEmotion.week_start}})</text>
     </view>
   </view>
-  <view class="section"><text>报告内容...</text></view>
+
+  <!-- 周报情绪分析区域 -->
+  <view class="section emotion-summary" wx:if="{{emotionSummary}}">
+    <view class="summary-row">
+      <text class="summary-label">📊 本周情绪</text>
+      <text class="summary-value">{{emotionSummary.currentLevelText}}</text>
+    </view>
+    <view class="summary-row" wx:if="{{emotionSummary.trendText}}">
+      <text class="summary-label">📈 近4周趋势</text>
+      <text class="summary-value trend-{{emotionSummary.trend}}">{{emotionSummary.trendText}}</text>
+    </view>
+    <view class="alert-banner" wx:if="{{emotionSummary.alert}}">
+      <text class="alert-icon">⚠️</text>
+      <text class="alert-text">{{emotionSummary.alertMessage}}</text>
+    </view>
+  </view>
+
+  <!-- 妈 -->
+  <view class="section parent-card">
+    <text class="parent-label">{{report.parentA.label}}</text>
+    <view class="fact-row">
+      <text class="fact-label">用药完成</text>
+      <text class="fact-value">{{report.parentA.medAdherence.rate}}%</text>
+      <text class="fact-note">{{report.parentA.medAdherence.note}}</text>
+    </view>
+    <view class="fact-row">
+      <text class="fact-label">日均步数</text>
+      <text class="fact-value">{{report.parentA.steps.dailyAvg}}</text>
+      <text class="fact-note">{{report.parentA.steps.note}}</text>
+    </view>
+    <view class="fact-row">
+      <text class="fact-label">心率异常</text>
+      <text class="fact-value">{{report.parentA.heartRate.anomalies}} 次</text>
+    </view>
+  </view>
+
+  <!-- 爸 -->
+  <view class="section parent-card">
+    <text class="parent-label">{{report.parentB.label}}</text>
+    <view class="fact-row">
+      <text class="fact-label">日均步数</text>
+      <text class="fact-value">{{report.parentB.steps.dailyAvg}}</text>
+      <text class="fact-note">{{report.parentB.steps.note}}</text>
+    </view>
+    <view class="fact-row">
+      <text class="fact-label">心率异常</text>
+      <text class="fact-value">{{report.parentB.heartRate.anomalies}} 次</text>
+    </view>
+  </view>
+
+  <!-- 行动建议 -->
+  <view class="section action-section">
+    <text class="section-icon">💡</text>
+    <text class="section-desc">{{report.action.text}}</text>
+  </view>
+
+  <!-- 你可能好奇的 -->
+  <view class="section wonder-section">
+    <text class="section-icon">🔍</text>
+    <text class="section-title">你可能好奇的</text>
+    <block wx:for="{{report.youMayWonder}}" wx:key="index">
+      <text class="wonder-item">• {{item}}</text>
+    </block>
+  </view>
+
+  <!-- 反馈按钮 -->
+  <view class="section feedback-section">
+    <button class="feedback-btn" data-type="talked" bindtap="onFeedback">聊了，情况还好</button>
+    <button class="feedback-btn" data-type="worried" bindtap="onFeedback">聊了，有些担心</button>
+    <button class="feedback-btn secondary" data-type="notYet" bindtap="onFeedback">还没聊</button>
+  </view>
+
+  <!-- 医疗免责声明 -->
+  <view class="disclaimer-footer">
+    本产品不提供医疗诊断、治疗建议或处方。所有健康信息仅供参考，不能替代专业医疗人员的诊断和建议。如有健康问题，请咨询医生或其他合格的医疗专业人士。
+  </view>
 </view>
