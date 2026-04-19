@@ -45,8 +45,8 @@ jobs:
       - name: Update OpenClaw Workspace
         run: |
           cp data/elder_care_complaints_*.json ~/.openclaw/workspace/data/
-          # git -C ~/.openclaw/workspace add data/elder_care_complaints_*.json  # 已禁用自动上传
-          # git -C ~/.openclaw/workspace commit -m "Update complaints: $(date)"  # 已禁用自动提交
+          git -C ~/.openclaw/workspace add data/elder_care_complaints_*.json
+          git -C ~/.openclaw/workspace commit -m "Update complaints: $(date)"
           
       - name: Generate Report
         run: |

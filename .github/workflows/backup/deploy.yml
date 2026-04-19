@@ -51,13 +51,13 @@ jobs:
       - name: Update OpenClaw Workspace
         run: |
           echo "📝 更新 OpenClaw Workspace..."
-          # git config --global user.email "hermes@parents-weekly-briefing.com"  # 已禁用
-          # git config --global user.name "Hermes Agent"  # 已禁用
+          git config --global user.email "hermes@parents-weekly-briefing.com"
+          git config --global user.name "Hermes Agent"
           
           # 更新部署记录
           echo "Deployed at: $(date)" >> ~/.openclaw/workspace/DEPLOYMENT_LOG.md
-          # git -C ~/.openclaw/workspace add DEPLOYMENT_LOG.md  # 已禁用
-          # git -C ~/.openclaw/workspace commit -m "Deploy: $(date)"  # 已禁用
+          git -C ~/.openclaw/workspace add DEPLOYMENT_LOG.md
+          git -C ~/.openclaw/workspace commit -m "Deploy: $(date)"
           
       - name: Health Check
         run: |
