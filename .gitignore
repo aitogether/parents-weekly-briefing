@@ -9,3 +9,7 @@ build/
 # 私密报告 - 本地保留不上传
 silver-economy-mvp-selection.md
 silver-economy-pain-points-report.md
+
+# 原始投诉数据（禁止上传）
+data/
+data/**
