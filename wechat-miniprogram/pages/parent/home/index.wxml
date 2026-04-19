@@ -44,6 +44,18 @@
       <text class="stat-item">下次吃药提醒：{{nextReminder}} 💊</text>
       <text class="stat-link" bindtap="onGoReminder">设置</text>
     </view>
+    
+    <!-- 用药进度条 -->
+    <view class="med-progress-section">
+      <view class="med-progress-header">
+        <text class="med-progress-label">💊 本周用药完成</text>
+        <text class="med-progress-percent">{{weekMedProgress}}%</text>
+      </view>
+      <view class="med-progress-bar">
+        <view class="med-progress-fill" style="width: {{weekMedProgress}}%;"></view>
+      </view>
+    </view>
+
   </view>
 
   <!-- 扫码帮手入口 -->
@@ -84,7 +96,7 @@
 <!-- 用药确认 ActionSheet -->
 <view class="action-sheet-mask" wx:if="{{showMedSheet}}" bindtap="onCloseMedSheet"></view>
 <view class="action-sheet" wx:if="{{showMedSheet}}">
-  <view class="sheet-title">药吃了吗？ 💊</view>
+  <view class="sheet-title">今天吃药了吗？ 💊</view>
   <view class="sheet-btn taken" bindtap="onMedConfirm" data-answer="taken">吃了 👍</view>
   <view class="sheet-btn missed" bindtap="onMedConfirm" data-answer="missed">还没吃</view>
   <view class="sheet-cancel" bindtap="onCloseMedSheet">取消</view>

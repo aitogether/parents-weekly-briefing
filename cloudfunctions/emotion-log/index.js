@@ -112,6 +112,16 @@ exports.main = async (event, context) => {
     if (!parent_id) {
       return { success: false, error: 'parent_id为必填参数' };
     }
+    // 授权校验：确保调用者是子女本人（child_id与openid匹配）
+    if (!child_id) {
+      return { success: false, error: 'child_id为必填参数' };
+    }
+    if (!context.userInfo || !context.userInfo.openid) {
+      return { success: false, error: '未获取到用户身份信息', code: 'AUTH_FAILED' };
+    }
+    if (context.userInfo.openid !== child_id) {
+      return { success: false, error: '无权记录该情绪日志', code: 'AUTH_FAILED' };
+    }
     if (typeof emotion_level !== 'number' || emotion_level < 1 || emotion_level > 5) {
       return { success: false, error: 'emotion_level必须为1-5的整数' };
     }

@@ -42,11 +42,11 @@ jobs:
           python scripts/aggregate_complaints.py
           echo "✅ 数据聚合完成"
           
-      - name: Update OpenClaw Workspace
+      - name: Store Complaints Locally
         run: |
+          # 投诉数据仅本地存储，不上传 GitHub
           cp data/elder_care_complaints_*.json ~/.openclaw/workspace/data/
-          git -C ~/.openclaw/workspace add data/elder_care_complaints_*.json
-          git -C ~/.openclaw/workspace commit -m "Update complaints: $(date)"
+          echo "✅ 投诉数据已存储到本地 OpenClaw 工作区"
           
       - name: Generate Report
         run: |

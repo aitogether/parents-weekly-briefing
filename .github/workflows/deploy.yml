@@ -48,16 +48,12 @@ jobs:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           
-      - name: Update OpenClaw Workspace
+      - name: Update Local Deployment Log
         run: |
-          echo "📝 更新 OpenClaw Workspace..."
-          git config --global user.email "hermes@parents-weekly-briefing.com"
-          git config --global user.name "Hermes Agent"
-          
-          # 更新部署记录
+          echo "📝 更新本地部署记录..."
+          # 部署日志仅本地存储，不上传 GitHub
           echo "Deployed at: $(date)" >> ~/.openclaw/workspace/DEPLOYMENT_LOG.md
-          git -C ~/.openclaw/workspace add DEPLOYMENT_LOG.md
-          git -C ~/.openclaw/workspace commit -m "Deploy: $(date)"
+          echo "✅ 部署日志已记录到本地"
           
       - name: Health Check
         run: |

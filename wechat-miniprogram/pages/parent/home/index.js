@@ -11,6 +11,7 @@ Page({
     todaySteps: 0,
     confirmed: false,
     weekConfirmed: 0,
+    weekMedProgress: 0, // 本周用药完成百分比
     nextReminder: '',
     echoText: null,
     showMedSheet: false
@@ -102,6 +103,9 @@ Page({
     }
     this.setData({ weekConfirmed: count });
 
+    // 加载用药进度条
+    this._loadMedProgress();
+
     // 计算下次吃药提醒时间
     const hour = today.getHours();
     const minute = today.getMinutes();
@@ -114,7 +118,25 @@ Page({
     }
   },
 
-  _loadEcho() {
+  _loadMedProgress() {
+    const user = wx.getStorageSync('pwb_user');
+    if (!user) return;
+
+    // 获取本周用药统计
+    app.api.getMedStats(user.id, 7).then(res => {
+      if (res && res.success) {
+        // API 返回: { total: 7, taken: 5, rate: 71 }
+        const rate = res.data?.rate || 0;
+        this.setData({ weekMedProgress: rate });
+      }
+    }).catch(() => {
+      // 失败时使用本周确认次数作为兜底
+      const progress = Math.min(100, Math.round((this.data.weekConfirmed / 7) * 100));
+      this.setData({ weekMedProgress: progress });
+    });
+  },
+
+    _loadEcho() {
     const user = wx.getStorageSync('pwb_user');
     if (!user) return;
     app.api.getLatestFeedback(user.id).then(res => {

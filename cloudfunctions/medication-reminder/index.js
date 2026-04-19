@@ -17,7 +17,7 @@ cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
 /**
  * 用药提醒云函数
- * 定时触发：每天 08:00, 13:00, 18:00, 22:00
+ * 定时触发：每天 08:00, 18:00
  *
  * 核心流程：
  *   1. 查询所有 enabled=true 的用药计划
@@ -59,7 +59,7 @@ function getCurrentTimeInfo() {
 /**
  * 判断某时间点是否匹配当前触发时间
  * @param {string} timeStr - 计划时间 "HH:mm"
- * @param {number} triggerHour - 当前触发小时（8,13,18,22）
+ * @param {number} triggerHour - 当前触发小时（8,18）
  * @returns {boolean}
  */
 function isTimeMatch(timeStr, triggerHour) {
@@ -125,7 +125,7 @@ function shouldRemindToday(schedule, triggerHour, dayOfWeek) {
 
 /**
  * 查询今日需要提醒的用药计划
- * @param {number} triggerHour - 当前触发小时（8,13,18,22）
+ * @param {number} triggerHour - 当前触发小时（8,18）
  * @returns {Array} 需要提醒的计划列表
  */
 async function getTodaysMedicationPlans(triggerHour) {
@@ -189,7 +189,8 @@ async function sendTemplateMessage(parentOpenId, plan, triggerHour) {
   const data = {
     thing1: { value: plan.nickname || '药品' },        // 药品名称
     time2: { value: `${String(triggerHour).padStart(2, '0')}:00` }, // 提醒时间
-    thing3: { value: plan.dosage || '请遵医嘱' }        // 用法用量
+    thing3: { value: plan.dosage || '请遵医嘱' },       // 用法用量
+    thing4: { value: '本产品不构成医疗建议。紧急情况请拨打120。' } // 免责声明
   };
 
   try {
@@ -264,8 +265,8 @@ exports.main = async (event, context) => {
   const { hour } = getCurrentTimeInfo();
   console.log(`[Reminder] 当前时间：${hour}点`);
 
-  // 仅处理预设的提醒时间段（8,13,18,22）
-  const REMINDER_HOURS = [8, 13, 18, 22];
+  // 仅处理预设的提醒时间段（8,18）
+  const REMINDER_HOURS = [8, 18];
   if (!REMINDER_HOURS.includes(hour)) {
     console.log(`[Reminder] 非提醒时间段（${hour}点），跳过`);
     return { success: true, skipped: true, reason: 'non-reminder-hour' };

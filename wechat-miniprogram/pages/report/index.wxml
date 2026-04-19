@@ -70,17 +70,17 @@
   <view class="section parent-card">
     <text class="parent-label">{{report.parentA.label}}</text>
     <view class="fact-row">
-      <text class="fact-label">用药完成</text>
+      <text class="fact-icon">💊</text><text class="fact-label">用药完成</text>
       <text class="fact-value">{{report.parentA.medAdherence.rate}}%</text>
       <text class="fact-note">{{report.parentA.medAdherence.note}}</text>
     </view>
     <view class="fact-row">
-      <text class="fact-label">日均步数</text>
+      <text class="fact-icon">🚶</text><text class="fact-label">日均步数</text>
       <text class="fact-value">{{report.parentA.steps.dailyAvg}}</text>
       <text class="fact-note">{{report.parentA.steps.note}}</text>
     </view>
     <view class="fact-row">
-      <text class="fact-label">心率异常</text>
+      <text class="fact-icon">❤️</text><text class="fact-label">心率记录</text>
       <text class="fact-value">{{report.parentA.heartRate.anomalies}} 次</text>
     </view>
   </view>
@@ -89,12 +89,12 @@
   <view class="section parent-card">
     <text class="parent-label">{{report.parentB.label}}</text>
     <view class="fact-row">
-      <text class="fact-label">日均步数</text>
+      <text class="fact-icon">🚶</text><text class="fact-label">日均步数</text>
       <text class="fact-value">{{report.parentB.steps.dailyAvg}}</text>
       <text class="fact-note">{{report.parentB.steps.note}}</text>
     </view>
     <view class="fact-row">
-      <text class="fact-label">心率异常</text>
+      <text class="fact-icon">❤️</text><text class="fact-label">心率记录</text>
       <text class="fact-value">{{report.parentB.heartRate.anomalies}} 次</text>
     </view>
   </view>
@@ -122,7 +122,7 @@
   </view>
 
   <!-- 医疗免责声明 -->
-  <view class="disclaimer-footer">
-    本产品不提供医疗诊断、治疗建议或处方。所有健康信息仅供参考，不能替代专业医疗人员的诊断和建议。如有健康问题，请咨询医生或其他合格的医疗专业人士。
+  <view class="disclaimer-banner">
+    本产品不提供医疗诊断、治疗建议或处方。所有健康信息仅供参考，不能替代专业医疗人员的诊断和建议。如有健康问题，请咨询医生或其他合格的医疗专业人士。紧急情况请拨打120。
   </view>
 </view>

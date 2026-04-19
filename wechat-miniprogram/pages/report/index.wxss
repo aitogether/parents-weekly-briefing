@@ -63,10 +63,17 @@
 }
 
 .fact-label {
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #999;
   width: 160rpx;
 }
+
+.fact-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  line-height: 1;
+}
+
 
 .fact-value {
   font-size: 28rpx;
@@ -76,12 +83,12 @@
 }
 
 .fact-note {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #999;
 }
 
 .wonder-item {
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #666;
   display: block;
   padding: 8rpx 0;
@@ -139,7 +146,7 @@
 }
 
 .emotion-desc {
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #999;
   line-height: 1.4;
 }
@@ -177,7 +184,7 @@
 }
 
 .emoji-btn .emoji-label {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #666;
   line-height: 1.2;
 }
@@ -253,7 +260,7 @@
 }
 
 .recorded-week {
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #999;
   margin-left: auto;
 }
@@ -324,3 +331,23 @@
   line-height: 1.5;
 }
 
+
+
+/* ── 医疗免责声明横幅 ── */
+.disclaimer-banner {
+  margin-top: 40rpx;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFFFFF 100%);
+  border: 3rpx solid #FFCDD2;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  color: #C62828;
+  line-height: 1.7;
+  text-align: center;
+  box-shadow: 0 4rpx 12rpx rgba(198, 40, 40, 0.08);
+}
+.disclaimer-banner .icon {
+  font-size: 40rpx;
+  display: block;
+  margin-bottom: 12rpx;
+}

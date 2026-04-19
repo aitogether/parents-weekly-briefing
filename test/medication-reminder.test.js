@@ -11,7 +11,7 @@
  */
 
 // 模拟云函数核心逻辑（不依赖云环境）
-const REMINDER_HOURS = [8, 13, 18, 22];
+const REMINDER_HOURS = [8, 18];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 工具函数（从 index.js 复制逻辑用于测试）
@@ -328,17 +328,15 @@ test('filterPlansForHour - 非提醒小时应返回空', () => {
 
 console.log('\n📍 触发器配置测试\n');
 
-test('Cron 表达式格式应为 0 0 8,13,18,22 * * *', () => {
-  const cron = '0 0 8,13,18,22 * * *';
-  assertEqual(cron, '0 0 8,13,18,22 * * *');
+test('Cron 表达式格式应为 0 0 8,18 * * *', () => {
+  const cron = '0 0 8,18 * * *';
+  assertEqual(cron, '0 0 8,18 * * *');
 });
 
-test('提醒小时列表应包含 8, 13, 18, 22', () => {
-  assertEqual(REMINDER_HOURS.length, 4);
+test('提醒小时列表应包含 8, 18', () => {
+  assertEqual(REMINDER_HOURS.length, 2);
   assertTrue(REMINDER_HOURS.includes(8));
-  assertTrue(REMINDER_HOURS.includes(13));
   assertTrue(REMINDER_HOURS.includes(18));
-  assertTrue(REMINDER_HOURS.includes(22));
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

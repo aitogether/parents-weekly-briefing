@@ -9,3 +9,45 @@ build/
 # 私密报告 - 本地保留不上传
 silver-economy-mvp-selection.md
 silver-economy-pain-points-report.md
+
+
+# Hermes Agent 内部配置（禁止上传）
+.hermes/
+.hermes/**
+
+# 部署文档（内部使用）
+docs/deployment/
+
+# 银发经济分析报告（禁止上传）
+*.report.md
+*analysis*.md
+*review*.md
+*audit*.md
+
+# 内部会议记录
+meeting-notes/
+meeting_notes/
+internal/
+internal/**
+
+# 待验证数据
+data/raw/
+data/unverified/
+
+# 测试数据（含真实用户吐槽）
+test/data/
+test/fixtures/
+
+# 环境变量和密钥
+.env
+*.key
+*.pem
+secrets/
+
+# 日志文件
+*.log
+logs/
+
+# OpenClaw 工作区（已单独管理，双重保险）
+.openclaw/workspace/memory/
+.openclaw/workspace/.dreams/
