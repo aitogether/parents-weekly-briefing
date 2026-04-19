@@ -13,3 +13,22 @@ silver-economy-pain-points-report.md
 # 原始投诉数据（禁止上传）
 data/
 data/**
+
+
+# Hermes Agent 内部配置（已添加，验证）
+.hermes/
+.hermes/**
+
+# 部署文档（内部使用）
+docs/deployment/
+
+# 银发经济分析文档（禁止上传）
+silver-economy-*.md
+*.report.md
+*analysis*.md
+*review*.md
+*audit*.md
+
+# 内部目录
+internal/
+internal/**
