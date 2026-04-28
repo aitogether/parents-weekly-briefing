@@ -26,16 +26,56 @@
   line-height: 72rpx !important;
 }
 
+.stats-section {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #F59E0B;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
 .section {
   margin-bottom: 32rpx;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
 .section-title {
-  display: block;
   font-size: 28rpx;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 16rpx;
+}
+
+.refresh-btn {
+  background-color: #6B7280 !important;
+  color: white !important;
+  border-radius: 16rpx !important;
+  font-size: 22rpx !important;
+  height: 44rpx !line-height: 44rpx !important;
 }
 
 .request-list {
@@ -108,8 +148,15 @@
   color: #9CA3AF;
 }
 
+.item-actions {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
 .item-actions button {
   border-radius: 16rpx !important;
+  font-size: 22rpx !important;
 }
 
 .empty-state {

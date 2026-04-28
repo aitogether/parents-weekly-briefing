@@ -10,8 +10,34 @@
     </button>
   </view>
 
+  <!-- 统计卡片 -->
+  <view class="stats-section">
+    <view class="stat-card">
+      <text class="stat-number">{{todayRequests}}</text>
+      <text class="stat-label">今日叫车</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{pendingRequests}}</text>
+      <text class="stat-label">待分配</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{completedRequests}}</text>
+      <text class="stat-label">已完成</text>
+    </view>
+  </view>
+
   <view class="section">
-    <text class="section-title">叫车记录</text>
+    <view class="section-header">
+      <text class="section-title">叫车记录</text>
+      <button 
+        class="refresh-btn"
+        size="mini"
+        bindtap="refreshList"
+        wx:if="{{!loading}}"
+      >
+        刷新
+      </button>
+    </view>
     
     <block wx:if="{{requests.length > 0}}">
       <view class="request-list">
@@ -27,13 +53,59 @@
           </view>
           
           <view class="item-actions">
-            <button 
-              size="mini"
-              data-id="{{item.id}}"
-              bindtap="viewDetail"
-            >
-              查看详情
-            </button>
+            <block wx:if="{{item.status === 'pending'}}">
+              <button 
+                size="mini"
+                data-id="{{item.id}}"
+                data-destination="{{item.destination}}"
+                bindtap="cancelRequest"
+              >
+                取消
+              </button>
+              <button 
+                size="mini"
+                data-request-id="{{item.id}}"
+                bindtap="viewDriverInfo"
+              >
+                司机信息
+              </button>
+            </block>
+            
+            <block wx:elif="{{item.status === 'assigned'}}">
+              <button 
+                size="mini"
+                data-id="{{item.id}}"
+                data-destination="{{item.destination}}"
+                bindtap="viewDetail"
+              >
+                查看详情
+              </button>
+              <button 
+                size="mini"
+                data-request-id="{{item.id}}"
+                bindtap="viewDriverInfo"
+              >
+                司机信息
+              </button>
+            </block>
+            
+            <block wx:else>
+              <button 
+                size="mini"
+                data-id="{{item.id}}"
+                data-destination="{{item.destination}}"
+                bindtap="reorderRequest"
+              >
+                再次叫车
+              </button>
+              <button 
+                size="mini"
+                data-id="{{item.id}}"
+                bindtap="viewDetail"
+              >
+                查看
+              </button>
+            </block>
           </view>
         </view>
       </view>
