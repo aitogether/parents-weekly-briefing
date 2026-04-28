@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="header">
+    <text class="title">父母这一周</text>
+    <text class="subtitle">请选择您的身份开始使用</text>
+  </view>
+
+  <view class="role-selection">
+    <view 
+      class="role-card {{selectedRole === 'parent' ? 'selected' : ''}}" 
+      data-role="parent"
+      bindtap="selectRole"
+    >
+      <image src="/images/parent-icon.png" mode="aspectFit" />
+      <text class="role-title">我是父母</text>
+      <text class="role-desc">需要子女关心我的健康情况</text>
+    </view>
+
+    <view 
+      class="role-card {{selectedRole === 'child' ? 'selected' : ''}}" 
+      data-role="child"
+      bindtap="selectRole"
+    >
+      <image src="/images/child-icon.png" mode="aspectFit" />
+      <text class="role-title">我是子女</text>
+      <text class="role-desc">想关心父母的健康状况</text>
+    </view>
+  </view>
+
+  <view class="privacy-section">
+    <checkbox checked="{{privacyAgreed}}" bindchange="agreePrivacy"/>
+    <label class="privacy-text">
+      我已阅读并同意
+      <text class="link" bindtap="showUserAgreement">用户协议</text>
+      和
+      <text class="link" bindtap="showPrivacyPolicy">隐私政策</text>
+    </label>
+  </view>
+
+  <button 
+    class="login-btn {{selectedRole ? '' : 'disabled'}} {{privacyAgreed ? '' : 'disabled'}}"
+    loading="{{loading}}"
+    bindtap="doLogin"
+    disabled="{{!selectedRole || !privacyAgreed}}"
+  >
+    开始体验
+  </button>
+</view>
