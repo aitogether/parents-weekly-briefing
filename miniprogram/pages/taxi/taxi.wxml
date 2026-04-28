@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="header">
+    <text class="title">🚗 叫车帮手</text>
+    <button 
+      class="submit-btn"
+      bindtap="submitRequest"
+      loading="{{submitting}}"
+    >
+      我要叫车
+    </button>
+  </view>
+
+  <view class="section">
+    <text class="section-title">叫车记录</text>
+    
+    <block wx:if="{{requests.length > 0}}">
+      <view class="request-list">
+        <view class="request-item" wx:for="{{requests}}" wx:key="id">
+          <view class="item-header">
+            <text class="destination">{{item.destination}}</text>
+            <text class="status {{item.status}}">{{getStatusText(item.status)}}</text>
+          </view>
+          
+          <view class="item-content">
+            <text class="time">{{formatTime(item.scheduled_time)}}</text>
+            <text class="notes">{{item.notes || '无备注'}}</text>
+          </view>
+          
+          <view class="item-actions">
+            <button 
+              size="mini"
+              data-id="{{item.id}}"
+              bindtap="viewDetail"
+            >
+              查看详情
+            </button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view class="empty-state" wx:else>
+      <image src="/images/taxi-empty.png" mode="aspectFit" />
+      <text class="empty-text">暂无叫车记录</text>
+      <text class="empty-desc">点击下方按钮发起叫车</text>
+    </view>
+  </view>
+</view>

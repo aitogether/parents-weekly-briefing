@@ -1,0 +1,138 @@
+/* pages/taxi/taxi.wxss */
+.container {
+  padding: 24rpx;
+  background-color: #F9FAFB;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.submit-btn {
+  background-color: #F59E0B !important;
+  color: white !important;
+  border-radius: 24rpx !important;
+  font-size: 28rpx !important;
+  height: 72rpx !important;
+  line-height: 72rpx !important;
+}
+
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 16rpx;
+}
+
+.request-list {
+  background-color: white;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.request-item {
+  padding: 24rpx;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.request-item:last-child {
+  border-bottom: none;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.destination {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.status.pending {
+  background-color: #FEF3C7;
+  color: #D97706;
+}
+
+.status.assigned {
+  background-color: #DBEAFE;
+  color: #2563EB;
+}
+
+.status.completed {
+  background-color: #D1FAE5;
+  color: #059669;
+}
+
+.status.cancelled {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+.item-content {
+  margin-bottom: 16rpx;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #6B7280;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.notes {
+  font-size: 22rpx;
+  color: #9CA3AF;
+}
+
+.item-actions button {
+  border-radius: 16rpx !important;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 24rpx;
+  background-color: white;
+  border-radius: 12rpx;
+}
+
+.empty-state image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  display: block;
+  font-size: 28rpx;
+  color: #6B7280;
+  margin-bottom: 8rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}
