@@ -10,7 +10,7 @@ App({
     API_BASE_URL: 'http://192.168.1.100:3000',
 
     // 云开发环境 ID（替换为你的真实环境 ID）
-    CLOUD_ENV: 'prod-你的环境ID',
+    CLOUD_ENV: 'prod-8k9m2n3p',
 
     TOKEN_KEY: 'pwb_auth_token',
     USER_ROLE_KEY: 'pwb_user_role',
@@ -124,7 +124,7 @@ App({
           // 用户拒绝，显示提示并限制功能
           wx.showModal({
             title: '温馨提示',
-            content: '不同意隐私政策将无法使用服务。您可以在"设置"-"隐私政策"中随时查看并同意。',
+            content: '不同意隐私政策将无法使用服务。您可以在"设置"-\"隐私政策\"中随时查看并同意。',
             showCancel: false,
             success: () => {
               // 可以退出小程序或跳转到隐私政策页面

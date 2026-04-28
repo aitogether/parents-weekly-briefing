@@ -1,0 +1,11 @@
+{
+  "privacy": {
+    "title": "隐私政策",
+    "contentUrl": "/pages/privacy/policy",
+    "agreementUrl": "/pages/privacy/agreement"
+  },
+  "legal": {
+    "termsOfService": "/pages/legal/terms",
+    "dataProcessing": "/pages/legal/data-processing"
+  }
+}

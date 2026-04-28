@@ -180,7 +180,7 @@ module.exports = {
   // 焦虑量表
   getAnxietyQuestions, submitAnxietySurvey, getAnxietyHistory,
   // 叫车帮手
-  createTaxiRequest, getTaxiRequests, updateTaxiStatus, getTaxiStats
-};
+  createTaxiRequest, getTaxiRequests, updateTaxiStatus, getTaxiStats,
+  // 扫码帮手
   scanQRCode, getQRHistory, deleteQRScan
 };

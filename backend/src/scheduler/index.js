@@ -2,12 +2,11 @@
  * 定时调度器（P1-3 周五推送 + P1-4 每日小结 + P1-5 用药提醒）
  *
  * MVP 版用 setInterval 检查，生产环境建议替换为 node-cron。
- * 
+ *
  * 推送方式：
  * - 当前为 mock（console.log + 存储通知记录）
  * - 接入微信订阅消息后替换 sendNotification()
  */
-
 const { getDB } = require('../db/encryption-enabled');
 
 // ── 通知记录（防重复） ──
@@ -139,7 +138,8 @@ function checkMedReminder() {
   const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
 
   const db = getDB();
-  const settings = db.getReminderSettings(); // 获取所有用户的提醒设置
+  const allSettings = db.getAllReminderSettings && db.getAllReminderSettings() || [];
+  for (const settings of allSettings) {
     if (!settings.reminder_times) continue;
 
     for (const schedTime of settings.reminder_times) {
