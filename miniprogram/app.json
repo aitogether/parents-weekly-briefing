@@ -1,17 +1,49 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/medication/medication", 
-    "pages/qrscan/qrscan",
-    "pages/taxi/taxi",
     "pages/report/report",
-    "pages/checklist/checklist"
+    "pages/medication/medication",
+    "pages/checklist/checklist",
+    "pages/qrscan/qrscan",
+    "pages/taxi/taxi"
   ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "父母周报",
-    "navigationBarTextStyle": "black"
+  "tabBar": {
+    "color": "#6B7280",
+    "selectedColor": "#10B981",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/report/report",
+        "text": "健康周报",
+        "iconPath": "images/tab-report.png",
+        "selectedIconPath": "images/tab-report-selected.png"
+      },
+      {
+        "pagePath": "pages/medication/medication",
+        "text": "用药管理",
+        "iconPath": "images/tab-medication.png",
+        "selectedIconPath": "images/tab-medication-selected.png"
+      },
+      {
+        "pagePath": "pages/checklist/checklist",
+        "text": "安全检查",
+        "iconPath": "images/tab-checklist.png",
+        "selectedIconPath": "images/tab-checklist-selected.png"
+      },
+      {
+        "pagePath": "pages/qrscan/qrscan",
+        "text": "扫码帮手",
+        "iconPath": "images/tab-qrscan.png",
+        "selectedIconPath": "images/tab-qrscan-selected.png"
+      },
+      {
+        "pagePath": "pages/taxi/taxi",
+        "text": "叫车帮手",
+        "iconPath": "images/tab-taxi.png",
+        "selectedIconPath": "images/tab-taxi-selected.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
