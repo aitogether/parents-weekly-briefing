@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/medication/medication", 
+    "pages/qrscan/qrscan",
+    "pages/taxi/taxi",
     "pages/report/report",
     "pages/checklist/checklist"
   ],
