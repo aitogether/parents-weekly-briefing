@@ -44,4 +44,33 @@
   >
     开始体验
   </button>
+
+  <!-- 法律文档弹窗 -->
+  <block wx:if="{{showUserAgreement}}">
+    <view class="modal-mask" bindtap="closeLegalModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">用户协议</text>
+        <text class="close-btn" bindtap="closeLegalModal">✕</text>
+      </view>
+      <scroll-view class="modal-body" scroll-y="true">
+        <text>{{userAgreementContent}}</text>
+      </scroll-view>
+      <button class="modal-confirm" bindtap="closeLegalModal">我知道了</button>
+    </view>
+  </block>
+
+  <block wx:if="{{showPrivacyPolicy}}">
+    <view class="modal-mask" bindtap="closeLegalModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">隐私政策</text>
+        <text class="close-btn" bindtap="closeLegalModal">✕</text>
+      </view>
+      <scroll-view class="modal-body" scroll-y="true">
+        <text>{{privacyPolicyContent}}</text>
+      </scroll-view>
+      <button class="modal-confirm" bindtap="closeLegalModal">我知道了</button>
+    </view>
+  </block>
 </view>

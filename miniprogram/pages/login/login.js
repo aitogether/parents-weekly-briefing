@@ -3,7 +3,11 @@ Page({
   data: {
     selectedRole: '',
     privacyAgreed: false,
-    loading: false
+    loading: false,
+    showUserAgreement: false,
+    showPrivacyPolicy: false,
+    userAgreementContent: '',
+    privacyPolicyContent: ''
   },
 
   onLoad() {
@@ -31,6 +35,35 @@ Page({
   disagreePrivacy() {
     this.setData({
       privacyAgreed: false
+    });
+  },
+
+  showUserAgreement() {
+    this.setData({ showUserAgreement: true, showPrivacyPolicy: false });
+    this.loadLegalDocument('user');
+  },
+
+  showPrivacyPolicy() {
+    this.setData({ showPrivacyPolicy: true, showUserAgreement: false });
+    this.loadLegalDocument('privacy');
+  },
+
+  loadLegalDocument(type) {
+    // 模拟加载法律文档内容
+    const contentMap = {
+      user: '用户协议\n\n欢迎使用父母这一周应用。通过本协议，您同意我们提供的服务并了解相关权利义务...',
+      privacy: '隐私政策\n\n我们重视您的隐私保护。本政策说明我们如何收集、使用和保护您的个人信息...'
+    };
+    
+    this.setData({
+      [`${type}AgreementContent`]: contentMap[type]
+    });
+  },
+
+  closeLegalModal() {
+    this.setData({
+      showUserAgreement: false,
+      showPrivacyPolicy: false
     });
   },
 
