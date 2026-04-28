@@ -10,12 +10,36 @@
     </button>
   </view>
 
+  <!-- 用药统计 -->
+  <view class="stats-section">
+    <view class="stat-card">
+      <text class="stat-number">{{confirmRate}}%</text>
+      <text class="stat-label">今日完成率</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{todayConfirms.length}}</text>
+      <text class="stat-label">已确认</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{medPlans.length}}</text>
+      <text class="stat-label">总计划</text>
+    </view>
+  </view>
+
+  <!-- 添加药品按钮 -->
+  <button 
+    class="add-med-btn"
+    bindtap="showAddModal"
+  >
+    + 添加新的用药计划
+  </button>
+
   <view class="section">
     <text class="section-title">今日已确认</text>
     <view class="confirm-list">
       <block wx:if="{{todayConfirms.length > 0}}">
         <view class="confirm-item" wx:for="{{todayConfirms}}" wx:key="id">
-          <text class="confirm-time">{{item.time}}</text>
+          <text class="confirm-time">{{item.time || '未知时间'}}</text>
           <image src="/images/check-success.png" mode="aspectFit" />
         </view>
       </block>
@@ -33,7 +57,7 @@
         <view class="plan-item" wx:for="{{medPlans}}" wx:key="_id">
           <view class="plan-header">
             <text class="plan-name">{{item.name}}</text>
-            <text class="plan-time">{{item.times.join('、')}}</text>
+            <text class="plan-times">{{item.times.join('、')}}</text>
           </view>
           
           <view class="plan-actions">
@@ -52,6 +76,102 @@
     
     <view class="empty-state" wx:else>
       <text class="empty-text">暂无用药计划</text>
+      <button 
+        class="add-first-btn"
+        bindtap="showAddModal"
+      >
+        添加第一个用药计划
+      </button>
     </view>
   </view>
+
+  <!-- 添加药品弹窗 -->
+  <block wx:if="{{showAddModal}}">
+    <view class="modal-mask" bindtap="hideAddModal"></view>
+    <view class="add-modal-content">
+      <view class="modal-header">
+        <text class="modal-title">添加用药计划</text>
+        <text class="close-btn" bindtap="hideAddModal">✕</text>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y="true">
+        <!-- 药品名称 -->
+        <view class="form-group">
+          <text class="form-label">药品名称 *</text>
+          <input 
+            class="form-input"
+            type="text"
+            placeholder="请输入药品名称"
+            value="{{newMedName}}"
+            bindinput="updateMedName"
+          />
+        </view>
+
+        <!-- 用药时间 -->
+        <view class="form-group">
+          <text class="form-label">用药时间 *</text>
+          <view class="time-slots">
+            <block wx:for="{{newMedTimes}}" wx:key="index">
+              <view class="time-slot">
+                <input 
+                  class="time-input"
+                  type="time"
+                  value="{{item}}"
+                  data-index="{{index}}"
+                  bindinput="updateTimeSlot"
+                />
+                <button 
+                  class="remove-btn"
+                  size="mini"
+                  data-index="{{index}}"
+                  bindtap="removeTimeSlot"
+                  wx:if="{{newMedTimes.length > 1}}"
+                >
+                  删除
+                </button>
+              </view>
+            </block>
+            <button 
+              class="add-time-btn"
+              size="mini"
+              bindtap="addTimeSlot"
+            >
+              + 添加时间
+            </button>
+          </view>
+        </view>
+
+        <!-- 用药日期 -->
+        <view class="form-group">
+          <text class="form-label">用药日期 *</text>
+          <view class="days-selection">
+            <block wx:for="{{['周一','周二','周三','周四','周五','周六','周日']}}" wx:key="index">
+              <view 
+                class="day-item {{selectedDays.includes(index+1) ? 'selected' : ''}}"
+                data-day="{{index+1}}"
+                bindtap="toggleDay"
+              >
+                <text>{{item}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </scroll-view>
+      
+      <view class="modal-footer">
+        <button 
+          class="cancel-btn"
+          bindtap="hideAddModal"
+        >
+          取消
+        </button>
+        <button 
+          class="submit-btn"
+          bindtap="submitNewMed"
+        >
+          确定添加
+        </button>
+      </view>
+    </view>
+  </block>
 </view>
