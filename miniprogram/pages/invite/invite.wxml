@@ -1,0 +1,104 @@
+<view class="container">
+  <block wx:if="{{inviteType === 'child'}}">
+    <!-- 子女邀请页面 -->
+    <view class="header">
+      <text class="title">📱 邀请家人</text>
+      <text class="subtitle">生成邀请码分享给父母</text>
+    </view>
+
+    <view class="invite-section">
+      <view class="code-card">
+        <text class="label">邀请码</text>
+        <view class="code-display">
+          <text class="code">{{inviteCode}}</text>
+          <button 
+            class="copy-btn"
+            size="mini"
+            bindtap="copyInviteLink"
+          >
+            复制链接
+          </button>
+        </view>
+      </view>
+
+      <view class="qr-section">
+        <text class="section-title">扫码邀请</text>
+        <view class="qr-container">
+          <image src="{{qrCodeUrl}}" mode="aspectFit" />
+          <text class="qr-desc">父母扫码即可注册</text>
+        </view>
+      </view>
+
+      <view class="share-section">
+        <button 
+          class="share-btn"
+          bindtap="shareInvite"
+        >
+          📤 分享邀请
+        </button>
+        
+        <view class="share-tips">
+          <text class="tip-title">邀请步骤：</text>
+          <text class="tip-item">1. 点击分享按钮发送给父母</text>
+          <text class="tip-item">2. 父母点击链接或扫描二维码</text>
+          <text class="tip-item">3. 完成注册并建立关联</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:elif="{{inviteType === 'parent'}}">
+    <!-- 父母邀请验证页面 -->
+    <view class="header">
+      <text class="title">👨‍👩‍👧‍👦 家庭邀请</text>
+      <text class="subtitle">验证邀请信息</text>
+    </view>
+
+    <view class="verification-section">
+      <block wx:if="{{loading}}">
+        <view class="loading-state">
+          <text class="loading-text">正在验证邀请...</text>
+        </view>
+      </block>
+
+      <block wx:elif="{{parentInfo}}">
+        <view class="success-state">
+          <image src="/images/invite-success.png" mode="aspectFit" />
+          
+          <view class="info-card">
+            <text class="info-title">来自 {{parentInfo.nickname || '您的子女'}}</text>
+            <text class="info-desc">邀请您使用"父母这一周"</text>
+            <text class="info-desc">来记录健康数据，方便及时关注</text>
+          </view>
+
+          <button 
+            class="confirm-btn"
+            bindtap="confirmRegistration"
+          >
+            确认注册并绑定
+          </button>
+
+          <button 
+            class="cancel-btn"
+            bindtap="goBack"
+          >
+            暂不绑定
+          </button>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="error-state">
+          <image src="/images/invite-error.png" mode="aspectFit" />
+          <text class="error-text">无效的邀请码</text>
+          <button 
+            class="retry-btn"
+            bindtap="goBack"
+          >
+            返回重试
+          </button>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>
