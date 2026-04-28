@@ -1,0 +1,115 @@
+/* pages/medication/medication.wxss */
+.container {
+  padding: 24rpx;
+  background-color: #F9FAFB;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.quick-btn {
+  background-color: #10B981 !important;
+  color: white !important;
+  border-radius: 20rpx !important;
+  font-size: 24rpx !important;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 16rpx;
+}
+
+.confirm-list {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  min-height: 120rpx;
+}
+
+.confirm-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.confirm-item:last-child {
+  border-bottom: none;
+}
+
+.confirm-time {
+  font-size: 24rpx;
+  color: #10B981;
+  font-weight: 500;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48rpx 0;
+  color: #9CA3AF;
+}
+
+.empty-text {
+  font-size: 24rpx;
+}
+
+.plan-list {
+  background-color: white;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.plan-item {
+  padding: 24rpx;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.plan-header {
+  margin-bottom: 16rpx;
+}
+
+.plan-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 8rpx;
+}
+
+.plan-time {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
+.plan-actions {
+  display: flex;
+  gap: 12rpx;
+}
+
+.action-btn {
+  border-radius: 20rpx !important;
+}
+
+.confirm-btn {
+  background-color: #10B981 !important;
+  color: white !important;
+  font-size: 24rpx !important;
+}

@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="header">
+    <text class="title">📋 用药管理</text>
+    <button 
+      class="quick-btn" 
+      size="mini"
+      bindtap="addDailyConfirm"
+    >
+      一键确认今日用药
+    </button>
+  </view>
+
+  <view class="section">
+    <text class="section-title">今日已确认</text>
+    <view class="confirm-list">
+      <block wx:if="{{todayConfirms.length > 0}}">
+        <view class="confirm-item" wx:for="{{todayConfirms}}" wx:key="id">
+          <text class="confirm-time">{{item.time}}</text>
+          <image src="/images/check-success.png" mode="aspectFit" />
+        </view>
+      </block>
+      <view class="empty-state" wx:else>
+        <text class="empty-text">今日暂无用药记录</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <text class="section-title">用药计划</text>
+    
+    <block wx:if="{{medPlans.length > 0}}">
+      <view class="plan-list">
+        <view class="plan-item" wx:for="{{medPlans}}" wx:key="_id">
+          <view class="plan-header">
+            <text class="plan-name">{{item.name}}</text>
+            <text class="plan-time">{{item.times.join('、')}}</text>
+          </view>
+          
+          <view class="plan-actions">
+            <button 
+              class="action-btn confirm-btn"
+              data-plan-id="{{item._id}}"
+              bindtap="confirmMed"
+              size="mini"
+            >
+              确认服药
+            </button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无用药计划</text>
+    </view>
+  </view>
+</view>
