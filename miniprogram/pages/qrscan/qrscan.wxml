@@ -10,8 +10,37 @@
     </button>
   </view>
 
+  <!-- 最近扫描 -->
+  <block wx:if="{{recentScans.length > 0}}">
+    <view class="section">
+      <text class="section-title">最近扫描</text>
+      <view class="recent-scans">
+        <block wx:for="{{recentScans}}" wx:key="index">
+          <view 
+            class="recent-item"
+            data-value="{{item}}"
+            bindtap="quickScan"
+          >
+            <text class="recent-text">{{item}}</text>
+            <image src="/images/arrow-right.png" mode="aspectFit" />
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
   <view class="section">
-    <text class="section-title">扫码记录</text>
+    <view class="section-header">
+      <text class="section-title">扫码记录</text>
+      <button 
+        class="clear-btn"
+        size="mini"
+        bindtap="clearAllHistory"
+        wx:if="{{scanHistory.length > 0}}"
+      >
+        清空
+      </button>
+    </view>
     
     <block wx:if="{{scanHistory.length > 0}}">
       <view class="history-list">
@@ -20,6 +49,7 @@
             <text class="qr-value">{{item.qr_value}}</text>
             <text class="scan-time">{{item.scanned_date}}</text>
           </view>
+          
           <view class="item-actions">
             <button 
               size="mini"
@@ -27,6 +57,14 @@
               bindtap="viewDetail"
             >
               查看
+            </button>
+            <button 
+              size="mini"
+              class="delete-btn"
+              data-id="{{item.id}}"
+              bindtap="deleteScan"
+            >
+              删除
             </button>
           </view>
         </view>
@@ -39,4 +77,38 @@
       <text class="empty-desc">点击下方按钮开始扫描</text>
     </view>
   </view>
+
+  <!-- 扫码结果确认弹窗 -->
+  <block wx:if="{{showResultModal}}">
+    <view class="modal-mask" bindtap="cancelRecord"></view>
+    <view class="result-modal">
+      <view class="modal-header">
+        <text class="modal-title">扫码结果</text>
+        <text class="close-btn" bindtap="cancelRecord">✕</text>
+      </view>
+      
+      <view class="modal-body">
+        <text class="scan-result">{{currentScan}}</text>
+        <view class="scan-info">
+          <text>时间：{{formatCurrentTime()}}</text>
+          <text>类型：{{detectQRType(currentScan)}}</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button 
+          class="cancel-modal-btn"
+          bindtap="cancelRecord"
+        >
+          取消
+        </button>
+        <button 
+          class="confirm-modal-btn"
+          bindtap="confirmRecord"
+        >
+          确认记录
+        </button>
+      </view>
+    </view>
+  </block>
 </view>
