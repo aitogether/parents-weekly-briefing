@@ -1,0 +1,103 @@
+/* pages/qrscan/qrscan.wxss */
+.container {
+  padding: 24rpx;
+  background-color: #F9FAFB;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.scan-btn {
+  background-color: #0EA5E9 !important;
+  color: white !important;
+  border-radius: 24rpx !important;
+  font-size: 28rpx !important;
+  height: 72rpx !important;
+  line-height: 72rpx !important;
+}
+
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 16rpx;
+}
+
+.history-list {
+  background-color: white;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.qr-value {
+  display: block;
+  font-size: 26rpx;
+  color: #1F2937;
+  margin-bottom: 8rpx;
+  word-break: break-all;
+}
+
+.scan-time {
+  font-size: 22rpx;
+  color: #6B7280;
+}
+
+.item-actions button {
+  border-radius: 16rpx !important;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 24rpx;
+  background-color: white;
+  border-radius: 12rpx;
+}
+
+.empty-state image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  display: block;
+  font-size: 28rpx;
+  color: #6B7280;
+  margin-bottom: 8rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}

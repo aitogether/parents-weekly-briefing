@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="header">
+    <text class="title">📱 扫码帮手</text>
+    <button 
+      class="scan-btn"
+      bindtap="scanQRCode"
+      loading="{{loading}}"
+    >
+      扫描二维码
+    </button>
+  </view>
+
+  <view class="section">
+    <text class="section-title">扫码记录</text>
+    
+    <block wx:if="{{scanHistory.length > 0}}">
+      <view class="history-list">
+        <view class="history-item" wx:for="{{scanHistory}}" wx:key="id">
+          <view class="item-content">
+            <text class="qr-value">{{item.qr_value}}</text>
+            <text class="scan-time">{{item.scanned_date}}</text>
+          </view>
+          <view class="item-actions">
+            <button 
+              size="mini"
+              data-id="{{item.id}}"
+              bindtap="viewDetail"
+            >
+              查看
+            </button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view class="empty-state" wx:else>
+      <image src="/images/qr-empty.png" mode="aspectFit" />
+      <text class="empty-text">暂无扫码记录</text>
+      <text class="empty-desc">点击下方按钮开始扫描</text>
+    </view>
+  </view>
+</view>
